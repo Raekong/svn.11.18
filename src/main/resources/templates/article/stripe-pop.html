@@ -1,0 +1,90 @@
+<div>
+
+    <style>
+        #stripe .articleinfos {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        #stripe .articleinfos .atitle {
+            flex-basis: 88px;
+            text-align: right;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            padding-right: 6px;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        #stripe .articleinfos .avalue {
+            font-size: 13px;
+            flex: 1 1 auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 0;
+            flex-shrink: 0;
+            text-align: left;
+        }
+
+        #card-errors{
+            margin-top: 6px;
+            font-size: 12px;
+            color: red; 
+        }
+    </style>
+    <div id="stripe" >
+        <div class="title"><i class="fa fa-server"></i> <span>Stripe Payment</span></div>
+        <div style="padding: 16px;">
+            <form action="" id="payment-form" method="post">
+                <input id="api-key" type="hidden" th:value="${stripePublicKey}">
+                <input id="aid" type="hidden" th:value="${aid}">
+                <input id="jid" type="hidden" th:value="${jid}">
+                <input id="payid" type="hidden" th:value="${payid}">
+                <input id="pnum" type="hidden" th:value="${pnum}">
+                <input id="totalamount" type="hidden" th:value="${total}">
+                <label>Paper information</label>
+                <div style="clear: both;"></div>
+                <div style="background-color: #f2f2f2;padding:8px; margin-bottom: 8px;">
+                    <div class="articleinfos">
+                        <div class="atitle">[ Article ID <span ></span>]</div>
+                        <div class="avalue"><span th:text="${aid}" ></span></div>
+                    </div>
+                    <div class="articleinfos">
+                        <div class="atitle">[ Article Title <span ></span>]</div>
+                        <div class="avalue"><span th:text="${atitle}"></span></div>
+                    </div>
+                    
+                    <div class="articleinfos">
+                        <div class="atitle">[ Journal ]</div>
+                        <div class="avalue"><span th:text="${jtitle}"></span></div>
+                    </div>
+                    <div class="articleinfos">
+                        <div class="atitle">[ Total ]</div>
+                        <div class="avalue"><span th:text="${total}"></span> USD($)</div>
+                    </div>
+                </div> 
+                <label>Payer's Email<span style="color:red">*</span></label>
+                <div style="clear: both;"></div>
+                <input id="email" name="email" placeholder="email address" type="text" required th:value="${email}">
+                
+                <label >Pay With Your Card<img src="/img/loading.gif" style="vertical-align:middle;" id="loading"></label>
+                <div style="clear: both;"></div>
+
+                <div class="form-group" style="padding: 8px ; border: 1px solid #aaa; border-radius: 3px;;">
+                    <div id="card-element">
+                    </div>
+                </div>
+                
+                <!-- Used to display Element errors. -->
+                <div class="text-danger w-100" id="card-errors" role="alert"></div>
+                
+            </form>
+            
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-paper-plane" aria-hidden="true"></i> <span>Pay: $ <span th:text="${total}"></span></span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>Cancel</span></span>
+        </div>
+    </div>
+</div>

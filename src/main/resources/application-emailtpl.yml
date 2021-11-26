@@ -1,0 +1,506 @@
+#public static final String[] variables = {
+#      "#jid#",
+#      "#Publisher#",
+#      "#Jounral Mail Address Info#",
+#      "#Journal Title#",
+#      "#Journal Abbreviation#",
+#      "#Journal Online Issn#",
+#      "#Journal Print Issn#",
+#      "#Journal Principal Email#",
+#      "#Journal Principal Name#",
+#      "#Journal Support Email#",
+#      "#Jounral Manager#",
+#      "#Jounral Manager Name#",
+#      "#isSpecial#",
+#      "#Editor in Chief#",
+#      "#Editor in Chief Name#",
+#      "#Article Id#",
+#      "#Article Title#",
+#      "#Article Abstract#",
+#      "#Article Url#",
+#      "#Submitor Name#",
+#      "#Submitor Email#",
+#      "#Contributors Name#",
+#      "#Contributors Email#",
+#      "#Corresponding Authors Name#",
+#      "#Corresponding Authors Email#",
+#      //for review ==============================================
+#      "#Reviewers Email#",
+#      "#Reviewers Name#",
+#      "#Review Response Due#",
+#      "#Review Due#",
+#      "#Revision Due#",
+#      "#accessUrl#",
+#  };
+0: User  # 指定收件人
+1: Submitor #投稿人
+2: Submitor and Corresponding Author #投稿人与通讯作者
+3: All authors # 所有作者
+template:
+  tplvariables:
+    journal:
+      '[#jid#]': journalId
+      '[#Journal Title#]': title
+      '[#Journal Abbreviation#]': abbreviation
+    journalteam:
+      '[#Jounral Manager#]': team.manager.email
+      '[#Jounral Manager Name#]': team.manager.name
+#      "#isSpecial#",
+      '[#Editor in Chief#]': team.chief.email
+      '[#Editor in Chief Name#]': team.chief.name
+    journasetting:
+      '[#Journal Online Issn#]': masthead.onlineissn
+      '[#Journal Print Issn#]': masthead.printissn
+      '[#ji18n#]': masthead.i18n
+      '[#Journal Principal Email#]': contact.email
+      '[#Journal Principal Name#]': contact.name
+      '[#Journal Support Email#]': contact.techemail
+      '[#Jounral Mail Address Info#]': contact.ci
+      '[#Review Response Due#]': 'Revision Due'
+      '[#Review Due#]': 'Review Due'
+      '[#Revision Due#]': 'Revision Due'
+      #'#accessUrl#': 
+    publisher: 
+      '[#Publisher#]': name
+      '[#pi18n#]': i18n
+    article:
+      '[#Article Id#]': id
+      '[#Article Title#]': title
+      '[#Article Abstract#]': abstractTxt
+      '[#Submitor id#]': submit.userId
+      '[#Submitor Name#]': submit.username
+      '[#Submitor Email#]': submit.email
+      '[#Contributor Name#]': authors.names
+      '[#Contributor Email#]': authors.emails
+      '[#Corresponding Authors Name#]': corresponding.name
+      '[#Corresponding Authors Email#]': corresponding.email
+      #      "#Article Url#",
+    reviewers:
+      '[#Reviewers Email#]': a.reviewers.emails
+      '[#Reviewers Name#]': a.reviewers.names
+  systemEmailConfigPoints:
+    - configPoint: 'Account Confirm'
+      email: true
+      tpls: 
+        - jid: -1
+          titleEN: 'Account Email Confirm'
+          titleCH:
+          tplEN: 'Hi, #username#<br><br>Your Account almost Ready.<br>You (hopefully you) has used this email to regist an account at #publishername# online submission system.<br>Email: #email#<br>Password: #password#<br>Please user the link below to verify you ownership of this email and active you account.<br>#link#<br>#publisheraddress#<br>'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - username
+            - publishername
+            - email
+            - password
+            - link
+            - publisheraddress
+    - configPoint: 'Password Reset'
+      email: true
+      tpls:       
+        - jid: -1
+          titleEN: 'Account Password Reset Notify'
+          titleCH:
+          tplEN: 'Hi, #username#:<br>We  use this email to notify  your right to manage your TSP account .<br>Your account password has been reset to: #password# <br>You can use the new password to login our #publishername# academic journal system.<br>#publisheraddress#'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - username
+            - publishername
+            - password
+            - publisheraddress
+    - configPoint: 'Submission Ack'
+      email: true
+      tpls:   
+        - jid: -1
+          titleEN: 'Submission Acknowledgement of [#Article Id#] From #Journal Abbreviation#'
+          titleCH:
+          tplEN: '#Journal Title#<br>ISSN: #Journal Online Issn#<br><br><br>Dear #Contributor Name#, <br><br>Thank you for submitting the manuscript, "#Article Title#" to #Journal Title#. With the online journal management system that we are using, you will be able to track its progress through the editorial process by logging in to the journal website: <br><br>Username: #Contributor Name# <br><br>Paper ID: #Article Id#<br><br>#Journal Title# is an open access journal. Articles in the journal are published open access under a CC BY license (Creative Commons Attribution 4.0 International License). The CC BY license allows for maximum dissemination and re-use of open access materials. <br><br> If you have any questions, please contact us. Thank you for considering this journal as a venue for your work. <br><br>#Jounral Mail Address Info#<br>'
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Receiver Name
+            - Article Title
+            - Article Abstract
+            - Jounral Mail Address Info
+    - configPoint: 'Submission Editor Notify'
+      email: false
+      tpls:   
+        - jid: -1
+          titleEN: 'The submission ID: #Article Id#, "#Article Title#" to #Journal Title# has been assigned to you as Editor'
+          titleCH:
+          tplEN: 'The submission ID: #Article Id#, "#Article Title#" to #Journal Title# has been assigned to you as Editor'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Receiver Name
+            - Article Title
+            - Article Abstract
+            - Jounral Mail Address Info
+    - configPoint: 'Editor Discuss Notify'
+      email: true
+      tpls:   
+        - jid: -1
+          titleEN: 'A Message from the editor of your paper ID: #Article Id#, "#Article Title#" '
+          tplEN: 'A Message from the editor of your paper ID: #Article Id#, "#Article Title#", Please log in to the system to check the message. '
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Receiver Name
+            - Article Title
+            - Article Abstract
+            - Jounral Mail Address Info
+    - configPoint: 'PreReview Require'
+      email: false
+      tpls:   
+        - jid: -1
+          titleEN: 'The submission ID: #Article Id#, "#Article Title#" to #Journal Title# has been assigned to you as Pre-reviewer Editor'
+          titleCH:
+          tplEN: 'The submission ID: #Article Id#, "#Article Title#" to #Journal Title# has been assigned to you as Pre-reviewer Editor'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Receiver Name
+            - Article Title
+            - Article Abstract
+            - Jounral Mail Address Info
+    - configPoint: 'Change Journal'
+      email: true
+      tpls:   
+        - jid: -1
+          titleEN: "Change Journal of [#Article Id#] From #Journal Abbreviation# to #Section# of the #Target JournalTitle#"
+          titleCH:
+          tplEN: '<p>Dear #Contributor Name#,</p><p>Thank you for submitting the manuscript, "#Article Title#" to #Journal Title#. For some reasons, we have decided to transfer your article to #Section# of the #Target JournalTitle#. Please log in to your account to decide whether to change the journal.'
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+            - Contributor Name
+            - Article Title
+            - Journal Title
+            - Target JournalTitle
+            - Section
+    - configPoint: 'Suggest Review Decision'
+      email: false
+      tpls:   
+        - jid: -1
+          titleEN: 'The Decision Suggest of ID: #Article Id#, "#Article Title#" of #Journal Title# '
+          titleCH:
+          tplEN: 'The paper ID: #Article Id#, "#Article Title#" of #Journal Title# was suggested to be #Suggest# by #EditorName#'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Receiver Name
+            - Article Title
+            - Article Abstract
+            - Jounral Mail Address Info
+            - Suggest
+            - EditorName
+    - configPoint: 'Decline Submission'
+      email: true
+      tpls:   
+        - jid: -1
+          titleEN: "Decision Letter of [#Article Id#] From #Journal Abbreviation#"
+          titleCH:
+          tplEN: "#Journal Title#<br>ISSN:#Journal Online Issn#<br><br><br>Dear #Contributor Name#,<br><br>The review of your submission to #Journal Title#<br><br>ID: #Article Id# , '#Article Title#' has been completed.<br><br>We are sorry to inform you that we have to reject your paper.<br><br>This decision was based on the comments of external experts who carefully peer-reviewed your paper. For your information, you can find the review reports at the end of this message.<br><br>If you are re-submitting a manuscript revised from this declined one in #Journal Title#, you are kindly encouraged to attach an Authors' Reply to the revised manuscript in order to expedite the review process.<br><br>Thank you very much for your contributions to #Journal Title#.<br><br>Sincerely,<br>#Jounral Mail Address Info#<br><br><p id='reviewboard'></p>"
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Contributor Name
+            - Article Id
+            - Article Title
+            - Jounral Mail Address Info
+    - configPoint: 'Review Invite'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: 'Article Review Request of [#Article Id#] From #Journal Abbreviation# '
+          titleCH:
+          tplEN: '<br/>#Journal Title#<br>ISSN: #Journal Online Issn# <br><br><br>Dear Dr. #Reviewers Name#, <br> <br>Based on your expertise, I would like to invite you to provide a review for the manuscript, "#Article Title#" which has been submitted to #Journal Title# to evaluate its suitability for publication. The abstract is available at the end of this message. <br> <br>Please click the deep link below by #Review Response Date# to inform us whether you will undertake the review or not, as well as to access the submission and to record your review and comments. <br>If you accept this invitation we would appreciate receiving your comments before #Review Due Date#. Please let us know if you will need more time. <br> <br>Submission ID: #Article Id#<br><br>Submission URL: <a href=#accessUrl#>#accessUrl#</a><br><br>If you are not able to review this manuscript, we kindly ask you to click on the above link to decline the request so that we can continue processing this submission. We would also appreciate any suggestions for alternative expert reviewers. <br><br>The peer-review request and the contents of the manuscript are confidential. You must also declare if you have a conflict of interest with the content of the manuscript or the authors. <br><br>The reviewer shall not recommend unrelated papers for authors to cite. If the reviewer considers the paper is lacking more than two citations of the relevant works that would not prove enough the case, the reviewer shall give decline recommendation. <br><br><br>Thank you for considering this request. <br><br>#Jounral Mail Address Info#<br> <p>Title: "#Article Title#"<br><br>Abstract: "#Article Abstract#"<br></p>'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Review Response Date
+            - Review Due Date
+            - Article Id
+            - accessUrl
+            - Jounral Mail Address Info
+            - Article Abstract
+    - configPoint: 'Review Remind'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "Review Remind of [#Article Id#] From #Journal Abbreviation# "
+          titleCH:
+          tplEN: '#Journal Title# <br>ISSN: #Journal Online Issn# <br> <br> <br>Dear Dr. #Reviewers Name#, <br><br>Just a gentle reminder of our request for your review of the submission, "#Article Title#" for #Journal Title#. We were hoping to have this review by #Review Due#, and would be pleased to receive it as soon as you are able to prepare it. <br><br>Submission URL: <a href=#accessUrl#> #accessUrl# </a><br><br>Please confirm your ability to complete this vital contribution to the work of the journal. I look forward to hearing from you. <br><br>#Jounral Mail Address Info#<br>'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Review Due
+            - accessUrl
+            - Jounral Mail Address Info
+    - configPoint: 'Review Thanks'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "Review Thanks of [#Article Id#] From #Journal Abbreviation#"
+          titleCH:
+          tplEN: '#Journal Title# <br>ISSN: #Journal Online Issn# <br> <br> <br>Dear Dr. #Reviewers Name#, <br>Thank you for completing the review of the submission,  "#Article Title#", for #Journal Title#. We appreciate your contribution to the quality of the work that we publish.<br> <br>#Jounral Mail Address Info#<br>'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Jounral Mail Address Info
+    - configPoint: 'Decline Notify'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "The [#Article Id#] From #Journal Abbreviation# has been Decline by Reviewer"
+          titleCH:
+          tplEN: 'The [#Article Id#] From #Journal Abbreviation# has been Decline by #Reviewer Name# '
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Review Due
+            - accessUrl
+            - Jounral Mail Address Info
+    - configPoint: 'Review Result Num Notify'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "The [#Article Id#] From #Journal Abbreviation# has received #Result Num# comments"
+          titleCH:
+          tplEN: 'The [#Article Id#] From #Journal Abbreviation# has received #Result Num# comments'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Review Due
+            - accessUrl
+            - Jounral Mail Address Info
+    - configPoint: 'Review Close Notify'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "The Review of Article: [#Article Id#] From #Journal Abbreviation# has been closed"
+          titleCH:
+          tplEN: 'The review activity of Article [#Article Id#] From #Journal Abbreviation# has been closed, thank you for your participation <br> <br>#Jounral Mail Address Info#<br>'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Review Due
+            - accessUrl
+            - Jounral Mail Address Info
+    - configPoint: 'Article Revision'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "Revision Letter of [#Article Id#] From #Journal Abbreviation#"
+          titleCH:
+          tplEN: "#Journal Title#<br>ISSN:#Journal Online Issn#<br><br><br>Dear #Contributor Name#,<br><br>The review of your submission to #Journal Title#<br><br>ID: #Article Id# , '#Article Title#' has been completed.<br><br>Although we found that your paper has merit, it is not acceptable to publish in its present form.  We invite you to revise your paper to address reviewers’ comments as fully as possible. Please revise the manuscript according to the reviewers' comments and upload the revised file within #Revision Due# days.<br><br>When you submit your revision, please upload the following 3 files:<br><br>Your rebuttal;<br>Your revised paper with track change;<br>Your clean revised paper.<br>Please find the reviewer's comments at the end of this message. When uploading your revision files, scrolling down the page, you will find a panel for Revisions. Use the Revision Panel to upload your revised manuscript.<br><br>As authors, you have the right to refuse to use the unrelated citations recommended by the reviewers or relevant personnel. Authors are encouraged to report this issue directly to the CMC Editorial Office (cmc@techscience.com) in a timely manner once it is occurred.<br><br>Thank you very much for your contributions to #Journal Title#.<br><br>Sincerely,<br>#Jounral Mail Address Info# <br><p id='reviewboard'></p>"
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Contributor Name
+            - Article Id
+            - Article Title
+            - Jounral Mail Address Info
+    - configPoint: 'Article Accept'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "Accept Letter of [#Article Id#] From #Journal Abbreviation#"
+          titleCH:
+          tplEN: '#Journal Title#<br>ISSN:#Journal Online Issn#<br><br><br>Dear #Contributor Name#,<br><br>We are pleased to inform you that the following paper has been officially accepted for publication:<br><br>ID: #Article Id#<br><br>Title: "#Article Title#"<br><br><br>All articles in #Journal Title# (#Journal Abbreviation#, ISSN: #Journal Online Issn#) are published in printed and online version.<br/> <br>Thank you very much. <br><br><p id="reviewboard"></p> <br> <p id="apc"></p>'
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Contributor Name
+            - Article Id
+            - Article Title
+    - configPoint: 'Revision Replay'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "Revision Letter of [#Article Id#] #Article Title# "
+          titleCH:
+          tplEN: "Hello #Recevier Name#,<br><br>The revision of [ #Article Title# ] has been uploaded. Please follow the link <a href='/article/#Article Id#'> go to review </a> to check it, Thank you. <br><br>#Submitor Name#<br> "
+          tplZH:
+          recipient:
+          name: System
+          available:
+          - Recevier Name
+          - Article Title
+          - Article Id
+          - Submitor Name
+    - configPoint: 'Similar Checked Failed'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "ID:[#Article Id#] #Article Title#  From #Journal Abbreviation# similarity check has Failed "
+          titleCH:
+          tplEN: "Hello #Recevier Name#,<br><br>The ID:[#Article Id#] #Article Title#] From #Journal Abbreviation# has failed to pass similarity check according to the journal configuration, please login system and check it. "
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+          - Recevier Name
+          - Article Title
+          - Article Id
+          - Submitor Name
+    - configPoint: 'Similar Checked Passed'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "ID:[#Article Id#] #Article Title#  From #Journal Abbreviation# similarity check has passed "
+          titleCH:
+          tplEN: "Hello #Recevier Name#,<br><br>The ID:[#Article Id#] #Article Title#] From #Journal Abbreviation# has passed similarity check according to the journal configuration, please login system and check it. "
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+          - Recevier Name
+          - Article Title
+          - Article Id
+          - Submitor Name
+    - configPoint: 'Similar Checked Revision'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "Revision Letter of [#Article Id#] From #Journal Abbreviation# "
+          titleCH:
+          tplEN: "#Journal Title#<br>ISSN:#Journal Online Issn#<br><br><br>Dear #Contributor Name#,<br><br>The similarity check of your submission has not matched the requirement of #Journal Title#, Please revise the manuscript  and upload the revised file within #Similarity Revision Due# days.<br><br>Thank you very much for your contributions to #Journal Title#.<br><br>Sincerely,<br>#Jounral Mail Address Info#<br>t. "
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+          - Recevier Name
+          - Article Title
+          - Article Id
+          - Submitor Name
+    - configPoint: 'Similar Checked Decline'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "ID:[#Article Id#] #Article Title#  From #Journal Abbreviation# "
+          titleCH:
+          tplEN: '#Journal Title#<br>ISSN:#Journal Online Issn#<br><br><br>Dear #Contributor Name#,<br><br>The similarity check of your submission has not matched the requirement of #Journal Title#, So we are sorry to inform you that we have to reject your paper.<br><br>'
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+          - Recevier Name
+          - Article Title
+          - Article Id
+          - Submitor Name
+    - configPoint: 'APC Paid Notify'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "The APC of [#Article Id#] From #Journal Abbreviation# has Paid"
+          titleCH:
+          tplEN: 'The APC of [#Article Id#] From #Journal Abbreviation# has Paid, Please log in to the system and check whether the payment is successful.'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Review Due
+            - accessUrl
+            - Jounral Mail Address Info
+    - configPoint: 'Copyedit Notify'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "The [#Article Id#] From #Journal Abbreviation# are waiting for copyedit"
+          titleCH:
+          tplEN: 'The [#Article Id#] From #Journal Abbreviation# are waiting for copyedit'
+          tplZH:
+          recipient: 0
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Review Due
+            - accessUrl
+            - Jounral Mail Address Info
+    - configPoint: 'Copyedit Requirement'
+      email: true
+      tpls:
+        - jid: -1
+          titleEN: "Copyedit Requirement of [#Article Id#] From #Journal Abbreviation#"
+          titleCH:
+          tplEN: '#Journal Title#<br>ISSN:#Journal Online Issn#<br><br><br>Dear Dr.#Contributor Name#,<br><br>We have received the payment of your paper (ID: #Article Id#) and the proof of your article is attached as a PDF file. Please use this proof solely for checking the typesetting and editing, also the completeness and correctness of the text, tables and figures. You are kindly required to send back your confirmation within 72 hours.<br><br>If you have corrections, it is important to ensure that all of your corrections are highlighted in the proof and sent back to us. Please use the attached PDF for any corrections.<br><br>If you have no corrections, please also respond within the required time to us with your confirmation.<br><br>Should you have any questions, please do not hesitate to let us know.<br>Thank you.<br><br>#Jounral Mail Address Info#'
+          tplZH:
+          recipient: 1
+          name: System
+          available:
+            - Journal Title
+            - Journal Online Issn
+            - Reviewers Name
+            - Article Title
+            - Review Due
+            - accessUrl
+            - Jounral Mail Address Info
+
+    
+    

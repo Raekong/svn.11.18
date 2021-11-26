@@ -1,0 +1,166 @@
+<div>
+    <style>
+       #reviewassign label{
+           float: left;
+       }
+
+       .h4title{
+           text-align: left;
+       }
+
+       #addreviewer{
+            margin-bottom: 5px;
+            min-height: 35px;
+       }
+       
+       #queryRstbody .row{
+           font-size: 12px;
+           background-color: #fff;
+       }
+
+       #queryRstbody .row div{
+            font-family:'Times New Roman', Times, serif;
+            line-height: 28px;
+       }
+
+       #queryRstbody .row:hover{
+           background-color: #eee;
+       }
+
+       input.due{
+           width: 138px;
+           min-height: 28px;
+       }
+
+       span.del{
+           cursor: pointer;
+       }
+       
+
+        .page{
+            text-align: center;
+            line-height: 32px;
+            font-size: 13px;
+        }
+
+        .page div{
+            display: inline-block;
+            margin: 0px 4px;
+        }
+
+        div.paginationjs-pages ul li {
+            display: inline-block;
+            margin: 0px 8px;
+        }
+       
+        div#queryRstbody .body .row{
+            cursor: pointer;
+        }
+    </style>
+    <div id="reviewassign" th:attr="responseDue=${responseDue}, reviewDue=${reviewDue}" >
+        <div >
+            <div th:if="${rid>0}">
+                <div class="h4title" >Last Round Reviewer </div>
+                <div id="lastreviewer">
+                    <div class="tablehead">
+                        <div class="cell" style="flex: 1 1 24%;" >Email</div>
+                        <div class="cell" style="flex: 1 1 24%;" >Name</div>
+                        <div class="cell" style="flex: 1 1 24%;" >Affiliation</div>
+                        <div class="cell" style="flex: 1 1 24%;">Research field</div>
+                        <div class="cell" style="flex: 1 1 4%;">Add</div>
+                    </div>
+                    <div class="row" th:each="last: ${lasts}" style="cursor: pointer;" >
+                        <div class="cell" style="flex: 1 1 24%;" th:text="${last.email}" data="email">Email</div>
+                        <div class="cell" style="flex: 1 1 24%;" th:text="${last.name}"  data="name">Name</div>
+                        <div class="cell" style="flex: 1 1 24%;" th:text="${ last.get('affiliation') !=null ?  last.affiliation : '-' }"  data="affiliation">Affiliation</div>
+                        <div class="cell" style="flex: 1 1 24%;" th:text="${ last.get('researchField') !=null ?  last.researchField : '-'}"  data="researchfield">Research field</div>
+                        <div class="cell" style="flex: 1 1 4%;"><span><i class="fa fa-check-square-o"></i></span></div>
+                    </div>
+                </div>
+            </div>
+            <div  th:if="${rid==0}">
+                <div class="h4title">Suggest Reviewer </div>
+                <div id="suggestreviewer">
+                    <div class="tablehead">
+                        <div class="cell" style="flex: 1 1 24%;" >Email</div>
+                        <div class="cell" style="flex: 1 1 24%;" >Name</div>
+                        <div class="cell" style="flex: 1 1 24%;" >Affiliation</div>
+                        <div class="cell" style="flex: 1 1 24%;">Research field</div>
+                        <div class="cell" style="flex: 1 1 4%;">Add</div>
+                    </div>
+                    <div class="row" th:each="suggest: ${suggests}" style="cursor: pointer;">
+                        <div class="cell" style="flex: 1 1 24%;" th:text="${suggest.email}" data="email">Email</div>
+                        <div class="cell" style="flex: 1 1 24%;" th:text="${suggest.name}"  data="name">Name</div>
+                        <div class="cell" style="flex: 1 1 24%;" th:text="${suggest.affiliation}"  data="affiliation">Affiliation</div>
+                        <div class="cell" style="flex: 1 1 24%;" th:text="${suggest.researchfield}"  data="researchfield">Research field</div>
+                        <div class="cell" style="flex: 1 1 4%;"><span><i class="fa fa-check-square-o"></i></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="h4title">Review Search </div>
+            <div id="review" style="position: relative;">
+                <div id="queryboard" style="display: flex; position: relative; align-items: flex-end;">
+                    <div cell="20%" title="Email" data="email" required style="padding-right: 6px;"></div>
+                    <div cell="20%" title="Name" data="name" required style="padding-right: 6px;"></div>
+                    <div cell="20%" title="Affiliation" data="affiliation" required style="padding-right: 6px;"></div>
+                    <div cell="20%" title="Research Field" data="research" required style="padding-right: 6px;" ></div>
+                    <div cell="20%" title="Statis" data="statis" style="padding-right: 6px;" ></div>
+                    <div style="flex-basis: 80px;line-height: 35px; margin-right: 6px;" class="smallbut" id="addreviewer"><i class="fa fa-plus"></i> Add</div>
+                    <div style="flex-basis: 80px;line-height: 35px; margin-bottom: 5px;" class="smallbut" id="clearReviewer"><i class="fa fa-close"></i> Clear</div>
+                </div>
+                <div id="queryRst" >
+                    <div id="queryRstbody" style="position: relative;" class="pagetable">
+                            <div class="tablehead" style="line-height: 32px; border-top: 3px double #aaa;border-bottom: 3px double #aaa;border-radius:0px;">'
+                                <div class="cell" cell="20%" style="flex: 1 1 20%; cursor: pointer;text-align: left;padding-left:6px" data="email">邮箱</div>
+                                <div class="cell" cell="20%" style="flex: 1 1 20%;cursor: pointer;text-align: left;" data="name">姓名</div>
+                                <div class="cell" cell="15%" style="flex: 1 1 15%;cursor: pointer;text-align: left;" data="affiliation">单位</div>
+                                <div class="cell" cell="15%" style="flex: 1 1 15%;cursor: pointer;text-align: left;" data="research">研究领域</div>
+                                <div class="cell" cell="15%" style="flex: 1 1 15%;cursor: pointer;text-align: left;" data="statis">共审/在审</div>
+                                <div class="cell" cell="15%" style="flex: 1 1 15%;cursor: pointer;text-align: left;" data="src">来源</div>
+                            </div>
+                            <div class="body">
+                            </div>
+                            <div class="page">
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h4title" >Selected Reviewer </div>
+            <div id="selectedReviewer">
+                <div class="tablehead">
+                    <div class="cell" style="flex: 1 1 20%;" >Email</div>
+                    <div class="cell" style="flex: 1 1 20%;" >Name</div>
+                    <div class="cell" style="flex: 1 1 20%;" >Review Statis</div>
+                    <div class="cell" style="flex: 1 1 36%;">Due Setting</div>
+                    <div class="cell" style="flex: 1 1 4%;">Del</div>
+                </div>
+                <div class="body"></div>
+            </div>
+            
+        </div>  
+        <div id="emailpart">
+            <div id="emailTpl">
+            </div>
+            <div class="h4title" >Review Files </div>
+            <div id='files' style=" clear: both;" >
+                <div class="tablehead">
+                    <div class="cell" style="flex: 1 1 25%; " >文件类型</div>
+                    <div class="cell" style="flex: 1 1 57%; " >文件名</div>
+                    <div class="cell" style="flex: 1 1 8%;;" >操作</div>
+                </div>
+                <div class="body">
+                    <div class="row" th:each="file : ${files}" style="display: flex;" th:attr="id=${file.id}, data=${file.originName + ',' + file.innerId.substring(file.innerId.lastIndexOf('/')+1)}">
+                        <div class="cell" style="flex: 1 1 25%; "  th:text="${file.fileType}" th:attr="fileType=${file.fileType}"></div>
+                        <div class="cell  file" style="flex: 1 1 57%; " th:attr="href=${file.innerId}"  th:text="${file.originName}"></div>
+                        <div class="cell" style="flex: 1 1 8%;; " ><span class="del"><i class="fa fa-close"></i></span></div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+                <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-paper-plane" aria-hidden="true"></i> <span>发送</span></span>
+                <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>取消</span></span>
+            </div>
+        </div>
+    </div>
+   
+</div>

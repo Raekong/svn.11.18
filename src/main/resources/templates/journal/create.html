@@ -1,0 +1,22 @@
+<div>
+    <style>
+    </style>
+    <div id="create" >
+        <div class="title"><i class="fa fa-server"></i> <span th:text="${create}">创建新的期刊</span></div>
+        <div class="popcontainer">
+            <div  style="display: flex; flex-direction: column;">
+                <div class="cell" cell="100%" th:attr="title=${name}" data="name" required></div>
+                <div class="cell" cell="100%" th:attr="title=${abbr}" data="abbr"  required></div>
+                <div class="cell" cell="100%" th:attr="title=${manageemail}" data="manageemail"  required></div>
+            </div>
+            <div class="errorinfo" style="line-height:28px;border:0px;font-size: 13px; color:crimson;">&nbsp;</div>
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span th:text="${confirm}">确定</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span th:text="${cancal}">取消</span></span>
+        </div>
+        <div th:attr="i18n=${i18nInfos}" ></div>
+    </div>
+
+
+</div>

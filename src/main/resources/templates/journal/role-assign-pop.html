@@ -1,0 +1,30 @@
+<div>
+    <style>
+       #roleassign label{
+           float: left;
+       }
+    </style>
+    <div id="roleassign" >
+        <div class="title"><i class="fa fa-server"></i> <span>指定用户角色</span></div>
+        <div style="padding: 16px;">
+            <div id="user" style="position: relative;">
+                <label>指定用户<span style="color: red;">*</span></label>
+                <input class="autoinput" param='email' placeholder="please input user's email" id="userid"></input>
+                <div  class="autolist" style="display: none; z-index: 1099999;" >
+                </div>
+            </div>
+            <div id="role" style="position: relative;">
+                <label>赋予角色<span style="color: red;">*</span></label>
+                <input class="autoinput" param='role' placeholder="set role as same premisson level" id="roleid"></input>
+                <div  class="autolist" style="display: none; z-index: 1099999;" >
+                </div>
+            </div>
+            <div class="errorinfo" style="line-height:28px;border:0px;font-size: 13px; color:crimson;">&nbsp;</div>
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>确定</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>取消</span></span>
+        </div>
+        <div i18n="" ></div>
+    </div>
+</div>

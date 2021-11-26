@@ -1,0 +1,274 @@
+listboard:
+    catagorys:
+        article:
+            #choice: 
+            #    index: -1
+            #    title: Article
+            #    showDefault: true
+            id:
+                index: 0
+                title: ID
+                size: small
+                showDefault: true
+                titlequery: 
+                query: 
+                    - article id|int
+                    - title|string
+            title:
+                index: 1
+                title: Title
+                size: blong
+                showDefault: true
+                titlequery: 
+                query: 
+                    - article id|int
+                    - title|string
+            status:
+                index: 3
+                title: Status
+                size: mid
+                showDefault: false
+                titlequery:
+                query:
+                    - status|status
+                    - status date|date
+            subdate:
+                index: 4
+                title: Submit Date
+                size: mid
+                showDefault: false
+                titlequery:
+                query:
+                    - submit Date|date
+            sumbitor:
+                index: 5
+                title: Submitor
+                size: mid
+                showDefault: false
+                titlequery:
+                query: 
+                    - submitor name|string
+                    - submitor id|int
+                    - submitor email|int           
+            js:
+                index: 2
+                title: Jouranl&Section
+                size: long
+                showDefault: true
+                titlequery:
+                query:
+                    - journal|string
+                    - section|string
+            
+            editor:
+                index: 8
+                title: Pre-review Editor
+                size: mid
+                showDefault: false
+                titlequery:
+                query: 
+                    - pre-review editor name|string
+                    - pre-review editor id|int
+                    - pre-review editor email|string
+            authors:
+                index: 9
+                title: Authors
+                size: long
+                showDefault: false
+                titlequery:
+                query:
+                    - author email|string
+        review:
+            #choice: 
+            #    index: -1
+            #    title: Review
+            #    showDefault: true
+            statis:
+                index: 1
+                title: Last Round Statistics
+                size: mid
+                showDefault: false
+                titlequery:
+                query:
+                    - last round total request|int
+                    - last round completed|int
+                    - last round reviewing|int
+                    - last round overdue|int
+                    - last round decline|int
+                    - last round result|reviewresult
+            totalrun:
+                index: 2
+                title: Total Rounds
+                size: small
+                showDefault: false
+                titlequery:
+                query: 
+                    - total rounds|int     
+            startdate:
+                index: 5
+                title: Start Date
+                size: mid
+                showDefault: false
+                titlequery:
+                query:
+                    - start date|date
+            editor:
+                index: 6
+                title: Section Editor
+                size: mid
+                showDefault: false
+                titlequery:
+                query: 
+                    - section editor name|string
+                    - section editor id|int
+                    - section editor email|string
+            reviewers:
+                index: 7
+                title: Last Round Reviewers
+                size: long
+                showDefault: false
+                titlequery:
+                query:
+                    - reviewer name|string
+                    - reviewer email|string
+            paststatis:
+                index: 8
+                size: mid
+                title: Past Round Statistics
+                showDefault: false
+                titlequery:
+        similar:
+            #choice: 
+            #    index: -1
+            #    title: Similarityr Check
+            #    showDefault: true
+            lastresult:
+                index: 3
+                title: Check Result
+                size: mid
+                showDefault: false
+                titlequery:
+                query:
+                    - result|checkresult
+                    - total|int
+                    - first check point|int
+                    - second check point|int
+                    - third check point|int
+            editor:
+                index: 4
+                title: Similarityr Check Editor
+                size: mid
+                showDefault: false
+                titlequery:
+                query: 
+                    - check editor name|string
+                    - check editor id|int
+                    - check editor email|string
+            totalrun:
+                index: 5
+                title: Total Rounds
+                size: small
+                showDefault: false
+                titlequery:
+                query: 
+                    - total rounds|int
+            startdate:
+                index: 6
+                size: mid
+                title: Start Date
+                showDefault: false
+                titlequery:
+                query:
+                    - start date|date
+        payment:
+            #choice: 
+            #    index: -1
+            #    title: Payment
+            #    showDefault: true                 
+            totalpage:
+                index: 2
+                title: Total Page
+                size: small
+                showDefault: false
+                titlequery:
+                query:
+                    - total page|int
+            totalapc:
+                index: 3
+                title: Total APC
+                size: small
+                showDefault: false
+                titlequery:
+                query:
+                    - total apc|int           
+            totalpaid:
+                index: 5
+                size: small
+                title: Total Paid
+                showDefault: false
+                titlequery:
+                query:
+                    - total paid|int
+            editor:
+                index: 6
+                size: mid
+                title: Finanical Editor
+                showDefault: false
+                titlequery:
+                query: 
+                    - finanical editor name|string
+                    - finanical editor id|int
+                    - finanical editor email|string
+            startdate:
+                index: 7
+                size: mid
+                title: Start Date
+                showDefault: false
+                titlequery:
+                query:
+                    - start date|date              
+            payemail:
+                index: 8
+                title: Payer Email
+                size: mid
+                showDefault: false
+                titlequery:
+                query:
+                    - payer email|string
+            history:
+                index: 9
+                title: History
+                size: long
+                showDefault: false
+                titlequery:
+        copyedit: 
+            #choice: 
+            #    index: -1
+            #    title: Copyedit
+            #    showDefault: true
+            totalrun:
+                index: 2
+                title: Total Rounds
+                size: small
+                showDefault: false
+                titlequery:
+                query: 
+                    - total rounds|int
+            editor:
+                index: 4
+                title: Copyeditor
+                size: mid
+                showDefault: false
+                titlequery:
+                query: 
+                    - copyeditor name|string
+                    - copyeditor id|int
+                    - copyeditor email|string
+            startdate:
+                index: 5
+                title: Start Date
+                size: mid
+                showDefault: false
+                titlequery:
+                query:
+                    - start date|date

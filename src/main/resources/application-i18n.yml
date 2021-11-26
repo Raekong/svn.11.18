@@ -1,0 +1,93 @@
+i18n: 
+  uploader: 
+    note:         
+      zh: '请选择上传文件'
+      en: 'Please select upload file'
+    selectbut:
+      zh: '选取文件'
+      en: 'Select file...'
+    confirmbut:
+      zh: '确    定'
+      en: 'Confirm'
+  pages: 
+    resetpassword:
+      email:
+        zh: 注册使用的邮箱
+        en: Registered Email
+      send: 
+        zh: 发送重置请求
+        en: Send Reset Request
+      emailfail:
+        zh: Email必须输入合法Email格式，且不能为空
+        en: Please enter a valid email addrss
+      sended:
+        zh: 密码已经重置，请进入邮箱查看重置后密码
+        en: Password reset successful, please log in email and check your new password
+      sendedfail:
+        zh: 密码重置出现问题, 请联系管理员
+        en: Password reset failed, please contact  system manager
+      log:
+        zh: 'OJS 学术期刊系统'
+        en: 'OJS Academic Journal  System'
+    login: 
+      emailfail:
+        zh: Email必须输入合法Email格式，且不能为空
+        en: Please enter a valid email addrss
+      passwordfail:
+        zh: 请输入密码
+        en: Please enter your email and password
+      login-info:
+        zh: 邮箱或密码错，请重新输入
+        en: The email or password you entered is incorrect, Please input again.
+      admin:
+        zh: 超级管理员
+        en: Super Admin
+      log:
+        zh: 'OJS 学术期刊系统'
+        en: 'OJS Academic Journal  System'
+      email: 
+        zh: 邮 箱
+        en: Email
+      password: 
+        zh: 密 码
+        en: Password
+      forgot: 
+        zh: 忘记密码
+        en: Forgot your password?
+      regist: 
+        zh: 注    册
+        en: Register
+      manual:
+        zh: 帮助文档
+        en: Download manual
+      sign:
+        zh: 登   录
+        en: Sign In
+    home:
+      submit:
+        zh: 新 投 稿
+        en: Submit New Paper
+      profile:
+        zh: 账户管理
+        en: Profile
+      logout:
+        zh: 退出
+        en: Logout
+    test: 
+      uploaded-suc:
+        zh: '文件上传成功'
+        en: 'File has uploaded successed!'
+      uploaded-fail:
+        zh: '文件上传失败'
+        en: 'File has uploaded Failed!'
+      uploaded-title:
+        zh: '信息'
+        en: 'Message'
+      uploaded-buts:
+        zh: '确定'
+        en: 'Confirm'
+
+    
+      
+  
+      

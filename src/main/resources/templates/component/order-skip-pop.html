@@ -1,0 +1,28 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <style>
+        input{
+            width: 48px;
+            text-align: center;
+            font-size: 13px;
+            display: inline-block;
+            margin: 0px 4px; 
+            min-height: 36px;
+        }
+
+        #skip div>span{
+            font-size: 13px;;
+        }
+    </style>
+    <div id="skip" >
+        <div class="title"><i class="fa fa-server"></i> <span>跳至</span></div>
+        <div style="padding: 16px;">
+            <div>
+                <span>移到第<input data="order">位之前</span>
+            </div>
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>确定</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>取消</span></span>
+        </div>
+    </div>
+</div>

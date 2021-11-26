@@ -1,0 +1,57 @@
+<div th:fragment="config" style="position: relative;">
+    <style>
+        .littlebut{
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 8px;
+            font-size: 13px;
+        }
+
+        .but {
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 22px;
+            cursor: pointer;
+            line-height: 36px;
+            padding: 0px 16px;
+        }
+    </style>
+    <div>
+        <div>
+            <div class="h4title" id="workflow">Payment Configuration </div>
+               
+            <div id="payment" style=" padding:8px; padding-top:0px; border:1px solid #c9d8db;">
+                <label> 是否需要支付 <span class="nocheck" configPoint="Payment" point></span></label>
+                <div style="clear: both;"></div>
+                <div id="paymentboard" style="display:none">
+                    <div style="display: flex;">
+                        <div cell="33%"  title='Article Processing Charge (USD):'  data="basiccharge" style="margin-right: 6px;;" required configPoint="Article Processing Charge"></div>
+                        <div cell="33%"  title='Over Charge (USD/Pre Page):'  data="superpagefee" style="margin-right: 6px;;" required configPoint="Over Charge"></div>
+                        <div cell="33%"  title='Basic pages Number(Integer):'  data="basicpages" required configPoint="Basic pages Number"></div>
+                    
+                    </div>
+                    <div style="display: flex;">
+                        <div cell="50%"  title='Wire Transfer (%):'  data="handlingfee" style="margin-right: 6px;;" required configPoint="Wire Transfer"></div>
+                        <div cell="50%"  title='Online Transfer Fee(%):'  data="onlinetransferfee" required configPoint="Online Transfer Fee"></div>
+                    </div>
+                    <label>Bank Account Information</label>
+                    <div style="clear: both;"></div>
+                    <div id="editor-bankinfo" configPoint="Bank Account Information"></div>
+                    
+                    <label>About Article Processing Charge (APC) </label>
+                    <div style="clear: both;"></div>
+                    <div id="editor-wiretransfer" configPoint="About Article Processing Charge"></div>
+                    
+                </div>
+                
+            </div>
+            <input id="submit-payment" th:value="${configsubmit}" class="form-submit" submit="payment" />
+    </div>
+        </div>
+    </div>
+</div>

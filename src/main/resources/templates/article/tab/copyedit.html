@@ -1,0 +1,256 @@
+<div id="copyedittab"  style="padding:16px; ">
+    <style>
+        #similarchecktab ul.nav li:first-child {
+            margin-left: 0px;
+        }
+
+        
+        div.decisionbut.accept {
+            background-color: #007ab2;
+            background-image: linear-gradient(#009de5, #007ab2);
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 40%);
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 20%);
+            border-color: #007ab2;
+        }
+
+        div.decisionbut {
+            display: inline-block;
+            padding: 7px 16px;
+            vertical-align: middle;
+            background-color: #eee;
+            background-image: linear-gradient(#eee, #ddd);
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 60%);
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+            color: rgba(0,0,0,0.84);
+            text-shadow: 0 2px 0 rgb(255 255 255 / 60%);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        div.decisionbut.decline {
+            background-color: #d00a6c;
+            background-image: linear-gradient(#f41985, #d00a6c);
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 40%);
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 20%);
+            border-color: #d00a6c;
+        }
+
+        div.decisionbut.recommend {
+            background-color: #00b24e;
+            background-image: linear-gradient(#00D560, #00b24e);
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 40%);
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 20%);
+            border-color: #00b24e;
+        }
+
+        div.decisionbut.preview {
+            background-color: #ffce54;
+            background-image: linear-gradient(#F8D056, #ffce54);
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 40%);
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 20%);
+            border-color: #ffce54;
+        }
+
+        
+        .littlebut {
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 8px;
+            font-size: 13px;
+        }
+
+        .editor{
+            font-size: 13px;
+            font-weight: 400;
+            display: flex;
+            color: #367fa9;
+            line-height: 18px;
+            font-style: italic;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #367fa9;
+            align-items: center;
+        }
+
+        div.curstate{
+            margin: 6px 0px;
+            font-size: 13px;;
+            padding : 8px 12px;
+            background-color: #eee;
+            line-height: 24px;
+            border-radius: 2px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+        }
+
+
+        span[change]{
+            color: #0588d4;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .attachment .smallbut {
+            min-height: 24px;
+        }
+
+        span i{
+            margin: 0px 2px;
+            cursor: pointer;
+        }
+
+        .dtitle, .dcontent{
+            border: 1px solid #ddd;
+            padding: 0px 8px;
+            border-radius: 3px;
+            line-height: 32px;
+            font-size: 13px;
+
+            margin: 6px 0px;
+        }
+
+        .dcontent{
+            max-height: 328px;
+            overflow: auto;
+        }
+
+        .Similar{
+            background-color: #eee;
+            font-size: 13px;
+            line-height: 28px;
+            margin: 8px 0px;
+            margin-top: 0px;
+            border: 3px;;
+            padding: 4px;
+            padding-left: 16px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+        }
+
+        div.decisionbut.pass {
+            background-color: #00b24e;
+            background-image: linear-gradient(#00D560, #00b24e);
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 40%);
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 20%);
+            border-color: #00b24e;
+        }
+
+        #roundtab .h4title{
+            margin-top: 0px;
+        }
+
+    </style>
+    <ul class="nav" >
+        <li class="mytab" th:each="round:${rounds}" >
+            <a th:attr="tag=${ 'round-' + (round.index+1) }" th:text="${'Round ' + (round.index+1) }"></a>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tabDiv" th:each="round:${rounds}"  th:attr="tag=${ 'round-' + (round.index+1) }, rid=${round.index}, closed=${round.closed}">
+        <div id="roundtab">
+            <div class="curstate"><span><i class="fa fa-volume-down" style="color:red"></i></span> <span th:utext="${round.desc}"></span></div>
+            <div id="tab">
+                <div style="display: flex;">
+                    <div style="flex: 1 1 auto;" th:attr="curstate=${round.curstate} ">
+                        
+                        <!--用户在修订状态下可见-->
+                        <div id="revisionboard" th:if="${!roles.author && round.curstate==1 && !round.closed}" th:attr="closed=${round.closed }">
+                            <div class="h4title" style="margin-top:0px;">Revision
+                                <span class="littlebut" id="uploadRevision" > [ Upload Revision Files <i class="fa fa-upload"></i> ]</span> 
+                            </div>
+                            <div class="tablehead">
+                                <div class="cell" style="flex: 1 1 25%; " >File Type</div>
+                                <div class="cell" style="flex: 1 1 57%; " >File Name</div>
+                                <div class="cell" style="flex: 1 1 18%;;" >Action</div>
+                            </div>
+                            <div class="body">
+                            </div>
+                            <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+                                <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>Submit</span></span>
+                            </div>
+                            <div style="clear:both; height: 6px;"></div>
+                        </div>
+                        <!--查询文件列表-->
+                        <div>
+                            <div class="h4title">Discussion 
+                                <span class="littlebut" id="sendAuthorMsg" th:attr="author=${roles.author}"  > [ Send Discussion <i class="fa fa-paper-plane"></i> ]</span> 
+                            </div>
+                            <div class="tablehead">
+                                <div class="cell" style="flex: 1 1 15%; " >Time</div>
+                                <div class="cell" style="flex: 1 1 20%;" >Sender</div>
+                                <div class="cell" style="flex: 1 1 57%; " >Title</div>
+                                <div class="cell" style="flex: 1 1 8%; ">Action</div>
+                            </div>
+                            <div th:each="msg : ${round.msgs}">
+                                <div class="row" th:if="${msg.type==1}"> 
+                                    <div style="flex:1 1 15%" th:text="${ #dates.format(msg.timestamp, 'yyyy-MM-dd HH:mm:ss') }"></div>
+                                    <div style="flex:1 1 20%" th:text="${msg.senderAccount}"></div>
+                                    <div style="flex:1 1 57%" th:text="${msg.title}"></div>
+                                    <div style="flex:1 1 8%" ><span th:attr="data=${msg.id}" class="viewmsg" style="color: #007ab2;"><i class="fa fa-search"></i></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--排版文件列表-->
+                        <div id='files' style=" clear: both;" th:attr="rid=${round.index}" >
+                            <div class="h4title" style="margin-top:0px;">Article Files </div>
+                            <div class="tablehead">
+                                <div class="cell" style="flex: 1 1 25%; " >File Type</div>
+                                <div class="cell" style="flex: 1 1 75%; " >File Name</div>
+                            </div>
+                            <div class="row" th:each="file : ${round.files}" style="display: flex;" th:attr="id=${file.id}, originName=${file.originName}, innerId=${file.innerId}">
+                                <div class="cell" style="flex: 1 1 25%; "  th:text="${file.fileType}"></div>
+                                <div class="cell  file" style="flex: 1 1 75%; " th:attr="href=${file.version}"  th:text="${file.originName}"></div>
+                            </div>
+                        </div>
+                        <!--查询出结果可见-->
+                        
+                        
+                        
+                    </div>
+                    
+                    <div th:attr="rid=${round.index}" th:if="${!round.closed && !roles.author}"  style="flex-basis: 288px; flex-shrink: 0; padding:8px;padding-right: 0px; padding-top: 0px;" >
+                        
+                        <div th:if="${round.curstate != 2}">
+                            <div data="revision" class="decisionbut revision" >  Send copyediting requirement </div>
+                            <div data="pass" class="decisionbut accept"  > Copyedit Accepted </div>
+                        </div>
+                       
+                        
+                        <div class="h4title" style="line-height: 56px; margin-top: 0px;;">Editor Board </div>
+                        
+                        <div class="editor" th:each="editor: ${board}" style="padding:6px;" th:attr="rid=${round.index}" th:if="${ !round.closed && editor.role eq 'copyeditor'  }">
+                            <div style="flex: 1 1 auto;" >
+                                <div >
+                                    <span class="editorname" th:text="${editor.name}"></span>
+                                </div>
+                                <div th:text="${editor.email}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        </div>
+        
+        <div id="emailcontainer" >
+
+        </div>
+    </div>
+
+</div>

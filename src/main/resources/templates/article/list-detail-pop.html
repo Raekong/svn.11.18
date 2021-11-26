@@ -1,0 +1,167 @@
+<div>
+    <style>
+      #detail .h4title{
+        text-align: left;
+      }
+
+      .item{
+          display: flex;
+          font-size: 13px;
+          font-family: 'Times New Roman', Times, serif;
+          color: #555;
+          line-height: 18px;
+      }
+
+      .item .label{
+          flex:  1 1 15%;
+          text-align: right;
+          padding: 0px 4px;
+          font-weight: bold;
+      }
+
+      .item .label::after{
+          content: ':';
+      }
+
+      .item .value{
+          flex: 1 1 80%;
+          text-align: left;
+      }
+    </style>
+    <div id="detail" >
+        <div class="title"><i class="fa fa-server"></i> <span>Article [{{aid}}]: <span style="color:red">{{article.statusdesc}}</span></span></div>
+        <div style="padding: 16px;max-height: 488px; overflow-y: scroll;">
+            <div class="h4title">Submission Inforamtions</div>
+            <div class="item"><div class="label">ID</div><div class="value">{{article.id}}</div></div>
+            <div class="item"><div class="label">Title</div><div class="value">{{article.title}}</div></div>
+            <div class="item"><div class="label">Journal & Section</div><div class="value">{{article.jtitle}} [{{article.stitle}}] </div></div>
+            <div class="item"><div class="label">Submitor</div><div class="value">{{article.subname}} [{{article.subemail}}]</div></div>
+            <div class="item"><div class="label">Submit Date</div><div class="value">{{article.subdate}}</div></div>
+            <div class="item"><div class="label">Authors</div>
+                <div class="value" >
+                    {{each article.authors as author}}
+                        <span>{{author.name}}[{{author.email}}]</span>, 
+                    {{/each}}
+                </div>
+            </div>
+            {{ if !!article.eemail }} <!--预审稿编辑-->
+            <div class="item"><div class="label">Pre-reviewer</div><div class="value">{{article.ename}} [{{article.eemail}}]</div></div>
+            {{/if}}
+
+            {{ if !!review && reivew != 'novalue'}} <!--如果有的话-->
+            <div style="padding-top: 8px;">
+                <div class="h4title">Review Inforamtions</div>
+                <div class="item"><div class="label">Start Date</div><div class="value">{{ review.startdate }}</div></div>                <div class="item"><div class="label">Section Editor</div><div class="value">{{review.ename}} [{{review.eemail}}]</div></div>
+                <div class="item"><div class="label">Total Rounds</div><div class="value">{{ !!review.rounds ? review.rounds.length : 0}}</div></div>
+
+                {{ if !!review.rounds }}
+                <div class="item" >
+                    <div class="label" style="line-height: 32px;">Rounds</div>
+                    <div class="value" >
+                        <div style="display: flex; background-color: #eee; padding: 6px; text-align: center;">
+                            <div style="flex:1 1 5%">Index</div>
+                            <div style="flex:1 1 20%">Result</div>
+                            <div style="flex:1 1 15%">Total Reviewer</div>
+                            <div style="flex:1 1 15%">Completed</div>
+                            <div style="flex:1 1 15%">Reviewing</div>
+                            <div style="flex:1 1 15%">Declined</div>
+                            <div style="flex:1 1 15%">Overdue</div>
+                        </div>
+                        {{each review.rounds as round}}
+                            <div style="display: flex; padding: 6px; text-align: center; ">
+                                <div style="flex:1 1 5%">{{ round.seq+1}}</div>
+                                <div style="flex:1 1 20%">{{ round.result }}</div>
+                                <div style="flex:1 1 15%">{{ round.total}}</div>
+                                <div style="flex:1 1 15%">{{ round.completed }}</div>
+                                <div style="flex:1 1 15%">{{ round.reviewing}}</div>
+                                <div style="flex:1 1 15%">{{ round.reviewing }}</div>
+                                <div style="flex:1 1 15%">{{ round.overdue}}</div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            {{ /if }}
+
+            {{ if !!payment && payment != 'novalue'}} <!--如果有的话-->
+            <div style="padding-top: 8px;">
+                <div class="h4title">Payment Inforamtions</div>
+                <div class="item"><div class="label">Start Date</div><div class="value">{{ payment.startdate }}</div></div>                
+                <div class="item"><div class="label">Financial Editor</div><div class="value">{{payment.ename}} [{{payment.eemail}}]</div></div>
+                <div class="item"><div class="label">Total Pages</div><div class="value">{{ payment.totalpage}}</div></div>
+                <div class="item"><div class="label">Total APC</div><div class="value">{{ payment.apc}}$</div></div>
+                <div class="item"><div class="label">Total Paid</div><div class="value">{{ payment.totalpaid}}$</div></div>
+                {{ if !!payment.histories }}
+                <div class="item">
+                    <div class="label" style="line-height: 32px;">History</div>
+                    <div class="value" >
+                        <div style="display: flex; background-color: #eee; padding: 6px; text-align: center;">
+                            <div style="flex:1 1 5%">Index</div>
+                            <div style="flex:1 1 20%">Type</div>
+                            <div style="flex:1 1 20%">Paid</div>
+                            <div style="flex:1 1 25%">Payer Email</div>
+                            <div style="flex:1 1 30%">Date</div>
+                        </div>
+                        {{each payment.histories as round index}}
+                            {{ if !!round.payEmail }}
+                            <div style="display: flex; padding: 6px; text-align: center; ">
+                                <div style="flex:1 1 5%">{{ index }}</div>
+                                <div style="flex:1 1 20%">{{ round.payType }}</div>
+                                <div style="flex:1 1 20%">{{ round.payTotal }}$</div>
+                                <div style="flex:1 1 25%">{{ round.payEmail}}</div>
+                                <div style="flex:1 1 30%">{{ round.paytime}}</div>
+                            </div>
+                            {{/if}}
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+            {{ /if }}
+
+
+            {{ if !!similar && similar != 'novalue'}} <!--如果有的话-->
+            <div style="padding-top: 8px;">
+                <div class="h4title">Similarity Check Inforamtions</div>
+                <div class="item"><div class="label">Start Date</div><div class="value">{{ similar.startdate }}</div></div>                
+                <div class="item"><div class="label">Similarity Check Editor</div><div class="value">{{similar.ename}} [{{similar.eemail}}]</div></div>
+                <div class="item"><div class="label">Result</div><div class="value">{{similar.status}}</div></div>
+                {{ if !!similar.rounds }}
+                <div class="item">
+                    <div class="label" style="line-height: 32px;">Round</div>
+                    <div class="value" >
+                        <div style="display: flex; background-color: #eee; padding: 6px; text-align: center;">
+                            <div style="flex:1 1 5%">Index</div>
+                            <div style="flex:1 1 19%">Result</div>
+                            <div style="flex:1 1 19%">Total</div>
+                            <div style="flex:1 1 19%">First Check Point</div>
+                            <div style="flex:1 1 19%">Second Check Point</div>
+                            <div style="flex:1 1 19%">Third Check Point</div>
+                        </div>
+                        {{each similar.rounds as round index}}
+                            <div style="display: flex; padding: 6px; text-align: center; ">
+                                <div style="flex:1 1 5%">{{ index }}</div>
+                                <div style="flex:1 1 19%">{{ round.pass ? 'Pass': 'Fail' }}</div>
+                                <div style="flex:1 1 19%">{{ round.totalSimilar }}</div>
+                                <div style="flex:1 1 19%">{{ round.frsSimilar }}</div>
+                                <div style="flex:1 1 19%">{{ round.secSimilar}}</div>
+                                <div style="flex:1 1 19%">{{ round.thrSimilar}}</div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+            {{ /if }}
+
+           
+
+        </div>
+
+        {{/if}}
+        
+    </div>
+    <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+        <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>Close</span></span>
+    </div>
+</div>

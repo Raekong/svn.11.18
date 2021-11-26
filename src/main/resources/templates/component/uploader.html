@@ -1,0 +1,18 @@
+<div th:attr="i18n=${i18n}, platform=${platform}">
+    
+    <div  id="uploadDiv" style=" padding:2px; display: flex; ">
+        <div style=" display: flex; flex:1 1 auto; flex-direction: column; padding:0px 6px;  ">
+            <div style="display: flex;">
+                <div class="note" th:text="${note}" style="flex: 1 1 auto;"></div>
+                <div class="butcontainer" style="flex-basis: 88px; ">
+                    <div class="smallbut selectbut" th:text="${selectbut}" id="selectbut" ></div>
+                </div>
+            </div>
+            <div class="process">
+                <div class="processbar">
+                    <div class="pre"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

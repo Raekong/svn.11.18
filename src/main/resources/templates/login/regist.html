@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TSP Academic Journal System</title>
+<link rel="shortcut icon" href="/img/favio.png"/>
+<script src="/js/third-party/jquery.js"></script>
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+
+	<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+		html, body{
+			height: 100%;
+		}
+		
+		
+		.page-title{
+			margin: 0.2em 0;
+		    font-size: 24px;
+		    margin-top: 10;
+		    margin-bottom: 18px;
+		    font-weight: 200;
+		    text-align: center;
+		    padding-top: 10px;
+            color: #323232;
+		}
+		
+
+		input {
+			-webkit-appearance: none;
+			background-color: #fff;
+			border: 1px solid #aaa;
+			border-radius: 3px;
+			box-shadow: none;
+			width: 100%;
+			min-height: 38px;
+			line-height: 1;
+			padding-left: 8px;
+			padding-right: 8px;
+			margin-bottom: 8px;
+			outline: none;
+		}
+		.form-submit {
+		    margin-top: 25px;
+		    margin-bottom: 28px;
+		    -webkit-appearance: none;
+		    background-color: #C8252C;
+		    border: 0;
+		    border-radius: 2px;
+		    color: #fff;
+		    font-size: 15px;
+		    font-weight: 600;
+		    padding: 18px 20px 17px;
+		    display: block;
+		    line-height: 1;
+		    width: 100%;
+			cursor: pointer;
+		}
+	
+		
+
+        #sub{
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        #sub::after{
+            display: block;
+            content: '';
+            position: absolute;
+            border-bottom: 1px dotted #4d4d4d;
+            width: 100%;  
+            top: 10px;   
+            z-index: -1;
+        }
+  
+		.error{
+			border: 1px solid #C8252C;
+		}
+
+        .headTitle .mainTitle{
+            font-family: Impact, Charcoal, sans-serif;
+            color: #444;
+            line-height: 32px;;
+        }
+
+        .headTitle .Sole::after {
+            display: block;
+            content: '';
+            position: absolute;
+            border-bottom: 1px dotted #555;
+            width: 100%;
+            top: 24px;
+        }
+
+		label {
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-family: Georgia, serif;
+            color: #444;
+            line-height: 28px
+        }
+
+		ul#countries{
+			position: absolute;
+			overflow-y: auto;
+			max-height: 280px;
+			font-size: 12px;
+			background-color: #fff;
+			width: 50%;
+			right: 0px;
+			top: 78px;
+			padding: 6px;
+			border: 1px solid #aaa;
+			border-radius: 3px;
+			color: #444;
+			display: none;
+		}
+        	
+		ul#countries li{
+			line-height: 22px;
+			padding-left: 8px;;
+			cursor: pointer;
+		}
+
+		ul#countries li:hover{
+			background-color: #eee;
+		}
+		body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+        }
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+            padding-left: 24px;
+            font-size: 14px;
+        }
+
+        body .layui-layer-title::before{
+            content: '\f06a';
+            display: inline-block;
+            margin-right: 6px;
+		    font-family:FontAwesome;
+        }
+
+
+        body .layui-layer-btn .layui-layer-btn0 {
+            background-color: #3c8dbc;
+            padding: 0px 16px;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            margin: 4px;
+            border-radius: 2px;
+            font-size: 12px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 10%);
+
+        }
+
+        body .layui-layer-content{
+            text-align: center;
+        }
+
+        body .layui-layer-dialog{
+            width: 480px;
+        }
+
+		body .layui-layer-setwin{
+			display: none;
+		}
+
+		.msgbox{
+			font-size: 13px;
+			border-radius: 6px;;
+		}
+
+		.msgbox .msgboxtitle{
+			line-height: 38px;
+			border-bottom: 1px solid #eee ;
+			text-align: left;
+			font-size: 14px;
+			margin: 16px;
+			margin-bottom: 0px;
+		}
+
+		.msgbox .msgboxtitle span.alert, .msgbox .msgboxtitle span.info{
+			margin-right: 6px;
+			width: 28px;
+			height: 28px;
+			float: left;
+			margin-top: 5px;
+		}
+
+		.msgbox .msgboxtitle span.alert{
+			background: url("/img/alert.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxtitle span.info{
+			background: url("/img/info.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxcontent{
+			padding: 24px 16px ;
+			text-align: left;
+		}
+
+		.msgbox .msgboxfoot{
+			line-height: 48px;
+			background-color: #f2f2f2;
+		}
+
+		.msgbox .msgboxfoot .confirm{
+			cursor: pointer;
+		}
+
+
+
+	</style>
+</head>
+<body  style="background-color: #f2f2f2; ">
+	<div id="container" th:attr="abbr=${publisherAbbr}, i18n=${i18n}" style="padding: 16px; width: 980px; margin: 0 auto; height: 100%; display: flex; flex-direction: column;">
+		<div id="body" style="flex:auto; background-color: #fff; border-radius:6px; padding: 0px 15px; padding-top: 8px; padding-bottom: 16px;">
+			<div class="headTitle">
+				<div   class="mainTitle" th:text="${regist}">用户注册</div>
+				<div class="Sole" style="color: #999; font-size: 13px; position: relative;">
+					<span   style="background-color: #fff; " th:text="${publisher}"></span>
+				</div>
+			</div>
+			<div style="display: flex; margin-top: 16px;;">
+				<div cell="33%" th:attr="title=${firstname}" data="firstname" required style="padding-right: 6px;;"></div>
+				<div cell="33%" th:attr="title=${middlename}" data="midname" style="padding-right: 6px;;"></div>
+				<div cell="33%" th:attr="title=${lastname}" data="lastname"></div>
+			</div>
+			<div style="display: flex; margin-top: 16px; position: relative;">
+				<div cell="50%" th:attr="title=${org}"  data="affiliation" required style="padding-right: 6px;;"></div>
+				<div cell="50%" th:attr="title=${country}"  data="country" required ></div>
+				<ul id="countries" >
+					<li th:each="map:${countries}" th:attr="data=${map.value}" th:text="${map.key}"> </li>
+				</ul>
+			</div>
+			
+			<div style="display: flex; margin-top: 16px;;">
+				<div cell="50%" th:attr="title=${email}"  data="email" required style="padding-right: 6px;;"></div>
+				<div cell="50%" th:attr="title=${reemail}" data="reemail" required ></div>
+			</div>
+			<div style="display: flex; margin-top: 16px;;">
+				<div style="padding-right: 6px; flex: 1 1 50%;">
+					<label ><span th:text="${password}">Password</span><span style="color:red;">*</span></label>
+					<input data-password type="password">
+				</div>
+				<div style="flex: 1 1 50%;">
+					<label><span th:text="${repassword}	">Repeat Password</span><span style="color:red;">*</span></label>
+					<input data-repassword type="password">
+				</div>
+			</div>
+			<div style="display: flex; margin-top: 16px;;">
+				<div cell="100%" th:attr="title=${interest}"  data="interest" required ></div>
+			</div>
+		   	<input id="submit" value="submit" class="form-submit" style="text-align: center; width: 188px; float: right;"></input>
+			<p id="i18n" th:attr="i18n=${i18nInfos}"></p>
+		</div>
+		<div class="footer" style="color:#444; text-align: center; line-height: 32px; font-size:13px; flex-basis: 32px; margin: 8px 0px; background-color: #fff;border-radius:6px;">
+		   <span th:text="${publisher}"></span> © 2020-2025 TSP Academic Journal System - All Rights Reserved - 
+		</div>
+	</div>
+	<div style="display: none;" id="i18nInfos" th:attr="infos=${i18nInfos}"></div>
+	<script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="regist" target-module="regist" defer async="true" ></script></body>
+</html>

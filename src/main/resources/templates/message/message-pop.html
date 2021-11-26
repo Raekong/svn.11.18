@@ -1,0 +1,102 @@
+<div>
+    <style>
+        .msgbox{
+            font-size: 13px;;
+            text-align: left;
+        }
+
+        .msgbox .h4title{
+            font-size: 13px;;
+            background-color: #e2e2e2;
+        }
+
+        .attachment{
+            clear: both;
+            margin-top: 4px;;
+        }
+
+        .note{
+            font-size: 12px;
+            font-family: sans-serif;
+            flex-basis: 20px;
+            line-height: 20px;;
+        }
+
+        .process{
+            flex: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .processbar{
+            height: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            position: relative;
+        }
+
+        .pre{
+            position: absolute;
+            background-color: #66DDFF;
+            width: 0%;
+            top: -1px;
+            left: 0px;
+            height: 3px;
+        }
+
+        .attachment .smallbut{
+            text-align: center;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #e2e2e2;
+            border-radius: 2px;
+            padding-left: 4px;
+            margin-bottom: 6px;
+            color: #323232;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        #fileList a, div a{
+            text-decoration: underline;
+            padding: 0px 8px;
+            color: #0D6DA2;
+            cursor: pointer;
+            margin: 4px;    
+        }
+
+        #fileList>div{
+            line-height: 28px;
+        }
+
+
+    </style>
+    <div id="user-message" class="msgbox" >
+        <div class="title"><i class="fa fa-server"></i> <span>消息</span></div>
+        <div id="msgcontent" style="padding:16px; overflow-y: auto;">
+            <div>
+                <div class="h4title">消息标题</div>
+                <input id="msg-title" readonly="readonly"/>
+            </div>
+            <div>
+                <div class="h4title">消息内容</div>
+                <div style="overflow:auto;font-size:12px; line-height: 18px; font-family: Georgia, 'Times New Roman', Times, serif;  height:218px; padding:16px; border:1px solid #c9d8db;" id="msg-content"></div>
+            </div>
+            <div class="attachment">
+                <div class="h4title">消息附件</div>
+                
+                <div id="fileList" >
+                </div>
+            </div>
+
+        </div>
+        <div style="margin-top:28px;text-align:right; background: #eee; padding:16px;">
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span >退出</span></span>
+        </div>
+
+    </div>
+
+</div>

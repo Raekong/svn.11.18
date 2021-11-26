@@ -1,0 +1,102 @@
+<div>
+    <style>
+       #reviewassign label{
+           float: left;
+       }
+
+       .h4title{
+           text-align: left;
+       }
+
+       #addreviewer{
+            margin-bottom: 5px;
+            min-height: 35px;
+       }
+       
+       #queryRstbody .row{
+           font-size: 12px;
+           background-color: #fff;
+       }
+
+       #queryRstbody .row div{
+            font-family:'Times New Roman', Times, serif;
+            line-height: 28px;
+       }
+
+       #queryRstbody .row:hover{
+           background-color: #eee;
+       }
+
+       input.due{
+           width: 138px;
+           min-height: 28px;
+       }
+
+       span.del{
+           cursor: pointer;
+       }
+       
+       .smah4title{
+            font-weight: 200; 
+            background-color: #eee; 
+            font-size: 13px; 
+            font-weight:200; 
+            color: #0090D7;
+            line-height: 28px;
+            padding-left: 8px; 
+            margin: 4px 0px;
+       }
+
+       .resulttxt{
+            font-size: 13px; 
+            color: #444;
+            text-align: justify;
+            padding: 16px;
+            padding-top:0px;
+            border: 1px solid #dddddd;;
+            margin: 4px 0px;;
+            border-radius: 2px;
+       }
+
+       .resulttip{
+           font-size: 12px; 
+           line-height: 32px;
+           color: #0090D7;
+           cursor: pointer;
+       }
+
+       #finalFiles i{
+            color: #0090D7;
+       }
+
+       div.cell.file {
+            color:#3c8dbc;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+    </style>
+    <div id="reviewdecision">
+        <div id='mailtpl'>
+            
+        </div>
+        <div id='attachs' th:if="${type eq 'revision'}">
+            <div class="h4title">Revision Files List</div>
+            <div class="tablehead">
+                <div  class="cell" style="flex: 1 1 90%" cell="90%" data="originName">File Name</div>
+                <div  class="cell" style="flex: 1 1 10%; text-align:left" cell="10%" >Action</div>
+            </div>
+            <div class="body" >
+                <div class="row" th:each="file: ${roundFiles}">
+                    <div  class="cell" style="flex: 1 1 90%" cell="90%" th:attr="id=${file.id}, originName=${file.originName}, innerId=${file.innerId}" th:text="${file.originName}"></div>
+                    <div  class="cell" style="flex: 1 1 10%; text-align:left" cell="10%" ><span class="del"><i class="fa fa-close"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-paper-plane" aria-hidden="true"></i> <span>发送</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>取消</span></span>
+        </div>
+    </div>
+   
+</div>

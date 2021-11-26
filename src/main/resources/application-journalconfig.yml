@@ -1,0 +1,52 @@
+journal:
+    filetypes:
+        - Manuscript in Latex
+        - Manuscript in Pdf
+        - Manuscript in Word
+        - Cover Letter
+        - Graphical Abstract
+        - Supplementary Files
+        - Copyright transfer statement
+        - Other Files
+    configs:
+        - configPoint: 'Submit Guidelines'
+          data: 'Manuscripts submitted for publication must be prepared according to the guidelines given by the Instruction for Authors Please prepare your manuscript strictly according to the Template. All articles in the journal are published in full Open Access. An article processing charge (APC) is applied to all articles. The authors are requested to pay an article processing charge (APC) of $1,350 US dollars per processed paper. For articles in excess of 15 pages, a mandatory page charge of $100 US dollars per extra page will be required beyond 15 pages. Rejected articles are free of charge. The authors must state that they are willing to pay an article processing charge (APC) in the cover letter.'
+        - configPoint: 'Submit Requirements'
+          data: 'true'
+        - configPoint: 'Require Reviewers Num'
+          data: '3'
+        - configPoint: 'Reviewer Requirement'
+          data: "The reviewer shall have a senior title or a doctor's degree, and there is no personal relationship with the author, such as family and partners."
+        - configPoint: 'CoverLetter Check'
+          data: 'false'
+        - configPoint: 'CoverLetter Requirement'
+          data: 'true'
+        - configPoint: 'Latex Check'
+          data: 'false'
+        - configPoint: 'Review Due'
+          data: '10'       
+        - configPoint: 'Response Due'
+          data: '3'
+        - configPoint: 'Revision Due'
+          data: '3'
+        - configPoint: 'Review Score Module'
+          data: 'false'
+        - configPoint: 'Payment'
+          data: 'false'
+        - configPoint: 'Simaliary Check'
+          data: 'true'
+        - configPoint: 'Similarity Revision Due'
+          data: '3'        
+        - configPoint: 'Simaliary Check First'
+          data: 'false'
+        - configPoint: 'Total Similar'
+          data: '20'
+        - configPoint: 'First Similar'
+          data: '10'
+        - configPoint: 'Second Similar'
+          data: '10'
+        - configPoint: 'Third Similar'
+          data: '10'
+        - configPoint: 'About Article Processing Charge'
+          data: 'An article processing charge (APC) is applied to every article. The authors are requested to pay an article processing charge (APC) of #Article Processing Charge# dollars per processed paper. For articles in excess of #Basic Pages# pages, a mandatory page charge of #Over Charge# dollars per extra page will be required beyond #Basic Pages# pages. Rejected articles are free of charge.<br>So, the APC of your article is: <span apc font-weight="bold">#Total APC#</span>. Total payment is due in 10 days.<br><br>There are two options to pay the charge:<br>1) Wire Transfer<br>Article Processing Charge (APC): $<span apc font-weight="bold">#Total APC#</span> USD<br>Transfer Charge: $#Wrie Transfer# USD<br>Total Amount : $#Total Amount Pay by Wire Transfer# USD<br>If you choose the payment by wire transfer, please use the information below and include your paper ID on the reference of payment. Then you need to send the payment receipt to our official email account ( /**********Need to fill in************/).<br>Name of the Bank: /**********Need to fill in************<br>Address: /**********Need to fill in************<br>Swift Code: /**********Need to fill in************<br>Routing number: /**********Need to fill in************<br>Account Name: /**********Need to fill in************<br>Account Number: /**********Need to fill in************<br>2) Credit Card<br>Article Processing Charge (APC): $<span apc font-weight="bold">#Total APC#</span> USD<br>Transfer Charge: #Online Transfer Fee#<br>Total Amount : $#Total Amount Pay by online#USD<br>Visa, Mastercard, American Express, and Discover cards are accepted. If you choose pay by Credit Card, please get your Card Number, Expiration Date, Card Verification Number ready, and click the link below:<br>/**********Need to fill in************<br>For more information of the payment of Article Processing Charge, you may click the link below:<br>/**********Need to fill in************<br>If you need a formal #Journal Abbreviation# Invoice, please click the link of #Journal Abbreviation# Invoice to download the PDF document and fill relevant information in the editable fields.Confirmation Email will be sent to you within five working days when the payment is fully confirmed. If you haven’t received the Confirmation Email two weeks after payment, please contact us. We will not reply any inquiries regarding Confirmation Letter during these two weeks.'
+          

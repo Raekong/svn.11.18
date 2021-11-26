@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TSP Academic Journal System</title>
+<link rel="shortcut icon" href="/img/favio.png"/>
+<script src="/js/third-party/jquery.js"></script>
+<link rel="stylesheet" href="/css/layui.css" media="all">
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+
+	<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-weight: 200;
+        }
+
+        html, body{
+            width:100%;
+            height: 100%;
+            font-size: 1em;
+        }
+		
+        #frame{
+            width: 100%;
+            min-height: 100%;
+        }
+
+        #menus{
+            flex-basis: 228px;  
+            background-color: #353E4F;; 
+            flex-shrink: 0;
+        }
+
+        .headTitle .mainTitle{
+            font-family: Impact, Charcoal, sans-serif;
+            color: #444;
+            line-height: 32px;;
+        }
+
+        .headTitle .Sole{
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            font-size: 1em;
+        }
+        
+        .headTitle .after {
+            display: block;
+            position: absolute;
+            border-bottom: 1px dotted #555;
+            width: 100%;
+            top: 56px;
+            height: 1px;
+        }
+
+        #container{
+            flex:auto; 
+            background-color: #f2f2f2; 
+            padding: 11px 15px 6px 15px ; 
+            display: flex; 
+            flex-direction: column;
+        }
+
+        #body{
+            flex:auto; 
+            background-color: #fff; 
+            border-radius:6px; 
+            padding: 0px 15px; 
+            padding-top: 8px; 
+            padding-bottom: 16px;
+        }
+      
+        
+        label {
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-family: sans-serif;
+            color: #444;
+            line-height: 28px;
+            float: left;
+        }
+
+        input {
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            box-shadow: none;
+            width: 100%;
+            min-height: 38px;
+            line-height: 1;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-bottom: 4px;
+            outline: none;
+            font-size: 13px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        span.nocheck {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(/img/s.png) no-repeat center center;
+            background-size: cover;
+            position: relative;
+            top: 3px;
+            cursor: pointer;
+        }
+        span.checked {
+            background: url(/img/check-s.png) no-repeat center center;
+            background-size: cover;
+        }
+        
+        .form-submit {
+            margin-top: 25px;
+            margin-bottom: 28px;
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 15px;
+            display: block;
+            line-height: 1;
+            cursor: pointer;
+            width: 180px;
+            float: right;
+            text-align: center;
+        }
+
+        .error{
+			border: 1px solid #C8252C;
+		}
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+        }
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+            padding-left: 24px;
+            font-size: 14px;
+        }
+
+        body .layui-layer-title::before{
+            content: '\f06a';
+            display: inline-block;
+            margin-right: 6px;
+		    font-family:FontAwesome;
+        }
+
+
+        body .layui-layer-btn .layui-layer-btn0 {
+            background-color: #3c8dbc;
+            padding: 0px 16px;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            margin: 4px;
+            border-radius: 2px;
+            font-size: 12px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 10%);
+
+        }
+
+        body .layui-layer-page .layui-layer-content{
+            text-align: center;
+        }
+
+        body .layui-layer-dialog{
+            width: 480px;
+        }
+
+
+        .footer{
+            color:#444; 
+            text-align: center; 
+            line-height: 32px; 
+            font-size:13px; 
+            flex-basis: 32px; 
+            margin: 8px 0px; 
+            background-color: #fff;
+            border-radius:6px;
+        }
+
+        div.smallbut {
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #e2e2e2;
+            border-radius: 2px;
+            padding-left: 4px;
+            min-height: 36px;
+            margin-bottom: 8px;
+            line-height: 1;  
+            color: #323232;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-size: 13px;
+        }
+
+        .but{
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 22px;
+            cursor: pointer;
+        }
+
+        span.cbutton {
+            display: inline-block;
+            padding: 7px 16px;
+            vertical-align: middle;
+            background-color: #fff;
+            background-image: linear-gradient(#eee, #ddd);
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 60%);
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 16px;
+            color: rgba(0,0,0,0.84);
+            text-shadow: 0 2px 0 rgb(255 255 255 / 60%);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+        }
+
+        .but.cancel{
+            background-color: #eee;
+            color: #444;
+        }
+
+        body .layui-layer-setwin{
+            display: none;
+        }
+
+        div.title {
+            border-top: 1px solid #d4d4d4;
+            line-height: 36px;
+            background: #eee;
+            margin: 0px;
+            padding-left: 14px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-weight: bold;
+            text-align: left;
+            font-size: 13px;
+            color:#007ab2;
+        }
+
+        div.popcontainer{
+            padding:16px;
+        }
+
+        .tablehead{
+            font-size: 13px;
+            display: flex;
+            margin: 4px 0px;
+            border-radius: 4px;;
+            font-family: Lato-Bold;
+            color: #555;
+            line-height: 36px;
+            text-transform: uppercase;
+            background-color: transparent;
+        }
+
+        .tablehead div.cell{
+            padding-left: 3px;
+        }
+
+        .row{
+            
+            display: flex;
+            margin: 4px 0px;
+            border-radius: 4px;;
+            background: #f7f7f7;
+        }
+
+        .row div{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 13px;
+            line-height: 32px;
+            font-family: Georgia, serif;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            width: 0;
+            padding: 0px 4px;
+        }
+
+        .row:hover{
+            background-color: #FCF9EF;;
+        }
+
+        .nav{
+            border-bottom: 1px solid #dddddd;
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            white-space: nowrap;
+            overflow: visible;;
+            padding-right: 30px;
+            vertical-align: middle;
+        }
+
+        .nav::before{
+            content: " ";
+            display: table;
+        }
+
+
+        .nav > li {
+            float: left;
+            position: relative;
+            display: block;
+            border-radius: 2px 2px 0 0;
+            cursor: pointer;
+        }
+
+
+        .nav > li > a {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            font-size: 13px;
+            display: block;
+            outline: none;
+            color: #337ab7;
+            text-decoration: none;
+            top: 2px;
+            border-radius: 2px 2px 0px 0px;
+        }
+
+        .nav > li.active {
+            background: #fff;
+            position: relative;
+            border-color: #666;
+            font-weight: bold;
+        }
+
+        .nav li > a.active {
+            color: #555555;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+            cursor: default;
+        }
+
+        .nav > li > a:hover:not(active) {
+            text-decoration: none;
+            background-color: #eeeeee;
+        }
+
+        p.other.emp {
+            background: #eee;
+            margin-left: 1em;
+            line-height: 24px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            border-left: 4px solid #4d4d4d;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .h4title{
+            font-size: 14px;
+            color: #007bff;
+            margin: 8px 0px;
+            line-height: 32px;
+            padding-left: 6px;
+            background-color: #eee;
+            border-radius: 2px;
+        }
+
+        .h4title:before {
+            content: '\f0c9';
+            font-family: FontAwesome;
+            color: #0D6DA2;
+            margin: 0px 4px;
+        }
+
+        .tabDiv{
+            display: none;
+        }
+
+        .autolist{
+            border:1px solid #aaa; 
+            border-radius: 2px; 
+            position: absolute; 
+            overflow-y: auto; 
+            height: 160px; 
+            background-color: #fff; 
+            margin-right: 6px; 
+            width:100%;
+            padding: 4px;
+            
+        }
+        
+        .autolist ul li{
+            font-size: 12px;
+            text-align: left;
+            line-height: 18px;;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .autolist ul li:hover{
+            background-color: #eee;
+        }
+
+        .emphsis{
+            font-weight: bold;
+            color:#C8252C;
+            background-color: #FCF9EF;
+        }
+
+        .h4title .email{
+            margin-left: 16px;
+            font-size: 13px;
+        }
+
+        .tpl{
+            display: flex;
+            margin: 4px 0px ;
+            font-size: 13px;;
+            line-height: 28px;
+            color: #323232;
+        }
+
+        .tpl .tplName{
+            flex:1 1 40%;
+        }
+
+        .tpl .isDefault{
+            flex:1 1 30%;
+        }
+
+        .tpl .operate{
+            flex:1 1 30%;
+        }
+
+        .tpl div>span.title{
+            background-color: #eee;
+            display: inline-block;  
+            padding: 0px 16px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.9)
+        }
+
+        .tpl div>span.value{
+            display: inline-block;  
+            padding: 0px 16px;
+        }
+
+        .tpl span i{
+            display: inline-block;
+            margin: 0px 6px;
+            cursor: pointer;
+        }
+
+        .msgbox{
+			font-size: 13px;
+			border-radius: 6px;;
+		}
+
+		.msgbox .msgboxtitle{
+			line-height: 38px;
+			border-bottom: 1px solid #eee ;
+			text-align: left;
+			font-size: 14px;
+			margin: 16px;
+			margin-bottom: 0px;
+		}
+
+		.msgbox .msgboxtitle span.alert, .msgbox .msgboxtitle span.info{
+			margin-right: 6px;
+			width: 28px;
+			height: 28px;
+			float: left;
+			margin-top: 5px;
+		}
+
+		.msgbox .msgboxtitle span.alert{
+			background: url("/img/alert.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxtitle span.info{
+			background: url("/img/info.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxcontent{
+			padding: 24px 16px ;
+			text-align: left;
+		}
+
+		.msgbox .msgboxfoot{
+			line-height: 48px;
+			background-color: #f2f2f2;
+		}
+
+		.msgbox .msgboxfoot .confirm{
+			cursor: pointer;
+		}
+
+        .articleinfos{
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .articleinfos{
+            display: flex;
+            align-items: center;
+        }
+
+        .articleinfos .atitle{
+            font-size: 15px;
+            flex-basis: 128px;
+            line-height: 24px;
+            text-align: right;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            padding-right: 6px;
+        }
+
+        .articleinfos .avalue{
+            font-size: 15px;
+            flex: 1 1 auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 0;
+            flex-shrink: 0;
+        }
+
+        ul.nav li:first-child{
+            margin-left: 36px;
+        }
+
+        #tabs ul.nav li a.active{
+            border-top: 2px solid #D17099;
+            color: #0090D7;
+            font-weight: bold;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+		#reviewpage.yes{
+			margin: 16px 64px;
+			padding: 16px;
+			background-color: #fff;
+			border-radius: 4px;
+		}
+
+		.emp{
+            background: #eee;
+            margin: 8px 0px;
+            line-height: 24px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            border-left: 4px solid #ff0000;
+            cursor: pointer;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+		body.yes{
+			background-color: #f2f2f2;
+		}
+
+        .infoitem{
+            display: flex;
+            line-height: 24px;
+            font-size: 13px;
+            color: #323232;
+        }
+
+        .infoitem .lt{
+            flex-basis: 128px;
+            text-align: right;
+            padding-right: 8px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .infoitem .lv{
+            flex-basis: 1 1 auto;
+            text-align: justify;
+        }
+
+        body{
+            font-family: 'Times New Roman', Times, serif
+        }
+
+        .littlebut {
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 8px;
+            font-size: 13px;
+            color:#007ab2;
+        }
+
+        .note {
+                font-size: 12px;
+                font-family: sans-serif;
+                flex-basis: 20px;
+                line-height: 24px;
+                text-align: left;
+            }
+
+        .process{
+            flex: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .processbar{
+            height: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            position: relative;
+        }
+
+        .pre{
+            position: absolute;
+            background-color: #66DDFF;
+            width: 0%;
+            top: -1px;
+            left: 0px;
+            height: 3px;
+        }
+
+        .attachment .smallbut{
+            text-align: center;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #e2e2e2;
+            border-radius: 2px;
+            padding-left: 4px;
+            margin-bottom: 6px;
+            color: #323232;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-size: 13px;
+            line-height: 20px;
+        }
+        div.selectbut{
+            line-height: 26px;
+            min-height: 26px;
+            margin-bottom: 4px;
+        }
+        .autolist{
+            border:1px solid #aaa;
+            border-radius: 2px;
+            position: absolute;
+            overflow-y: auto;
+            height: 160px;
+            background-color: #fff;
+            margin-right: 6px;
+            width:100%;
+            padding: 4px;
+            z-index: 999999;
+
+        }
+
+        .autolist ul li{
+            font-size: 12px;
+            text-align: left;
+            line-height: 18px;;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .autolist ul li:hover{
+            background-color: #eee;
+        }
+
+        .under{
+            font-style: italic;
+            color: #aaa;
+            font-size: 12px;
+            font-weight: 200;
+            text-align: right;
+        }
+
+        #finalFiles .body .row span{
+            cursor: pointer;
+        } 
+        
+        div.cell.file {
+            color:#3c8dbc;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #cachemetion{
+                top: 40px;
+                left: 0px;
+                right: 0px;
+                width: 600px;
+                height: 60px;
+                margin-left:auto;
+                margin-right:auto;
+                background-color: #c9d8db;
+                text-align: center;
+                font-size: 12px;
+                border-radius: 4px;
+                position: fixed; 
+                line-height: 60px;
+                text-shadow: 1px 1px 0 rgb(255 255 255 / 50%);
+                z-index: 09999999999999999;
+            }
+	</style>
+</head>
+
+<body th:attr="class=${extends ? 'yes': 'no' }, review=${over}">
+	<div id="reviewpage" th:attr="class=${extends ? 'yes': 'no' }, aid=${ra.articleId}, jid=${j.journalId}, raid=${ra.id}, i18n=${i18n} ,viewResult=${viewResult}">
+		<div class="headTitle" style="position: relative;">
+			<div class="mainTitle" >Review</div>
+			<div class="Sole" style="color: #999; font-size: 13px; position: relative;">
+				<span style="background-color: #fff;" >Please read the following prompts carefully, and complete the review of the paper within due date.</span>
+			</div>
+			<div class="after"  ></div>
+		</div>
+		<div style="clear: both;margin-bottom: 18px;"></div>
+		<p  class="emp" th:if="${requested}">You have been selected as a potential reviewer of the following submission. We hope that you are able to participate. 
+			The editor asks that you complete the review by the Review Due Date: <span style="color:#007bff; padding:0px 6px; "th:text="${ra.reviewDue}"></span>. 
+			You can click the "Accept & Start Review" button to start review work or click the "Decline Review Request" to reject the task.
+		</p>
+
+        <p  class="emp" th:if="${over}" >Thank you for your support and cooperation, the review work has been completed!</p>
+
+		<div class="h4title">Paper Information</div>
+		<div class="infoitem">
+            <div class="lt">Publish & Journal: </div>
+			<div class="lv" th:text="${'[' + p.name +'] '+ j.title}"></div>
+        </div>    
+        <div class="infoitem">
+            <div class="lt">Paper ID: </div>
+			<div class="lv" th:text="${a.id}"></div>
+        </div>  
+        <div class="infoitem">
+            <div class="lt">Title: </div>
+			<div class="lv" th:text="${a.title}"></div>
+        </div> 
+        <div class="infoitem">
+            <div class="lt">Abstract: </div>
+			<div class="lv" th:utext="${a.abstractTxt}"></div>
+        </div>   
+        <div th:if="${requested}">
+            <input id="decline" type="submit" name="commit" value="Decline Review Request" class="form-submit" style="background-color: #aaa; color: #323232;">
+            </input>
+            <input id="accept" type="submit" name="commit" value="Accept & Start Review" class="form-submit" style="margin-right: 6px;">
+            </input>
+        </div>
+		<div style="clear: both;"></div>
+            <div th:if="${reviewing ||(!reviewing && viewResult )} " >
+                <div class="h4title" id="reviewfiles"> Review Files</div>
+                <div id='files' style=" clear: both;" >
+                    <div class="tablehead">
+                        <div class="cell" style="flex: 1 1 25%;" ><span class="nocheck checked" id="selectall"></span> Select All <span class="littlebut" id="downloadZip">Download Zip</span></div>
+                        <div class="cell" style="flex: 1 1 25%; " >TYPE</div>
+                        <div class="cell" style="flex: 1 1 50%; " >File Name</div>
+                    </div>
+                    <div class="body">
+                        <div class="row" th:each="file : ${files}" style="display: flex;" th:attr=" data=${file.originName + ',' + file.innerId.substring(file.innerId.lastIndexOf('/')+1)}">
+                            <div class="cell" style="flex: 1 1 25%; " ><span class="nocheck"></span></div>
+                            <div class="cell" style="flex: 1 1 25%; "  th:text="${file.fileType}"></div>
+                            <div class="cell  file" style="flex: 1 1 50%; " th:attr="href=${file.link}"  th:text="${file.originName}"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="h4title">Comment for Authors & Editors<span style="color:red">*</span></div>
+                <div id="author" class="col-md-10"  style="font-size:13px; color:#474747;">
+                    <p></p>			
+                </div>	
+                <div class="h4title">Comment for Editors Only</div>
+                <div id="editor" class="col-md-10"  style="font-size:13px; color:#474747;">
+                    <p></p>
+                </div>				
+                <div class="h4title">Upload Attachments</div>
+                <div style="padding: 16px; ">
+                    <div th:unless="${viewResult}" id="selecteditor" style="display: flex;border-bottom:1px dotted #aaa; padding-bottom: 16px;">
+                        <div id="uploadDiv" style=" padding:2px; flex: 1 1 auto; margin: 0px -6px; "></div>
+                        <div style=" flex-basis: 88px; text-align: center; padding: 2px; ">
+                            <div id="uploadConfirm" class="smallbut" style="color:#007ab2;margin-bottom: 3px; line-height: 32px;">Confirm</div>
+                        </div>
+                    </div>
+                    <div class="para">
+                        <div id="finalFiles">
+                            <div class="tablehead">
+                                <div  class="cell" style="flex: 1 1 90%" cell="90%" data="originName">File Name</div>
+                                <div  class="cell" style="flex: 1 1 10%; text-align:left" cell="10%" const="<span class='del' style='cursor:pointer'><i class='fa fa-close'></i></span>"> Action</div>
+                            </div>
+                            <div class="body">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="under">Upload files you would like the editor and/or author to consult, including revised versions of the original review file(s).
+                </div>
+                <div class="h4title">Review Recommendation<span style="color:red">*</span></div>
+                <div class="recommend" >
+                    <p class="emp" style="border-left:0px; line-height:36px; margin:0px;">
+                        <span class="recommend" type="1"> Accept Submission<span class="nocheck"></span></span>
+                        &nbsp;&nbsp;&nbsp;<span class="recommend" type="2"> Minor Revision <span class="nocheck"></span></span>
+                        &nbsp;&nbsp;&nbsp;<span class="recommend" type="3"> Major Revision <span class="nocheck"></span></span>
+                        &nbsp;&nbsp;&nbsp;<span class="recommend" type="4"> Resubmit Elsewhere <span class="nocheck"></span></span>
+                        &nbsp;&nbsp;&nbsp;<span class="recommend" type="5"> Decline Submission <span class="nocheck"></span></span>
+                        &nbsp;&nbsp;&nbsp;<span class="recommend" type="6">See comments<span class="nocheck"></span> </span>
+                    </p>
+                </div>
+                <div th:unless="${viewResult}"  style="padding-bottom:48px ;">
+                   
+                    <input id="submit" type="submit" name="commit" value="Sumbit Review Result" class="form-submit" style="margin-left: 8px;">
+                    </input>
+                    <input id="savecache" type="submit" name="commit" value="Save" class="form-submit"  style="background-color: #aaaa; color: #323232;">
+                </input>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div id="cachemetion" style="display: none;">
+                <span style="text-decoration: underline; cursor: pointer;" id="closePrompt"> Close this Prompt  <i class="fa fa-sign-out"></i></span>
+                or Clear the current submission informations and Start an new Submission 
+                    <span style="text-decoration: underline; cursor: pointer;" id="clearCache"> Clear?   <i class="fa fa-trash"></i></span>  
+            </div>
+        </div>
+        
+	</div>
+	<script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="review" target-module="review" defer async="true" ></script>
+</body>
+</html>

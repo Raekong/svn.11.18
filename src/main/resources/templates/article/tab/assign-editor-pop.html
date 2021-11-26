@@ -1,0 +1,23 @@
+<div>
+    <style>
+       #roleassign label{
+           float: left;
+       }
+    </style>
+    <div id="roleassign" >
+        <div class="title"><i class="fa fa-server"></i> <span>添加审稿编辑</span></div>
+        <div style="padding: 16px;">
+            <div id="user" style="position: relative;">
+                <label>添加编辑<span style="color: red;">*</span><span th:if="${roles.authorityeditor}" style="margin-left: 8px; font-weight:bold;">授予权限<span class="nocheck"></span></span></label>
+                <input class="autoinput" param='email' placeholder="please input editor's email" id="userid"></input>
+                <div  class="autolist" style="display: none; z-index: 1099999;" >
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>确定</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>取消</span></span>
+        </div>
+        <div i18n="" ></div>
+    </div>
+</div>

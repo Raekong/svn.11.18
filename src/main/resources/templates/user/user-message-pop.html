@@ -1,0 +1,126 @@
+<div>
+    <style>
+        .msgbox{
+            font-size: 13px;;
+            text-align: left;
+        }
+
+        .msgbox .h4title{
+            font-size: 13px;;
+            background-color: #e2e2e2;
+        }
+
+        .attachment{
+            clear: both;
+            margin-top: 48px;;
+        }
+        
+        .note{
+            font-size: 12px;
+            font-family: sans-serif;
+            flex-basis: 20px;
+            line-height: 20px;;
+        }
+
+        .fileList{
+            min-height: 36px;
+            line-height: 24px;
+            margin: 8px 0px;;
+            border: 1px solid #c9d8db;
+            border-radius: 2px;;
+            background-color: #fff;
+        }
+
+        .fileList .file{
+            background-color: #eee;
+            font-size: 12px;
+            display: inline-block;
+            margin: 4px;
+            padding: 0px 6px;
+        }
+
+        .fileList .file i{
+            cursor: pointer;
+        }
+
+        .process{
+            flex: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .processbar{
+            height: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            position: relative;
+        }
+
+        .pre{
+            position: absolute;
+            background-color: #66DDFF;
+            width: 0%;
+            top: -1px;
+            left: 0px;
+            height: 3px;
+        }
+
+        .attachment .smallbut{
+            text-align: center;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #e2e2e2;
+            border-radius: 2px;
+            padding-left: 4px;
+            margin-bottom: 6px;
+            color: #323232;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        
+
+        
+    </style>
+    <div id="user-message" class="msgbox" >
+        <div class="title"><i class="fa fa-server"></i> <span>发送消息</span></div>
+        <div id="msgcontent" style="padding:16px; overflow-y: auto;">
+            <div id="namelist">
+                <div class="recevier h4title"><span>收件人: </span>  <span id="recevier"></span>  </div>
+            </div>
+            <div>
+                <div class="h4title">消息标题</div>
+                <input data-title></input>
+            </div>
+            <div>
+                <div class="h4title">消息内容</div>
+                <div id="editor-container" style="height:168px;"></div>
+            </div>
+            <div class="attachment">
+                <div class="h4title">消息附件</div>
+                <div style="display: flex;">
+                    <div id="uploadDiv"  label="message-file-uploaded" style="flex: 1 1 auto"></div>
+                    <div style=" flex-basis: 88px;text-align: center; padding: 2px ">
+                        <div id="uploadConfirm" class="smallbut" style="color:#007ab2;line-height: 28px;">确定</div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="fileList">
+            </div>
+           
+        </div>
+        <div style="margin-top:28px;text-align:right; background: #eee; padding:16px;">
+            <span style="text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);">Send with Email? <span class="nocheck" id="withemail"></span> </span>
+            <span id="send" class="cbutton" style="color:#007ab2;">
+               <i class="fa fa-check-square-o" aria-hidden="true"></i> <span>发送</span>
+            </span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span >取消</span></span>
+        </div>
+        
+    </div>
+
+</div>

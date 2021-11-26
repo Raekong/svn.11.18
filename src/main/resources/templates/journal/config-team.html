@@ -1,0 +1,34 @@
+<div th:fragment="team" >
+    <style>
+        .but {
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 22px;
+            cursor: pointer;
+            line-height: 36px;
+            padding: 0px 16px;
+        }
+    </style>
+    <div  style="margin-top:15px; float:right; margin-left: 8px;display: flex" class="but"  id="createRole">
+        <i class="fa fa-wrench" style="padding-top: 12px"></i> <div th:text=" ${newrole}">&Create New Role </div>
+    </div>
+    <div  style="margin-top:15px; float:right; display: flex" class="but"  id="roleAssign">
+        <i class="fa fa-cog" style="padding-top: 12px"></i> <div th:text=" ${roleassign}">&nbsp;Role Assign </div>
+    </div>
+    <div id="teamlist" style="clear: right; margin-top: 16px;">
+            <div class="tablehead">
+                <div  class="cell" style="flex: 1 1 20%" cell="20%" data="rid" th:text="${serialnumber}">序号</div>
+                <div  class="cell" style="flex: 1 1 40%" cell="40%" data="title" th:text="${rolename}">角色名称</div>
+                <div  class="cell" style="flex: 1 1 20%" cell="20%" data="total" th:text="${total}">共计</div>
+                <div  class="cell" style="flex: 1 1 20%; text-align:left" cell="20%" const="<span class='config' style='cursor:pointer'><i class='fa fa-cog'></i></span>"th:text="${operation}" >操作</div>
+            </div>
+            <div class="body">
+                
+            </div>
+    </div>
+</div>

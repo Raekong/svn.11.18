@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TSP Academic Journal System</title>
+<link rel="shortcut icon" href="/img/favio.png"/>
+<script src="/js/third-party/jquery.js"></script>
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+
+	<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-weight: 200;
+        }
+
+        html, body{
+            width:100%;
+            height: 100%;
+        }
+		
+        #frame{
+            width: 100%;
+            min-height: 100%;
+        }
+
+        .headTitle{
+            
+        }
+
+        .headTitle .mainTitle{
+            font-family: Impact, Charcoal, sans-serif;
+            color: #444;
+            line-height: 32px;;
+        }
+
+        .headTitle .Sole::after {
+            display: block;
+            content: '';
+            position: absolute;
+            border-bottom: 1px dotted #555;
+            width: 100%;
+            top: 24px;
+        }
+
+        label {
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-family: sans-serif;
+            color: #444;
+            line-height: 28px
+        }
+
+        input {
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            box-shadow: none;
+            width: 100%;
+            min-height: 38px;
+            line-height: 1;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-bottom: 8px;
+            outline: none;
+        }
+
+        span.nocheck {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(/img/s.png) no-repeat center center;
+            background-size: cover;
+            position: relative;
+            top: 3px;
+            cursor: pointer;
+        }
+        span.checked {
+            background: url(/img/check-s.png) no-repeat center center;
+            background-size: cover;
+        }
+
+        span.mtitle{
+            font-size: 13px;
+            color: #444;
+            display: block;
+        }
+
+        div.list{
+            margin-bottom: 12px;
+        }
+
+        span.desc{
+            font-size: 12px;
+            padding-left: 18px;
+            color: #777;
+        }
+
+        .form-submit {
+            margin-top: 25px;
+            margin-bottom: 28px;
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 15px;
+            display: block;
+            line-height: 1;
+            cursor: pointer;
+            width: 180px;
+            float: right;
+            text-align: center;
+        }
+
+        .error{
+			border: 1px solid #C8252C;
+		}
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+        }
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+            padding-left: 24px;
+            font-size: 14px;
+        }
+
+        body .layui-layer-title::before{
+            content: '\f06a';
+            display: inline-block;
+            margin-right: 6px;
+		    font-family:FontAwesome;
+        }
+
+
+        body .layui-layer-btn .layui-layer-btn0 {
+            background-color: #3c8dbc;
+            padding: 0px 16px;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            margin: 4px;
+            border-radius: 2px;
+            font-size: 12px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 10%);
+
+        }
+
+        body .layui-layer-content{
+            text-align: center;
+        }
+
+        body .layui-layer-dialog{
+            width: 480px;
+        }
+
+        body .layui-layer-setwin{
+			display: none;
+		}
+
+		.msgbox{
+			font-size: 13px;
+			border-radius: 6px;;
+		}
+
+		.msgbox .msgboxtitle{
+			line-height: 38px;
+			border-bottom: 1px solid #eee ;
+			text-align: left;
+			font-size: 14px;
+			margin: 16px;
+			margin-bottom: 0px;
+		}
+
+		.msgbox .msgboxtitle span.alert, .msgbox .msgboxtitle span.info{
+			margin-right: 6px;
+			width: 28px;
+			height: 28px;
+			float: left;
+			margin-top: 5px;
+		}
+
+		.msgbox .msgboxtitle span.alert{
+			background: url("/img/alert.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxtitle span.info{
+			background: url("/img/info.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxcontent{
+			padding: 24px 16px ;
+			text-align: left;
+		}
+
+		.msgbox .msgboxfoot{
+			line-height: 48px;
+			background-color: #f2f2f2;
+		}
+
+		.msgbox .msgboxfoot .confirm{
+			cursor: pointer;
+		}
+
+        div#payselect div{
+            display: inline-block;
+            font-size: 13px;
+            line-height: 24px;
+            padding:0px 16px;
+            background-color: #eee;
+            min-width: 128px;
+        }
+
+        div.payment{
+            border: 1px solid #aaa;
+            padding: 8px;
+            margin: 4px 0px;
+            border-radius: 2px;
+        }
+	</style>
+</head>
+<body>
+	<div id="frame" th:attr="abbr=${publisherAbbr}, lang=${lang}" style="display: flex; flex-direction: column; align-items: stretch;" >
+		<div th:include="component/head::head" style="flex-basis: 50px;"></div>
+        <div style="display: flex;  align-items: stretch; flex: auto;" >
+            <div id="menus" th:include="component/head::sider" style="flex-basis: 228px;  background-color: #353E4F;; flex-shrink: 0;"></div>
+            <div id="container" style="flex:auto; background-color: #eee; padding: 15px 15px 6px 15px ; display: flex; flex-direction: column;">
+                <div id="body" style="flex:auto; background-color: #fff; border-radius:6px; padding: 0px 15px; padding-top: 8px; padding-bottom: 16px;">
+                    <div class="headTitle">
+                        <div th:if="${p} == null"  class="mainTitle" th:text="${newPublisher}">创建新的出版社</div>
+                        <div th:if="${p} != null"  class="mainTitle" th:text="${configpublisher}">出版社配置调整</div>
+                        <div class="Sole" style="color: #999; font-size: 13px; position: relative;">
+                            <span  th:if="${p} == null" style="background-color: #fff; " th:text="${newpublisherintroduce}">填写新出版社的基本信息，并创建用户作为新出版社的管理员</span>
+                            <span  th:if="${p} != null" style="background-color: #fff; " th:text="${configpublisherIntroduce}">调整与修改出版社的基本信息，出版社管理员调整请至出版社用户管理模块</span>
+                      
+                        </div>
+                    </div>
+                    <div style="display: flex; margin-top: 16px;;">
+                        <div style="flex:50% ;display: flex; margin-right: 6px;;">
+                            <div cell="100%" th:attr="title=${publisherName}" data="name" required></div>
+                        </div>
+                        <div style="flex:50%; display: flex;">
+                            <div th:if="${p} == null" cell="100%" th:attr="title=${nameabbr}" data="abbr" style="margin-right: 6px;;" required></div>
+                            <div th:if="${p} != null" cell="100%" th:attr="title=${configabbr}"  data="abbr" style="margin-right: 6px;;" required></div>
+                            <div style="flex-basis:158px;" id="lang" data-lang="en">
+                                <label th:text="${language}">语种</label>
+                                <div style=" text-align: center;border: 1px solid #aaa;border-radius: 3px; min-height: 38px;font-size: 12px;line-height: 36px;">
+                                    <span class="nocheck checked lang" lang="en"></span> English 
+                                    <span class="nocheck lang"  lang="zh"></span> 中文 
+                                </div>
+                            </div>
+                        </div>                
+                    </div>
+                    <div style="display: flex;">
+                        <div cell="33%" th:attr="title=${host}" data="host" style="margin-right: 6px;;" required></div>
+                        <div cell="33%" th:attr="title=${port}" data="port" style="margin-right: 6px;;" required></div>
+                        <div cell="33%" th:attr="title=${password}" data="password"  required></div>
+                    </div>
+                    <div style="display: flex;">
+                        <div cell="20%" th:attr="title=${publisherEmail}" data="email" style="margin-right: 6px;;" required></div>   
+                        <div cell="20%" th:attr="title=${sendPeopleName}" data="emailsender" style="margin-right: 6px;;" required></div>
+                        
+                    </div>
+                    <div style="display: flex;" th:if="${p} == null" >
+                        <div cell="20%" th:attr="title=${adminEmail}"  data="rootemail" style="margin-right: 6px;;" required></div>
+                        <div cell="20%" th:attr="title=${adminName}"   data="rootname" style="margin-right: 6px;;" required></div>
+                        <div cell="20%" th:attr="title=${adminPassword}"   data="rootpassword" ></div>
+                    </div>
+                    <div style="display: flex; align-items: stretch;">
+                        <div style="flex:1 1 50%;margin-right: 6px;" id="modules">
+                            <label style="flex-basis:42px" th:text="${chooseMoudles}">功能模块选择</label>
+                        </div>   
+                        <div style="flex:1 1 50%; flex-direction: column;">
+                            <label style="flex-basis:42px"><span th:text="${publisherEmailAddress}">出版社地址</span><span style="color:red;">*</span></label>
+                            <div id="address" style="line-height: 24px;font-size: 12px; padding: 8px; outline:none; flex: 1 1 auto; border: 1px solid #aaa; border-radius: 2px; height: 100%;" contenteditable="true">
+                            
+                            </div>
+                        </div>
+                        
+                    </div>
+  
+                    <div style="height: 38px;clear: both;"></div>
+                    <div id="payment">
+                        <label th:text="${paymentsetting}">支付配置</label>
+                        <div id="payselect">
+                            <div><span class="nocheck checked" data="stripe"></span> Stripe</div>
+                            <div><span class="nocheck" data="alipay"></span> Alipay</div>
+                            <div><span class="nocheck" data="wxpay"></span> Wxpay</div>
+                        </div>
+                        <div class="payment stripe">
+                            <div cell title='Stripe Public Key'  data="publickey" style="margin-right: 6px;;" required></div>
+                            <div cell title='Stripe Api Key'   data="apikey" style="margin-right: 6px;;" required></div>
+                            <div cell title='Stripe Web Hook Secret'   data="webhooksecret" required></div>
+                        </div>
+                        <!--
+                        <div class="payment alipay">
+                            
+
+                        </div>
+                        <div class="payment wxpay">
+                            
+
+                        </div>
+                        -->
+                        
+                    </div>
+              
+                   <input id="submit" th:value="${submit}" class="form-submit"></input>
+ 
+                </div>
+                <div class="footer" style="color:#444; text-align: center; line-height: 32px; font-size:13px; flex-basis: 32px; margin: 8px 0px; background-color: #fff;border-radius:6px;">
+                   <span th:text="${publisher}"></span> © 2020-2025 TSP Academic Journal System - All Rights Reserved - 
+                </div>
+            </div>
+            <p id="config" th:if="${p} != null" th:text="${p}" style="display: none;"></p>
+            <p th:attr="i18n=${i18nInfos}" style="display: none;" id="i18nInfos"></p>
+        </div>
+	</div>
+	<script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="create-publisher" target-module="create-publisher" defer async="true" ></script>
+</body>
+</html>

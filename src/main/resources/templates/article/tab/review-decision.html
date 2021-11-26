@@ -1,0 +1,160 @@
+<div>
+    <style>
+       #reviewassign label{
+           float: left;
+       }
+
+       .h4title{
+           text-align: left;
+       }
+
+       #addreviewer{
+            margin-bottom: 5px;
+            min-height: 35px;
+       }
+       
+       #queryRstbody .row{
+           font-size: 12px;
+           background-color: #fff;
+       }
+
+       #queryRstbody .row div{
+            font-family:'Times New Roman', Times, serif;
+            line-height: 28px;
+       }
+
+       #queryRstbody .row:hover{
+           background-color: #eee;
+       }
+
+       input.due{
+           width: 138px;
+           min-height: 28px;
+       }
+
+       span.del{
+           cursor: pointer;
+       }
+       
+       .smah4title{
+            font-weight: 200; 
+            background-color: #eee; 
+            font-size: 13px; 
+            font-weight:200; 
+            color: #0090D7;
+            line-height: 28px;
+            padding-left: 8px; 
+            margin: 4px 0px;
+       }
+
+       .resulttxt{
+            font-size: 13px; 
+            color: #444;
+            text-align: justify;
+            padding: 16px;
+            padding-top:0px;
+            border: 1px solid #dddddd;;
+            margin: 4px 0px;;
+            border-radius: 2px;
+       }
+
+       .resulttip{
+           font-size: 12px; 
+           line-height: 32px;
+           color: #0090D7;
+           cursor: pointer;
+       }
+
+       #finalFiles i{
+            color: #0090D7;
+       }
+
+       div.cell.file {
+            color:#3c8dbc;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+       
+    </style>
+    <div id="reviewdecision">
+        <div class="h4title">Review Results List</div>
+        <div class="action" th:each="action, status: ${actions}" th:attr="index=${status.index+1}" >
+            <div class="smah4title">
+                <i class="fa fa-edit"></i> 
+                <span th:text="${action.ra.reviewerName +' [' + action.ra.reviewerEmail+'] '}"></span>: 
+                <span th:text="${action.resultType}" style="font-weight: bold;"></span>
+            </div>
+            <div class="resulttxt" >
+                <span class="resulttip copy" data="author">For Author <span><i class="fa  fa-copy"></i></span></span>
+                <div  class="content" th:if="${action.result.commendforAuthor != null}" th:text="${action.result.commendforAuthor}">
+                </div>
+            </div>
+            <div class="resulttxt">
+                <span class="resulttip copy" data="editor">For Editor <span ><i class="fa  fa-copy"></i></span></span>
+                <div class="content"  th:if="${action.result.commendforEditor != null}" th:text="${action.result.commendforEditor}  ">
+                </div>
+            </div>
+            <div id="finalFiles" th:if="${action.files != null}">
+                <div class="tablehead">
+                    <div  class="cell" style="flex: 1 1 60%" cell="60%" data="originName">Review Attach files</div>
+                    <div  class="cell" style="flex: 1 1 40%; text-align:left" cell="40%" >Attach to Email</div>
+                </div>
+                <div class="body"  th:each="file: ${action.files}">
+                    <div class="row file" th:attr="originName=${file.originName}, innerId=${file.innerId}">
+                        <div  class="cell file" style="flex: 1 1 60%" cell="60%"  th:attr="url=${file.url}" th:text="${file.originName}"> </div>
+                        <div  class="cell" style="flex: 1 1 40%; text-align:left" cell="40%" ><span class="copy"><i class="fa fa-copy"></i></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="payment" th:if="${needPay eq 'true' && type eq 'accept' }">
+            <div class="h4title">Article Process Charge Setting</div>
+            <div style="display: flex;">
+                <div cell="25%"  title='Number Of Pages' data="totalpage" style="margin-right: 6px;" required>
+                </div>
+                <div cell="25%"  title='Total APC'  data="totalapc" style="margin-right: 6px;;">
+                </div>
+                <div cell="25%"  title='Wire Transfer Pay' style="margin-right: 6px;;"  data="wiretrnasfer" >
+                </div>
+                <div cell="25%"  title='online Pay'  data="online" style="margin-right: 6px;;" >
+                </div>
+            </div>
+        </div>
+        
+        <div id='mailtpl'>
+            
+        </div>
+        <div id='attachs'>
+            <div class="h4title">Attach Review Files List</div>
+            <div class="tablehead">
+                <div  class="cell" style="flex: 1 1 90%" cell="90%" data="originName">File Name</div>
+                <div  class="cell" style="flex: 1 1 10%; text-align:left" cell="10%" >Action</div>
+            </div>
+            <div class="body" >
+                
+            </div>
+        </div>
+        <div id='nextStage' th:if="${type eq 'accept'}">
+            <div class="h4title"> Files Send to Next Step</div>
+            <div class="tablehead">
+                <div  class="cell" style="flex: 1 1 90%" cell="90%" data="originName">File Name</div>
+                <div  class="cell" style="flex: 1 1 10%; text-align:left" cell="10%" >Action</div>
+            </div>
+            <div class="body" >
+                <div class="row" th:each="file : ${roundFiles}" th:attr="id=${file.id}"> 
+                    <div  class="cell" style="flex: 1 1 90%" cell="90%" data="originName" th:text="${file.originName}">File Name</div>
+                    <div  class="cell" style="flex: 1 1 10%; text-align:left" cell="10%" >
+                        <span class="del"><i class="fa fa-close"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-paper-plane" aria-hidden="true"></i> <span>发送</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>取消</span></span>
+        </div>
+    </div>
+   
+</div>

@@ -1,0 +1,57 @@
+<div>
+    <style>
+       .h4title{
+           text-align: left;
+           font-size: 13px;
+       }
+
+       span.item, span.var{
+            display: inline-block;
+            border: 1px solid  #c9d8db;
+            margin-right: 4px 8px;
+            padding: 4px 8px;
+            font-size: 12px;
+            line-height: 18px;;
+       }
+
+       span.var{
+           border: 0px;
+           margin:4px;
+           line-height: 16px;
+           background-color: #eee;
+       }
+
+        #emailtpl .h4title:before {
+            content: '\f013';
+        }
+    </style>
+    <div id="emailtpl" style="border: 1px solid #aaa;border-radius: 2px; padding: 6px;;">
+        <div >
+            <div class="h4title">Template Name</div>
+            <input data-name>
+            <div id="recevsetting">
+                <div class="h4title">Recevier Setting</div>
+                <div style="text-align: left;">
+                    <span class="item"><span class="nocheck"  data="1"></span> Submitor</span>
+                    <span class="item"><span class="nocheck"  data="2"></span> Submitor & #Corresponding Author</span>
+                    <span class="item"><span  class="nocheck" data="3"></span> All Participant</span>
+                </div>
+            </div>
+            <div class="h4title">Title</div>
+            <input data-title>
+            <div class="h4title">Content</div>
+            <div id="messageedit" style="text-align: left; height: 288px;" ></div>
+            <div class="h4title" style="margin-top: 48px;">Avaliable Variables</div>
+            <div style="text-align: left;">
+               <span class="var">#jid#</span><span class="var">#Publisher#</span><span class="var">#Jounral Mail Address Info#</span><span class="var">#Journal Title#</span><span class="var">#Journal Abbreviation#</span><span class="var">#Journal Online Issn#</span><span class="var">#Journal Print Issn#</span><span class="var">#Journal Principal Email#</span><span class="var">#Journal Principal Name#</span><span class="var">#Journal Support Email#</span><span class="var">#Jounral Manager#</span><span class="var">#Jounral Manager Name#</span><span class="var">#isSpecial#</span><span class="var">#Editor in Chief#</span><span class="var">#Editor in Chief Name#</span><span class="var">#Article Id#</span><span class="var">#Article Title#</span><span class="var">#Article Abstract#</span><span class="var">#Article Url#</span><span class="var">#Submitor Name#</span><span class="var">#Submitor Email#</span><span class="var">#Contributors Name#</span><span class="var">#Contributors Email#</span><span class="var">#Contributor Name#</span><span class="var">#Contributor Email#</span><span class="var">#Corresponding Authors Name#</span><span class="var">#Corresponding Authors Email#</span><span class="var">#Reviewers Email#</span><span class="var">#Reviewers Name#</span><span class="var">#Review Response Date#</span><span class="var">#Review Due Date#</span><span class="var">#Revision Due Date#</span><span class="var">#accessUrl#</span>
+                
+            </div>
+
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>Submit</span></span>
+            
+        </div>
+        <div i18n="" ></div>
+    </div>
+</div>

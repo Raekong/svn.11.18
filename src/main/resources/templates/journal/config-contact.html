@@ -1,0 +1,23 @@
+<div th:fragment="contact" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div style="margin-top:15px;flex-shrink:1">
+        <div th:text="${ed3title}" class="h4title">Contact Infomation</div>
+        <div id="editor3-container-ci"></div>
+    </div>
+    <div th:text="${princontact}" class="h4title">Principle Contact</div>
+    <div  style="flex:50%; display:flex;">
+        <div class="cell" cell="33%" th:attr="title=${name}" data="name" style="margin-right: 6px;;" required></div>
+        <div class="cell" cell="33%" th:attr="title=${principleemail}" data="email" style="margin-right: 6px;;" required></div>
+        <div class="cell" cell="33%" th:attr="title=${title}"  data="title1" style="margin-right: 6px;;" ></div>
+    </div>
+    <div  style="flex:50%; display:flex;">
+        <div class="cell" cell="50%" th:attr="title=${phone}"  data="phone" style="margin-right: 6px;;" ></div>
+        <div class="cell" cell="50%" th:attr="title=${affiliation}" data="affiliation" style="margin-right: 6px;;" ></div>
+    </div>
+    <div th:text="${tecsupcontact}" class="h4title">Technical Support Contact</div>
+    <div  style="flex:50%; display:flex;">
+        <div class="cell" cell="33%" th:attr="title=${name}" data="techname" style="margin-right: 6px;;" required></div>
+        <div class="cell" cell="33%" th:attr="title=${techemail}" data="techemail" style="margin-right: 6px;;" required></div>
+        <div class="cell" cell="33%" th:attr="title=${phone}" data="techphone" style="margin-right: 6px;;" ></div>
+    </div>
+    <input id="submit-contact" th:value="${configsubmit}" class="form-submit" />
+</div>

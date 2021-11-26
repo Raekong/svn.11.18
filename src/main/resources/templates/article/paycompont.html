@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TSP Academic Journal System</title>
+<link rel="shortcut icon" href="/img/favio.png"/>
+<script src="/js/third-party/jquery.js"></script>
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+
+	<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-weight: 200;
+            
+        }
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-weight: 200;
+        }
+
+        #paymentPage.yes{
+			margin: 16px 64px;
+			padding: 16px;
+			background-color: #fff;
+			border-radius: 4px;
+		}
+
+        
+        
+        label {
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-family: sans-serif;
+            color: #444;
+            line-height: 28px;
+            float: left;
+        }
+
+        input {
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            box-shadow: none;
+            width: 100%;
+            min-height: 38px;
+            line-height: 1;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-bottom: 4px;
+            outline: none;
+            font-size: 13px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        .error{
+			border: 1px solid #C8252C;
+		}
+
+
+        .articleinfos {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            line-height: 18px;
+            margin: 3px 0px;
+            color:#323232;
+            padding: 8px 0px;
+        }
+
+        .articleinfos .atitle {
+            flex-basis: 98px;
+            text-align: right;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            padding-right: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #666;
+            
+        }
+
+        .articleinfos .avalue {
+            flex: 1 1 auto;
+            width: 0;
+            flex-shrink: 0;
+            text-align: left;
+            margin-left: 8px;
+            font-size: 12PX;
+            border-bottom: 1px dotted #4d4d4d;
+            min-height: 24px;
+        }
+
+        input {
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            box-shadow: none;
+            width: 100%;
+            min-height: 38px;
+            line-height: 1;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-bottom: 4px;
+            outline: none;
+            font-size: 13px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .error{
+            border: 1px solid red;
+        }
+
+        .but{
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 22px;
+            cursor: pointer;
+        }
+
+        span.cbutton {
+            display: inline-block;
+            padding: 7px 16px;
+            vertical-align: middle;
+            background-color: #fff;
+            background-image: linear-gradient(#eee, #ddd);
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 60%);
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 16px;
+            color: rgba(0,0,0,0.84);
+            text-shadow: 0 2px 0 rgb(255 255 255 / 60%);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+        }
+        div.decisionbut.archive{
+            background-color: #00b24e;
+            background-image: linear-gradient(#00D560, #00b24e);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.4);
+            color: #fff;
+            text-shadow: 0 2px 0 rgba(0,0,0,0.1);
+            border-color: #00b24e;
+        }
+
+        div.decisionbut {
+            display: inline-block;
+            padding: 7px 16px;
+            vertical-align: middle;
+            background-color: #eee;
+            background-image: linear-gradient(#eee, #ddd);
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 60%);
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+            color: rgba(0,0,0,0.84);
+            text-shadow: 0 2px 0 rgb(255 255 255 / 60%);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        div.decisionbut.accept {
+            background-color: #007ab2;
+            background-image: linear-gradient(#009de5, #007ab2);
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 40%);
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 20%);
+            border-color: #007ab2;
+        }
+        #sub{
+            position: relative;
+            margin-bottom: 24px;
+            z-index: 1;
+        }
+
+        #sub::after{
+            display: block;
+            content: '';
+            position: absolute;
+            border-bottom: 1px dotted #4d4d4d;
+            width: 100%;  
+            top: 10px;   
+            z-index: -1;
+        }
+        #paymentPage {
+            font-size: 15px;
+            font-weight: 200;
+            background-color: rgba(4,155,219,0.02);
+            width: 508px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px 0px rgb(0 0 0 / 8%), 0px 5px 50px 0px rgb(0 0 0 / 8%);
+            margin: 32px auto;
+            padding: 32px 47px 0px;
+        }
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+        }
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+            padding-left: 24px;
+            font-size: 14px;
+        }
+
+        body .layui-layer-title::before{
+            content: '\f06a';
+            display: inline-block;
+            margin-right: 6px;
+		    font-family:FontAwesome;
+        }
+
+
+        body .layui-layer-btn .layui-layer-btn0 {
+            background-color: #3c8dbc;
+            padding: 0px 16px;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            margin: 4px;
+            border-radius: 2px;
+            font-size: 12px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 10%);
+
+        }
+
+        body .layui-layer-page .layui-layer-content{
+            text-align: center;
+        }
+        div.smallbut {
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #e2e2e2;
+            border-radius: 2px;
+            padding-left: 4px;
+            min-height: 36px;
+            margin-bottom: 8px;
+            line-height: 1;  
+            color: #323232;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-size: 13px;
+        }
+
+        
+        .but.cancel{
+            background-color: #eee;
+            color: #444;
+        }
+
+        body .layui-layer-setwin{
+            display: none;
+        }
+
+        div.title {
+            border-top: 1px solid #d4d4d4;
+            line-height: 36px;
+            background: #eee;
+            margin: 0px;
+            padding-left: 14px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-weight: bold;
+            text-align: left;
+            font-size: 13px;
+            color:#007ab2;
+            z-index: 99999999999;
+        }
+
+        div.popcontainer{
+            padding:16px;
+        }
+
+	</style>
+</head>
+<body style="text-align: center; padding-top:18px;">
+    <div id="paymentPage" class="yes" style="width: 588px; margin: auto; padding: 16px;">
+        <h1 class="page-title" >Payment</h1>
+        <div id="sub" style="color: #aaa; font-size: 14px;text-align: center; ">
+            <span style="background-color: #fff; padding: 0px 8px; ">Payment for Article Process Charge</span>
+        </div>
+        <div class="articleinfos">
+            <div class="atitle">Payer's Email </div>
+            <div class="avalue" style="border: 0px;"><input id="email"></input></div>
+        </div>
+        <div class="articleinfos">
+            <div class="atitle" >Article ID </div>
+            <div class="avalue" style="border: 0px;"><input  id="aid" ></input></div>
+        </div>
+        <div class="articleinfos">
+            <div class="atitle">Total(USD$) </div>
+            <div class="avalue" style="border: 0px;"><input  id="total" ></input></div>
+        </div>
+        <div class="articleinfos">
+            <div class="atitle">Article Title </div>
+            <div class="avalue"><span id="atitle" ></span></div>
+        </div>
+        
+        <div class="articleinfos">
+            <div class="atitle">Authors </div>
+            <div class="avalue"><span id="authors" ></span></div>
+        </div>
+        <div class="articleinfos">
+            <div class="atitle">Journal </div>
+            <div class="avalue"><span id="journal"></span></div>
+        </div>
+
+        <div class="articleinfos">
+            <div class="atitle">Note </div>
+            <div class="avalue"><span id="note" style="color: red;"></span></div>
+        </div>
+
+        <input  type="wire" value="Pay by Wire Transfer" class="form-submit" style="margin-top:9px; cursor:pointer; border:0px; background-color: #007ab2;color:white;text-align: center;">
+        <input  type="stripe" value="Pay by Stripe" class="form-submit"  style="margin-top:9px;cursor:pointer;border:0px;background-color: #00b24e; color:white;text-align: center;">
+    </div>
+    <script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="paymentcompent" target-module="paymentcompent" defer async="true" ></script>
+
+</body>
+
+</html>

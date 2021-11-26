@@ -1,0 +1,80 @@
+<div th:fragment="workflow" id="workflow">
+    <style>
+        .but {
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 22px;
+            cursor: pointer;
+            line-height: 36px;
+            padding: 0px 16px;
+        }
+    </style>
+    <div>
+        <div id="workflow-config">
+            <ul class="nav">
+                <li class="mytab" ><a tag="pre-review " >Pre-review </a></li>
+                <li class="mytab"><a tag="workFlow_define" >WorkFlow Define  </a></li>
+            </ul>
+            <div class="tabDiv" tag="pre-review">
+                <div id="pre-review">
+                    <div style="position: relative;border: 1px solid #c9d8db; padding:8px; " id="precheck">
+                        <label >Pre-review before editor assign ? <span class="nocheck" configpoint="Technical Check"></span></label>
+                        <!-- 负责查重的编辑，后期调整到TEAM中设置
+                        <div >
+                            <input  style="display: none;" class="autoinput" param='email' placeholder="please assign  technical check editor's email" id="userid" configpoint="Technical Check Editor Name"></input>
+                            <div  class="autolist" style="display: none; z-index: 1099999;" ></div> 
+                            <div style="clear: both;">
+                            <label id="authority" style="display: none;"></label>
+                        </div>
+                        -->
+                    </div>
+                    <input submit="Technical Check"  th:value="${configsubmit}" class="form-submit" />
+                    
+                </div>
+            </div>
+            <div class="tabDiv" tag="workFlow_define">
+                <div id="workFlow_define">
+                    <style>
+                        #similar input{
+                            display: inline-block;
+                            width: 108px;
+                            min-height: 32px;
+                            margin-bottom: 0px;
+                        }
+        
+                        
+                        /*          这二项是查重被废弃的配置项  
+                                    <input name="Second Similar" placeholder="第二项重复率" Point="Second Similar" point> 
+                                    <input name="Third Similar" placeholder="第三项重复率" Point="Third Similar" point>
+                        */
+                    </style>
+                    <div style="margin-top:8px;padding: 8px; border: 1px solid #c9d8db;">
+                        <div id="similar" style="margin-top:8px;"><label style="margin-right: 6px;"> 是否需要查重 <span class="nocheck" configPoint="Simaliary Check" point></span></label>
+                            <div id="similarvalues" style="display: none;">
+                                <input name="Total Similar" placeholder="总重复率" configPoint="Total Similar" point> 
+                                <input name="First Similar" placeholder="分项重复率" configPoint="First Similar" point> 
+                                
+                                <label> Similarity Revision Due</label>
+                                <input name="Revision Due" placeholder="Revision Due" configPoint="Similarity Revision Due" point>
+                            
+                            </div>
+                            
+                        </div>  
+                        
+                    </div>
+                    <div style="margin-top:8px;padding: 8px; border: 1px solid #c9d8db;">
+                        <label> 审稿前先查重 <span class="nocheck" configPoint="Simaliary Check First" point></span></label>
+                    </div>
+                    <input submit="workflow"  th:value="${configsubmit}" class="form-submit" />
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

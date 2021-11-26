@@ -1,0 +1,30 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <style>
+        #createRole label{
+            float: left;
+        }
+    </style>
+    <div id="createRole" >
+        <div class="title"><i class="fa fa-server"></i> <span th:text="${createrole}">创建新角色</span></div>
+        <div style="padding: 16px;">
+            <div id="sameroleassign" style="position: relative;">
+                <label th:text="${equalrole}">指定等同权限角色</label>
+                <input class="autoinput" param='role' placeholder="set role as same premisson level" id="samerole"></input>
+                <div  class="autolist" style="display: none; z-index: 1099999;" >
+                </div>
+            </div>
+            <div  style="display: flex;">
+                <div class="cell" cell="100%" data="abbr" required th:attr="title=${roleabbr}" style="margin-right: 6px;"></div>
+                <div class="cell" cell="100%" data="zh"  th:attr="title=${rolezh}" style="margin-right: 6px;"></div>
+                <div class="cell" cell="100%" data="en"  th:attr="title=${roleen}" ></div>
+                    
+            </div>
+            <div class="errorinfo" style="line-height:28px;border:0px;font-size: 13px; color:crimson;">&nbsp;</div>
+        </div>
+        <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>确定</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>取消</span></span>
+        </div>
+        <div i18n="{&quot;confirm&quot;:&quot;确定&quot;,&quot;nouser&quot;:&quot;指定主编邮箱在出版社中尚未注册&quot;,&quot;cancal&quot;:&quot;取消&quot;,&quot;abbrexist&quot;:&quot;期刊名称缩写与已有期刊缩写相同&quot;,&quot;name&quot;:&quot;期刊名称&quot;,&quot;create&quot;:&quot;创建新期刊&quot;,&quot;abbr&quot;:&quot;期刊名称缩写&quot;,&quot;manageemail&quot;:&quot;主编邮箱(请确定邮箱为该出版社已注册用户)&quot;}" ></div>
+    </div>
+</div>

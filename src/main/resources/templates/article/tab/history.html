@@ -1,0 +1,26 @@
+<div id="history" style="padding:16px; ">
+    <div id="histable">
+        <div class="tablehead">
+            <div class="cell" style="flex: 1 1 16%; " >Date</div>
+            <div class="cell" style="flex: 1 1 16%; " >Operator</div>
+            <div class="cell" style="flex: 1 1 60%;;" >Description</div>
+            <div class="cell" style="flex: 1 1 8%;">View</div>
+        </div>
+        <div class="body">
+            <div class="row" th:each="h : ${histories}">
+                <div class="cell" style="flex: 1 1 16%; " th:text=" ${ #dates.format(h.stamp, 'yyyy-MM-dd HH:mm:ss') }">时间</div>
+                <div class="cell" style="flex: 1 1 16%; " th:text="${h.username}">状态</div>
+                <div class="cell" style="flex: 1 1 60%;;" th:text="${h.desc}">信息</div>
+                <div class="cell" style="flex: 1 1 8%;" >
+                    <span th:attr="mid=${h.msgId}" >
+                        <i class="fa fa-envelope-o" th:if="${!roles.author || (roles.author && h.status.indexOf('decision') != -1) }"> </i>&nbsp;
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="message">
+        <div id="tpls"></div>
+    </div>
+
+</div>

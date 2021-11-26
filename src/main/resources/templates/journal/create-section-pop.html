@@ -1,0 +1,43 @@
+<div>
+    <div id="create-section"  style="overflow: hidden;">
+        <style>
+            #create-section label{
+                float: left;
+            }
+        </style>
+        <div class="title"><i class="fa fa-server"></i> <span>创建新的栏目</span></div>
+        <div style="padding:16px;">
+           
+            <div  style=" ">
+                <div>
+                    <label><span th:text="${expireday}">栏目失效日期</span>
+                        <span style="color:red;">*</span>
+                        <span style="padding-left: 12px; font-size: 12px; font-weight: bold; color:#007ab2" th:text="${permanentlyvalid}"> 永久有效</span> 
+                        <span class="nocheck checked" id="unexpired" style="z-index: 0;" ></span>
+                    </label>
+                    <input type="text" id="noexpireday" style="background-color: #eee;" disabled="disabled"></input>
+                    <input type="text" id="sectionexpireday" placeholder="yyyy-MM-dd" style="display: none;"></input>
+                </div>
+                <div  style="display:flex;">
+                    <div class="cell" cell="100%" title="标题" data="title"  required></div>
+                </div>
+                <div id="selecteditor" style=" position: absolute; " >
+                    <label><span th:text="${sectioneditor}">责任编辑</span>
+                        <span style="color:red;">*</span> 
+                        <span style="padding-left: 12px; font-size: 12px; font-weight: bold; color:#007ab2" th:text="${isauthority}"> 是否授权 </span><span class="nocheck" id="authority"></span></label>
+                    <input class="autoinput" param='email' placeholder="input user's email" id="editoremail"></input>
+                    <div  class="autolist" style="display: none; z-index: auto;" >
+                    </div>
+                </div>
+                <div style="clear: both; height: 48px;"></div>
+            </div>
+            
+        </div>
+        <div style="margin-top:28px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span th:text="${confirm}">确定</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span th:text="${cancal}">取消</span></span>
+        </div>
+        <div th:attr="i18n=${i18nInfos}" ></div>
+    </div>
+
+</div>

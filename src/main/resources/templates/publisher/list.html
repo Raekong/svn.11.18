@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>OJS Academic Journal System</title>
+<link rel="shortcut icon" href="/img/favio.png"/>
+<script src="/js/third-party/jquery.js"></script>
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+
+	<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-weight: 200;
+        }
+
+        html, body{
+            width:100%;
+            height: 100%;
+        }
+		
+        #frame{
+            width: 100%;
+            min-height: 100%;
+        }
+
+        .headTitle .mainTitle{
+            font-family: Impact, Charcoal, sans-serif;
+            color: #444;
+            line-height: 32px;;
+        }
+
+        .headTitle .Sole::after {
+            display: block;
+            content: '';
+            position: absolute;
+            border-bottom: 1px dotted #555;
+            width: 100%;
+            top: 24px;
+            
+        }
+
+        .tablehead{
+            
+            display: flex;
+            margin: 4px 0px;
+            border-radius: 4px;;
+            font-family: Lato-Bold;
+            font-size: 14px;
+            color: #555;
+            line-height: 36px;
+            text-transform: uppercase;
+            background-color: transparent;
+        }
+
+        .tablehead div.cell{
+            padding-left: 3px;
+        }
+
+        .row{
+            
+            display: flex;
+            margin: 4px 0px;
+            border-radius: 4px;;
+            background: #f7f7f7;
+        }
+
+        .row div{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 13px;
+            line-height: 32px;
+            font-family: Georgia, serif;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            width: 0;
+            padding: 0px 4px;
+        }
+
+        .row:hover{
+            background-color: #FCF9EF;;
+        }
+
+        .page{
+            text-align: center;
+            line-height: 32px;
+            font-size: 13px;
+        }
+
+        .page div{
+            display: inline-block;
+            margin: 0px 4px;
+        }
+
+        div.paginationjs-pages ul li {
+            display: inline-block;
+            margin: 0px 8px;
+        }
+
+        div.body div.row div:last-child{
+            text-align: center;
+        }
+
+        div.row div span{
+            display: inline-block;
+            margin: 0px 6px;
+            cursor: pointer;
+        }
+
+        input {
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            box-shadow: none;
+            width: 100%;
+            min-height: 32px;
+            line-height: 1;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-bottom: 8px;
+            outline: none;
+        }
+
+        div.smallbut {
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #e2e2e2;
+            border-radius: 2px;
+            padding-left: 4px;
+            min-height: 32px;
+            margin-bottom: 8px;
+            line-height: 1;  
+            color: #323232;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-size: 13px;
+        }
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+        }
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+            padding-left: 24px;
+            font-size: 14px;
+        }
+
+        body .layui-layer-title::before{
+            content: '\f06a';
+            display: inline-block;
+            margin-right: 6px;
+		    font-family:FontAwesome;
+        }
+
+
+        body .layui-layer-btn .layui-layer-btn0 {
+            background-color: #3c8dbc;
+            padding: 0px 16px;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            margin: 4px;
+            border-radius: 2px;
+            font-size: 12px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 10%);
+
+        }
+
+        body .layui-layer-content{
+            text-align: center;
+        }
+
+        body .layui-layer-dialog{
+            width: 480px;
+        }
+
+        .msgbox{
+			font-size: 13px;
+			border-radius: 6px;;
+		}
+
+		.msgbox .msgboxtitle{
+			line-height: 38px;
+			border-bottom: 1px solid #eee ;
+			text-align: left;
+			font-size: 14px;
+			margin: 16px;
+			margin-bottom: 0px;
+		}
+
+		.msgbox .msgboxtitle span.alert, .msgbox .msgboxtitle span.info{
+			margin-right: 6px;
+			width: 28px;
+			height: 28px;
+			float: left;
+			margin-top: 5px;
+		}
+
+		.msgbox .msgboxtitle span.alert{
+			background: url("/img/alert.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxtitle span.info{
+			background: url("/img/info.png") no-repeat center center ;
+            background-size: contain;
+		}
+
+		.msgbox .msgboxcontent{
+			padding: 24px 16px ;
+			text-align: left;
+		}
+
+		.msgbox .msgboxfoot{
+			line-height: 48px;
+			background-color: #f2f2f2;
+		}
+
+		.msgbox .msgboxfoot .confirm{
+			cursor: pointer;
+		}
+
+
+		body .layui-layer-setwin{
+			display: none;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="frame" th:attr="abbr=${publisherAbbr}, i18n=${i18n}" style="display: flex; flex-direction: column; align-items: stretch;">
+		<div th:include="component/head::head" style="flex-basis: 50px;"></div>
+        <div style="display: flex;  align-items: stretch; flex:auto" >
+            <div id="menus" th:include="component/head::sider" style="flex-basis: 228px;  background-color: #353E4F;; flex-shrink: 0;"></div>
+            <div id="container" style="flex:auto; background-color: #eee; padding: 15px 15px 6px 15px ; display: flex; flex-direction: column;">
+                <div id="body" style="flex:auto; background-color: #fff; border-radius:6px; padding: 0px 15px; padding-top: 8px; padding-bottom: 16px;">
+                
+                    <div class="headTitle">
+                        <div class="mainTitle" th:text="${publisherlist}">出版社列表</div>
+                        <div class="Sole" style="color: #999; font-size: 13px; position: relative;">
+                            <span style="background-color: #fff; " th:text="${publisherlistintroduce}">系统现有出版社的列表，可以启动或停止出版社活动，并修改出版社的配置信息</span>
+                        </div>
+                    </div>
+                    <form id="queryForm" action="/publiser/management" method="post">
+                        <div style="padding-top: 16px; display: flex; float: right; width:480px; height: 48px; align-items: stretch;">
+                            <div style="flex:1 1 50%; margin-right: 6px;;"><input value="" id="name" name="name" th:attr="placeholder=${searchpublishername}" th:value="${name}"/></div>
+                            <div style="flex:1 1 50%; margin-right: 6px;"><input value="" id="abbr" name="abbr" th:attr="placeholder=${searchabbr}"  th:value="${abbr}"/></div>
+                            <div id="query" style="flex-basis: 88px; flex-shrink: 0; line-height: 28px;" class="smallbut"><i class="fa fa-search"></i> <span th:text="${search}">查询</span></div>
+                        </div>
+                    </form>
+                    <div style="clear:both"></div>
+                    <div id='testtable' style="padding-top: 16px;">
+                        <div class="tablehead">
+                            <div class="cell" style="flex: 1 1 10%" cell="10%" data="id" th:text="${shownumber}">序号</div>
+                            <div class="cell" style="flex: 1 1 35%" cell="35%" data="name" th:text="${showpublishername}">出版社名称</div>
+                            <div class="cell" style="flex: 1 1 15%" cell="15%" data="abbr" th:text="${showabbr}">缩写</div>
+                            <div class="cell" style="flex: 1 1 10%" cell="10%" data="disable" th:text="${showstate}">状态</div>
+                            <div class="cell" style="flex: 1 1 30%; text-align: center;" cell="30%" const="<span class='disable'><i class='fa fa-pause-circle-o'></i></span><span class='active'><i class='fa fa-check-square-o'></i></span><span class='config'><i class='fa fa-pencil'></i></span>" th:text="${showoperation}">操作</div>
+                        </div>
+                        <div class="body">
+
+                        </div>
+                        <div class="page">
+
+                        </div>
+                    </div>
+                    <p th:text="${i18nInfos}" style="display: none;" id="i18n"></p>
+                </div>
+                <div class="footer" style="color:#444; text-align: center; line-height: 32px; font-size:13px; flex-basis: 32px; margin: 8px 0px; background-color: #fff;border-radius:6px;">
+                    <span th:text="${publisher}"></span> © 2020-2025 TSP Academic Journal System - All Rights Reserved - 
+                </div>
+            </div>
+            <p th:attr="i18n=${i18nInfos}" style="display: none;" id="i18nInfos"></p>
+        </div>
+	</div>
+	<script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="list-publisher" target-module="list-publisher" defer async="true" ></script>
+</body>
+</html>

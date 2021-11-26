@@ -1,0 +1,35 @@
+<div th:fragment="masthead" >
+    <div  style="margin-top:5px;display: flex;">
+        <div class="cell" cell="33%" th:attr="title=${researchfield}"  data="researchfield" style="margin-right: 6px;;" required></div>
+        <div class="cell" cell="33%" th:attr="title=${onlineissn}" data="onlineissn" style="margin-right: 6px;;" required></div>
+        <div class="cell" cell="33%" th:attr="title=${printissn}"  data="printissn" style="margin-right: 6px;;" required></div>
+        <div style="flex-basis:168px;" id="lang" data-i18n="en">
+            <label>language</label>
+            <div style=" text-align: center;border: 1px solid #aaa;border-radius: 3px; min-height: 38px;font-size: 12px;line-height: 36px;">
+                <span class="nocheck checked lang" lang="en"></span> English 
+                <span class="nocheck lang" lang="zh"></span> 中文 
+            </div>
+        </div>
+    </div>
+    <div th:if="${isRoot}">
+    <div  style="margin-top:5px;flex:50%; display: flex;" >
+        <div class="cell" cell="50%" th:attr="title=${host}"  data="host" style="margin-right: 6px;;" ></div>
+        <div class="cell" cell="50%" th:attr="title=${port}" data="port" style="margin-right: 6px;;"></div>
+        <div class="cell" cell="50%" th:attr="title=${configEmail}"  data="email" ></div>
+    </div>
+    <div style="margin-top:5px;flex:50%; display: flex;">
+        <div class="cell" cell="50%" th:attr="title=${emailsender}"  data="emailsender" style="margin-right: 6px;;"></div>
+        <div class="cell" cell="50%" th:attr="title=${password}"  data="password" ></div>
+    </div>
+    </div>
+
+    <div >
+        <div th:text="${ed1title}" class="h4title">About the Journal</div>
+        <div id="editor1-container-atj"></div>
+    </div>
+    <div>
+        <div th:text="${ed2title}" class="h4title">Indexing and Abstracting</div>
+        <div id="editor2-container-iaa"></div>
+    </div>
+    <input id="submit-masthead" th:value="${configsubmit}" class="form-submit" />
+</div>

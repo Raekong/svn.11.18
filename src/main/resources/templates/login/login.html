@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TSP Academic Journal System</title>
+<link rel="shortcut icon" href="/img/favio.png"/>
+<script src="/js/third-party/jquery.js"></script>
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+
+	<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+		
+		#login{
+			font-size: 15px;
+		    font-weight: 200;
+		    background-color: rgba(4,155,219,0.02);
+		    width: 508px;
+			height: 568px;
+		    border-radius: 8px;
+		    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.08), 0px 5px 50px 0px rgba(0,0,0,0.08);
+		    margin: 32px auto;
+		    padding: 32px 47px 0px;
+		}
+		
+		.page-title{
+			margin: 0.2em 0;
+		    font-size: 24px;
+		    margin-top: 10;
+		    margin-bottom: 18px;
+		    font-weight: 200;
+		    text-align: center;
+		    padding-top: 10px;
+            color: #323232;
+		}
+		
+		label{
+			font-size: 15px;
+			display: inline-block;
+		    margin-bottom: 5px;
+		    font-weight: bold;
+            color: #444;
+		}
+		
+		.form-group .form-field {
+		    -webkit-appearance: none;
+		    background-color: #fff;
+		    border: 1px solid #aaa;
+		    border-radius: 4px;
+		    box-shadow: none;
+		    width: 100%;
+		    min-height: 48px;
+		    line-height: 1;
+		    padding-left: 18px;
+		    padding-right: 18px;
+		    margin-bottom: 8px;
+		    outline:none;
+			text-align: center;
+		}
+		
+		.form-submit {
+		    margin-top: 25px;
+		    margin-bottom: 28px;
+		    -webkit-appearance: none;
+		    background-color: #C8252C;
+		    border: 0;
+		    border-radius: 2px;
+		    color: #fff;
+		    font-size: 15px;
+		    font-weight: 600;
+		    padding: 18px 20px 17px;
+		    display: block;
+		    line-height: 1;
+		    width: 100%;
+			cursor: pointer;
+		}
+		
+		label.error{
+			font-weight: 200;
+		}
+		
+		label span{
+			text-decoration: underline;
+		}
+
+        #sub{
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        #sub::after{
+            display: block;
+            content: '';
+            position: absolute;
+            border-bottom: 1px dotted #4d4d4d;
+            width: 100%;  
+            top: 10px;   
+            z-index: -1;
+        }
+        
+        .form-helper .link a {
+            color: #049BDB;
+            margin: 0 13px;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .form-helper .link {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+		#email.error, #password.error{
+			border: 1px solid #C8252C;
+		}
+
+		div.error{
+			font-size: 13px;
+			text-align: center;
+			color: #C8252C;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="login" th:attr="abbr=${publisherAbbr}">
+		<div  fire="keypress" srcTag="enter">
+            <h1 class="page-title" th:text="${publisher}"></h1>
+            <div id="sub" style="color: #aaa; font-size: 14px;text-align: center;">
+                <span th:text="${log}" style="background-color: #fff; padding: 0px 8px;"></span>
+            </div>
+			
+			<div class="form-group">
+				<label th:text="${email}">Email</label>
+				<input data-email fire="blur" srcTag="input" type="email" name="email" id="email" class="form-field email-field" >
+			</div>
+            <br/>
+			<div class="form-group">
+				<label th:text="${password}">Password</label> 
+				<input  data-password fire="blur" srcTag="input" type="password"	name="password" id="password" class="form-field">
+			</div>
+            <br/>
+            <div class="error">&nbsp; <span th:if="${active}" th:text="${actived}"></span></div>
+			
+			<input  fire="click" srcTag="signin" type="submit" name="commit" th:value="${sign}" class="form-submit">
+            <br/>
+			<div class="form-helper" style="text-align: center; color: #049BDB;border-bottom:1px dotted #4d4d4d; padding-bottom:10px; margin-top: 8px;">
+				<div class="link" th:if="${publisherAbbr}ne'admin'">
+					<a th:href="@{'/user/regist/'+${publisherAbbr}}" th:text=" ${regist}"><span></span></a>
+				</div> |
+				<div class="link">
+					<a class="link-email" th:href="@{'/user/resetpassword/'+${publisherAbbr}}" >
+						<span th:text="${forgot}"></span>
+					</a>
+				</div> |
+				<div class="link">
+					<a href="/downloadManual"><span th:text="${manual}"></span></a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div style="display: none;" id="i18nInfos" th:attr="infos=${i18nInfos}"></div>
+	<script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="login" target-module="login" defer async="true" ></script></body>
+</html>

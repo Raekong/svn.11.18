@@ -1,0 +1,51 @@
+<div class="similarcheck-email" th:attr="revisiondue=${revision_due}">
+    <style>
+       #reviewassign label{
+           float: left;
+       }
+
+       .h4title{
+           text-align: left;
+       }
+
+       #addreviewer{
+            margin-bottom: 5px;
+            min-height: 35px;
+       }
+       
+       #queryRstbody .row{
+           font-size: 12px;
+           background-color: #fff;
+       }
+
+       #queryRstbody .row div{
+            font-family:'Times New Roman', Times, serif;
+            line-height: 28px;
+       }
+
+       #queryRstbody .row:hover{
+           background-color: #eee;
+       }
+
+       input.due{
+           width: 138px;
+           min-height: 28px;
+       }
+
+       span.del{
+           cursor: pointer;
+       }
+       
+
+       
+    </style>
+    <div id="mailtpl">
+        
+    </div>
+    <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+        <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-paper-plane" aria-hidden="true"></i> <span>发送</span></span>
+        <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span>取消</span></span>
+    </div>
+    </div>
+   
+</div>

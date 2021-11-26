@@ -1,0 +1,47 @@
+<div th:fragment="section" style="position: relative;">
+    <style>
+        .but {
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 22px;
+            cursor: pointer;
+            line-height: 36px;
+            padding: 0px 16px;
+        }
+
+        #slist i{
+            margin: 0px 6px;
+        }
+    </style>
+    <div>
+        <div  style="float: right;margin-top: 6px;display:flex" class="but"  id="createSection">
+            <i class="fa fa-wrench" style="padding-top: 12px"></i> <div th:text="${createsection}">Create Section</div>
+        </div>
+        <div id="querysection" style="width:228px;float: right; margin-top: 6px; margin-right: 6px; position: relative;">
+            <input style="min-height: 36px;" class="autoinput" param="title" th:attr="placeholder=${fuzzyquery}"> </input>
+            <div class="autolist" style="display: none;"></div>
+        </div>
+        
+    </div>
+     <div id="slist" style="padding-top: 16px; clear:both;">
+        <div class="tablehead">
+            <div  class="cell" style="flex: 1 1 5%" cell="5%" data="id" th:text="${serialnumber}" >序号</div>
+            <div  class="cell" style="flex: 1 1 22%" cell="22%" data="title" th:text="${name}">名称</div>
+            <div  class="cell" style="flex: 1 1 22%" cell="22%" data="sectionEditor" th:text="${sectioneditor}" >责任编辑</div>
+            <div  class="cell" style="flex: 1 1 9%" cell="9%" data="authority" th:text="${isauthority}">授权与否</div>
+            <div  class="cell" style="flex: 1 1 7%" cell="7%" data="status" th:text="${state}">状态</div>
+            <div  class="cell" style="flex: 1 1 14%"  cell="14%" data="expireDay" th:text="${expireday}" >失效日期</div>
+            <div  class="cell" style="flex: 1 1 21%;" cell="21%" const="<span class='config' style='cursor:pointer'><i class='fa fa-edit'></i></span><span class='enable' style='cursor:pointer'><i class='fa fa-check-square-o'></i></span><span class='ban' style='cursor:pointer'><i class='fa fa-ban'></i></span><span class='up' style='cursor:pointer'><i class='fa fa-arrow-up'></i></span><span class='down' style='cursor:pointer'><i class='fa fa-arrow-down'></i></span><span class='skip' style='cursor:pointer'><i class='fa fa-location-arrow'></i></span>" th:text="${operation}" >操作</div>
+        </div>
+        <div class="body">
+            
+        </div>
+    </div>
+    
+    
+</div>

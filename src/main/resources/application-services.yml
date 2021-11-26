@@ -1,0 +1,197 @@
+nacos:
+    list:
+        publisher: #代表一个DOCKER
+            ip: 'http://localhost:8010'
+            router: '/serverRouter'
+            stub:
+                savelink: '/link/save'
+                getLink: '/link/findByMD5'
+
+                findPublisherByAbbr: '/publish/findByAbbr'
+                login: '/user/login'
+                setUsreI18N: '/user/setI18n'
+                regist: '/user/regist'
+                isSuper: '/user/isSuper'
+                resetPassword: '/user/resetpassword'
+                getUserByEmailAndPid: '/user/getUserByEmailAndPid'
+                getSectionEditorByEmailAndJid: '/user/getSectionEditorByEmailAndJid'
+                getByNameAndPid: '/user/getUserByNameAndPid'
+                userQuery: '/user/queryUserWithRidAndNameAndEmail'
+                findUserById: '/user/findById'
+                updateprofile: '/user/update'
+                activeUser: '/user/active'
+                disableUser: '/user/disable'
+                userResetPassword: '/user/resetPassword'
+                turnUser: '/user/turn'
+
+                getPublisherList: '/publish/getAllPagePublishers'
+                updatePublisher:  '/publish/update'
+                searchPublishers: '/publish/searchPagePublishers'
+                newPublisher: '/publish/regist'
+                findPublisherById: '/publish/findById'
+                publisherDisable: '/publish/disable'
+                publisherEnable: '/publish/enable'
+
+                getPath: '/message/getPath'
+                getMessage: '/message/recv'
+                getSingleMessage: '/message/getMessage'
+                
+                journallist: '/journal/list'
+                journalsetting: '/journal/setting'
+                getallsetting: '/journal/getAllSettingByJid'
+                journalrole: '/journal/getroles'
+                journalchangeorder: '/journal/chanageOrder'
+                journalbyid: '/journal/getById'
+                querybyAbbrLike: '/journal/querybyAbbrLike'
+                getSetting: '/journal/getSettingByJidAndConfigPoint'
+                getEmailConfig: '/getEmailConfig'
+                saveEmailTpl: '/journal/emailtpl/save'
+                getEmailTpl : '/journal/emailtpl/getById'
+                updateEmailTpl: '/journal/emailtpl/update'
+                delEmailTpl : '/journal/emailtpl/delyId'
+                setDefaultEmailTpl : '/journal/emailtpl/setDefault'
+                setConfigPointWithEmail: '/journal/setting/email/setWithEmail'
+                getDefaultEmailConfigForJournal: '/getDefaultEmailConfigForJournal'
+                getEmailVariables: '/email/getEmailVariables'
+
+                savesection: '/journal/section/save'
+                openSection: '/journal/section/open'
+                orderSection: '/journal/section/order'
+                getsectionbyid: '/journal/section/findById'
+                getsectionbyguid: '/journal/section/findByGuid'
+                getsectionbyjid: '/journal/section/findByJournalId'
+                isSectionAuthorityByAid: '/journal/section/isSectionAuthorityByAid'
+                getSectionByTitleLike: '/journal/section/getSectionByTitleLike'
+                # zhj,8.9 ,role,userRoleRelation
+                getoriginrole: '/jouranl/getOriginRole'
+                saveRole: '/journal/role/save'
+                findRoleById: '/journal/role/findById'
+                findRoleByAbbr: '/journal/role/findByAbbr'
+                findRoleByJournalId: '/jouranl/findAllRoleForJournal'
+                findRoleForPublic: '/jouranl/findAllRoleForPublic'
+                getmanager: '/journal/getManager'
+                
+                saveUserRoleRelation: '/journal/userRoleRelation/save'
+                findUserRoleRelationByUserId: '/journal/userRoleRelation/findByUserId'
+                findUserRoleRelationByJournalId: '/journal/userRoleRelation/findByJournalId'
+                findRoleRelationByJournalIdAndUserIdAndRoleId: '/journal/userRoleRelation/findByJidAndUidAndRid'
+                queryteam: '/journal/team/queryByJournalId'
+                getTeamuserbyrole: '/journal/team/member'
+                getJournalEditorTeamByRole: '/journal/getJournalEditorTeamByRole'
+                removeTeamMember: '/journal/team/remove'
+                getAllEditor: /journal/getAllEditor
+
+                getEmailConfigForJournal: '/journal/emailconfig/'
+                getAllEmailConfigForJournal: '/journal/emailconfig/all'
+
+                #data monitor
+                userinfomodify: '/monitor/user/modify'
+                monitor: '/monitor/router'
+                getlistboardsetting: '/monitor/user/getSettingForUser'
+                savelistboardsetting: '/monitor/user/saveSettingForUser'
+
+                #article
+                submit : '/submit/do'
+                getArticleById : '/article/getById'
+                getArticleByType: '/article/list/getByType'
+                getMonitorData: '/article/list/getMonitorData'
+                getsectionbyaid: '/article/getSectionIdByAid'
+                getLastStatusById: '/article/getLastStatusById'
+
+                #list board query
+                nativeQuery: '/article/list/nativeQuery'
+
+                #list board
+                editorroles: '/user/getUserEditorRoles'
+                
+                saveArticleFile: '/article/file/save'
+                canReupload: '/article/file/canReupload'
+                delArticleFile: '/article/file/del'
+                articlefileupload: '/article/file/upload'
+                getFileForReviewRound: '/article/file/getFileForReviewRound'
+                getFileForCopyeditRound: '/article/file/getFileForCopyeditRound'
+                getArticleFilesByAHId: '/article/file/getArticleFilesByAHId'
+                getArticleFileById: '/article/file/getArticleFileById'
+                getArticleFilesByAidAndVersion: '/article/file/getArticleFilesByAidAndVersion'
+                findByAidAndVersionAndFileType: '/article/file/findByAidAndVersionAndFileType'
+
+                getSuggestReviewer: '/article/review/getSuggestReviewer'
+                getLastRoundReviewer: '/article/review/getLastRoundReviewer'
+
+                changeJournal: '/article/changeJournal'
+
+                #article editor board
+                articleboardsave: '/article/board/save'
+                getBoardBydAid: '/article/board/getBoardBydAid'
+                getrolesforuser: '/article/board/getRolesForUser'
+                articleboarddel: '/article/board/del'
+
+                #article reviewer
+                queryReviewer: '/article/review/queryReviewer'
+                saveReviewers: '/article/review/saveReviewers'
+                saveReviewActions: '/article/review/saveReviewActions'
+                saveReviewActionRemind: '/article/review/saveReviewActionRemind'
+                getReviewActionById: '/article/review/getReviewActionById'
+                getReviewActionByAidAndRid: '/article/review/getReviewActionByAidAndRid'
+                reveiwactionupdate: '/article/review/update'
+                reveiwactionsubmit: '/article/review/submit'
+                completeNumByRaid: '/article/review/completeNumByRaid'
+                unCompleteActionByAidAndRid: '/article/review/unCompleteActionByAidAndRid'
+                needRemind: '/article/review/needRemind'
+                updateRemindCount: '/article/review/updateRemindCount'
+                reveiwactionclose: '/article/review/close'
+                updatereviewoverdue: '/article/review/updateOverDue'
+                reveiwactionwithdraw: '/article/review/withdraw'
+                saveReviewLink : '/article/review/saveReviewLink'  
+                getReviewLink : '/article/review/getReviewLink'
+                getReviweLinkByMD5 : '/article/review/getReviewLinkMd5' #这个方法起的有问题，其实是BY REVIEWACTION ID返回MD5
+                getReviewLinkByActionId : '/article/review/getReviewLinkByActionId'
+                getReviewResult : '/article/review/getReviewResult'
+                withdrawdecision: '/article/review/withdrawDecision'
+
+                #articlehistory
+                historysave : '/article/history/save'
+                getHistory: '/article/history/get'
+                getLastHistory: '/article/history/getLastHistory'
+                getNextHistory: '/article/history/getNextHistory'
+                getHistoryById: '/article/history/getById'
+                getHistoryByAidandFlow: '/article/history/getHistoryByAidandFlow'
+                getWorkflowHasPreview: '/article/history/getWorkflowHasPreview'
+                getLastHistoryInRound: '/article/history/lastHistoryInRound'
+                getHistoryByAid: '/article/history/getHistoryByAid'
+
+                #discuss
+                savediscuss: '/article/disscusion/save' 
+                getDiscuss: '/article/disscusion/get'
+                #tab
+                getTabs: '/article/history/getTabs'
+
+                #simial check
+                saveSimilarCheck: '/similarCheck/save'
+                findSimilarCheckByAid: '/similarCheck/findByAid'
+                findSimilarCheckByAidAndRound: '/similarCheck/findByAidAndRound'
+                findUnchecked: '/similarCheck/unchecked'
+                findUnuploaded: '/similarCheck/unuploaded'
+
+                #payment
+                savePayment : '/payment/save'
+                getPaymentsByAid : '/payment/getPaymentsByAid'
+                getPaymentById: '/payment/getPaymentById'
+                payaudited: '/payment/audit'
+                
+        email:
+            ip: 'http://localhost:8010'
+            router: '/messageServerRouter'
+            stub:
+                sendmessage: '/message/send'    
+                searchMessages: '/message/search'
+                getmessagebyrecidandconfigpoint: '/message/getMessageByRevIdAndConfigPoint'    
+                getMessage: '/message/getMessage'
+                read: '/message/read'
+                deleteTop: 'message/deleteTop'
+                getbyid: '/message/getById'
+
+
+            
+    
+        

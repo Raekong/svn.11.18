@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TSP Academic Journal System</title>
+<link rel="shortcut icon" href="/img/favio.png"/>
+<script src="/js/third-party/jquery.js"></script>
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+
+	<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-weight: 200;
+        }
+
+        html, body{
+            width:100%;
+            height: 100%;
+        }
+		
+        #frame{
+            width: 100%;
+            min-height: 100%;
+        }
+
+        #menus{
+            flex-basis: 228px;  
+            background-color: #353E4F;; 
+            flex-shrink: 0;
+        }
+
+		
+	</style>
+</head>
+<body>
+	<div id="frame" th:attr="abbr=${publisherAbbr}" style="display: flex; flex-direction: column; align-items: stretch;">
+		<div th:include="component/head::head" style="flex-basis: 50px;"></div>
+        <div style="display: flex;  align-items: stretch; flex:auto" >
+            <div id="menus" th:include="component/head::sider" ></div>
+            <div id="container" style="flex: 1 1 auto; "></div>
+        </div>
+	</div>
+	<script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="home" target-module="home" defer async="true" ></script>
+</body>
+</html>

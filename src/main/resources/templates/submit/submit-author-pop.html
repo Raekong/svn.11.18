@@ -1,0 +1,124 @@
+<div>
+    <style>
+        .attachment .smallbut{
+            text-align: center;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #e2e2e2;
+            border-radius: 2px;
+            padding-left: 4px;
+            margin-bottom: 6px;
+            color: #323232;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-size: 13px;
+            line-height: 20px;
+        }
+        div.selectbut{
+            line-height: 26px;
+            min-height: 26px;
+            margin-bottom: 4px;
+        }
+        .autolist{
+            border:1px solid #aaa;
+            border-radius: 2px;
+            position: absolute;
+            overflow-y: auto;
+            height: 160px;
+            background-color: #fff;
+            margin-right: 6px;
+            width:100%;
+            padding: 4px;
+            z-index: 999999;
+
+        }
+
+        .autolist ul li{
+            font-size: 12px;
+            text-align: left;
+            line-height: 18px;;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .autolist ul li:hover{
+            background-color: #eee;
+        }
+
+        ul#countries{
+			position: absolute;
+			overflow-y: auto;
+			max-height: 188px;
+			font-size: 12px;
+			background-color: #fff;
+			left: 0px;
+			top: 78px;
+			padding: 6px;
+			border: 1px solid #aaa;
+			border-radius: 3px;
+			color: #444;
+			display: none;
+            z-index: 999999;
+            width: 100%;
+		}
+        	
+		ul#countries li{
+			line-height: 22px;
+			padding-left: 8px;;
+			cursor: pointer;
+            text-align: left;
+		}
+
+		ul#countries li:hover{
+			background-color: #eee;
+		}
+    </style>
+    <div id="addauthorpop"  style="overflow: hidden;">
+        <div class="title"><i class="fa fa-server"></i> <span >新增作者</span></div>
+        <div style="padding:16px;">
+            <div id="form">
+                <div style="display: flex; ">
+                    <div id="user" style="position: relative; flex: 1 1 30%; padding-right: 6px;">
+                        <label>Email<span style="color: red;">*</span></label>
+                        <input class="autoinput" param="email" placeholder="please input user's email" id="userid" data-email>
+                        <div class="autolist" style="display: none; z-index: 1099999;">
+                        </div>
+                    </div>
+                    <div cell="30%" title="Name" data="name" required style="padding-right: 6px;;" ></div>
+                    <div cell="40%" title="Country" data="Country" style="position: relative;">
+                        <ul id="countries" >
+                            <li th:each="map:${countries}" th:attr="data=${map.value}" th:text="${map.key}"> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: flex-end;">
+                    <div cell="50%" title="Affiliation" data="Affiliation" ></div>
+                    <div style="flex:1 1 50%; font-size: 14px; line-height: 36px; display: flex;" >
+                        <div style="flex: 1 1 auto; text-align: right; padding-right: 12px;">Is corresponding author <span id="corresponding" class="nocheck"></span></div>
+                        <div id="addConfirm" class="smallbut" style="flex-basis: 98px; color:#007ab2;line-height: 32px;">确定</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin: 16px 0px; border-bottom: 1px dotted #999;margin-top: 48px"></div>
+            <div id="authorlist">
+                <div class="tablehead">
+                    <div class="cell" style="flex: 1 1 20%" cell="20%" data="email">Email</div>
+                    <div class="cell"  style="flex: 1 1 20%" cell="20%" data="name">Name</div>
+                    <div class="cell"  style="flex: 1 1 20%" cell="20%" data="affiliation">Affiliation</div>
+                    <div class="cell"  style="flex: 1 1 15%" cell="15%" data="country">Country</div>
+                    <div class="cell"  style="flex: 1 1 15%" cell="15%" data="correspondingTitle">Corresponding?</div>
+                    <div class="cell"  style="flex: 1 1 10%; text-align:center" cell="10%" const="<span class='del' style='cursor:pointer'><i class='fa fa-close'></i></span>"> 操作</div>
+                </div>
+                <div class="body">
+                    
+                </div>
+            </div>
+        </div>
+        <div  id="footer" style="margin-top:28px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="display:none; color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>添加完成</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <spans>取消</span></span>
+        </div>
+        <div th:attr="i18n=${i18nInfos}" ></div>
+    </div>
+
+</div>

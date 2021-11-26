@@ -1,0 +1,118 @@
+<div>
+    <style>
+        div.title {
+            border-top: 1px solid #d4d4d4;
+            line-height: 36px;
+            background: #eee;
+            margin: 0px;
+            padding-left: 14px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-weight: bold;
+            text-align: left;
+            font-size: 13px;
+            color:#007ab2;
+        }
+        span.cbutton {
+            display: inline-block;
+            padding: 7px 16px;
+            vertical-align: middle;
+            background-color: #fff;
+            background-image: linear-gradient(#eee, #ddd);
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 60%);
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 16px;
+            color: rgba(0,0,0,0.84);
+            text-shadow: 0 2px 0 rgb(255 255 255 / 60%);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+        }
+
+        .tablehead{
+            font-size: 13px;
+            display: flex;
+            margin: 4px 0px;
+            border-radius: 4px;;
+            font-family: Lato-Bold;
+            color: #555;
+            line-height: 36px;
+            text-transform: uppercase;
+            background-color: transparent;
+        }
+
+        .tablehead div.cell{
+            padding-left: 3px;
+        }
+
+        .row{
+            
+            display: flex;
+            margin: 4px 0px;
+            border-radius: 4px;;
+            background: #f7f7f7;
+        }
+
+        .row div{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 13px;
+            line-height: 32px;
+            font-family: Georgia, serif;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            width: 0;
+            padding: 0px 4px;
+        }
+
+        .row:hover{
+            background-color: #FCF9EF;;
+        }
+
+        .row span i{
+            color: #444;
+            padding: 0px 6px;
+        }
+
+        span.nocheck {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(/img/s.png) no-repeat center center;
+            background-size: cover;
+            position: relative;
+            top: 3px;
+            cursor: pointer;
+        }
+        span.checked {
+            background: url(/img/check-s.png) no-repeat center center;
+            background-size: cover;
+        }
+    </style>
+    <div id="submit"  style="">
+        <div class="title"><i class="fa fa-server"></i> <span>期刊列表</span></div>
+        <div style="padding:16px;" id="journals">
+            <div class="tablehead">
+                            
+                <div  class="cell" style="flex: 1 1 10%" cell="10%" data="journalId">序号</div>
+                <div  class="cell" style="flex: 1 1 15%" cell="15%" data="abbreviation">缩写</div>
+                <div  class="cell" style="flex: 1 1 65%; text-align: left;" cell="65%" data="title">期刊名称</div>
+                <div  class="cell" style="flex: 1 1 10%; text-align:left" cell="10%" const="<span class='nocheck'></span>">选择</div>
+            </div>
+            <div class="body">
+            </div>
+        </div>
+        <div style="margin-top:28px;text-align:right; padding: 15px; background: #eee;">
+            <span id="save" class="cbutton" style="color:#007ab2;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>确定</span></span>
+            <span id="cancel" class="cbutton" ><i class="fa fa-times" aria-hidden="true"></i> <span >取消</span></span>
+        </div>
+        
+    </div>
+
+</div>

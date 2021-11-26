@@ -1,0 +1,29 @@
+<div>
+    <style>
+        .text{
+            clear: both;
+            font-size: 13px;
+            padding: 8px;
+            border: 1px solid #aaa;;
+            border-radius: 2px;
+        }
+    </style>
+    <label>Title</label>
+    <div th:utext="${msg.title}" class="text"></div>
+
+    <label>Content</label>
+    <div th:utext="${msg.content}"  class="text"></div>
+
+    <div class="tablehead">
+        <div class="cell" style="flex: 1 1 100%; " >Attach Files</div>
+    </div>
+    
+    <div class="row" th:each="file : ${files}">
+        <div class="cell" style="flex: 1 1 100%; " th:attr="url=${file.path}" th:text="${file.originName}">Attach Files</div>
+    </div>     
+
+
+    <div style="margin-top:8px;text-align:right; padding: 15px; background: #eee;">
+        <span id="cancel" class="cbutton" ><i class="fa fa-mail-reply-all" aria-hidden="true"></i> <span>Back</span></span>
+    </div>
+</div>

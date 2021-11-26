@@ -1,0 +1,76 @@
+<div id="submittab" >
+    <style>
+        #submittab{
+            font-size: 13px;;
+            padding:8px;
+        }
+        
+        div.h4title{
+            font-size: 14px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+			"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+			"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-weight: bold;
+            color:#0090D7;
+        }
+        div.cell.file {
+            color:#3c8dbc;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .littlebut {
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 8px;
+            font-size: 13px;
+        }
+
+    </style>
+    <div style=" padding: 4px;" th:attr="modify=${modifyFile}">
+        <div class="h4title">Upload Files 
+            <div style="display: inline-block;;">       
+                <!--
+                <span class="littlebut" id="upload" th:if="${modifyFile eq 'true'}"> [ Upload <i class="fa fa-upload"></i> ]</span> 
+                -->
+                <span class="littlebut" id="downloadZip"> [ Download all selected files <i class="fa fa-download"></i> ] </span>
+            </div>
+        </div>
+        <div id='files' style=" clear: both;" class="pagetable">
+            <div class="tablehead">
+                <div class="cell" style="flex: 1 1 10%;" ><span class="nocheck checked" id="selectall"></span> 全选 </div>
+                <div class="cell" style="flex: 1 1 25%; " >文件类型</div>
+                <div class="cell" style="flex: 1 1 60%; " >文件名</div>
+                <div class="cell" style="flex: 1 1 5%;;" th:if="${modifyFile eq 'true'}">操作</div>
+                
+            </div>
+            <div class="body">
+                <div class="row" th:each="file : ${a.files}" style="display: flex;" th:attr="id=${file.id}, data=${file.originName + ',' + file.innerId.substring(file.innerId.lastIndexOf('/')+1)}">
+                    <div class="cell" style="flex: 1 1 10%; " ><span class="nocheck"></span></div>
+                    <div class="cell" style="flex: 1 1 25%; "  th:text="${file.fileType}"></div>
+                    <div class="cell  file" style="flex: 1 1 60%; " th:attr="href=${file.innerId}"  th:text="${file.originName}"></div>
+                    <div class="cell" style="flex: 1 1 5%;; " th:if="${modifyFile eq 'true'}"><span class="del"><i class="fa fa-close"></i></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="h4title">Recommended Reviewers</div>
+        <div id='reviewers' style=" clear: both;" class="pagetable">
+            <div class="tablehead">
+                <div class="cell" style="flex: 1 1 25%; " >姓名</div>
+                <div class="cell" style="flex: 1 1 25%;" >Email</div>
+                <div class="cell" style="flex: 1 1 25%; " >单位</div>
+                <div class="cell" style="flex: 1 1 25%;; ">研究领域</div>
+            </div>
+            <div class="body">
+                <div class="row" th:each="reviewer : ${a.reviewers}" style="display: flex;" th:attr="id=${reviewer.id}">
+                    <div class="cell" style="flex: 1 1 25%;" th:text="${reviewer.name}">姓名</div>
+                    <div class="cell" style="flex: 1 1 25%; " th:text="${reviewer.email}">Email</div>
+                    <div class="cell" style="flex: 1 1 25%; " th:text="${reviewer.affiliation}">单位</div>
+                    <div class="cell" style="flex: 1 1 25%;;;" th:text="${reviewer.researchfield}">研究领域</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+

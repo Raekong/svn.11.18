@@ -1,0 +1,167 @@
+<div id="payment" style="display: flex; padding:8px;">
+    <style>
+        .under{
+            font-size: 12px;
+            color: #999;
+        }
+
+        span.note{
+            text-align: justify;
+        }
+
+        div.decisionbut.archive{
+            background-color: #00b24e;
+            background-image: linear-gradient(#00D560, #00b24e);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.4);
+            color: #fff;
+            text-shadow: 0 2px 0 rgba(0,0,0,0.1);
+            border-color: #00b24e;
+        }
+
+        div.decisionbut {
+            display: inline-block;
+            padding: 7px 16px;
+            vertical-align: middle;
+            background-color: #eee;
+            background-image: linear-gradient(#eee, #ddd);
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 60%);
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+            color: rgba(0,0,0,0.84);
+            text-shadow: 0 2px 0 rgb(255 255 255 / 60%);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        div.decisionbut.accept {
+            background-color: #007ab2;
+            background-image: linear-gradient(#009de5, #007ab2);
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 40%);
+            color: #fff;
+            text-shadow: 0 2px 0 rgb(0 0 0 / 20%);
+            border-color: #007ab2;
+        }
+
+        .editor{
+            font-size: 13px;
+            font-weight: 400;
+            display: flex;
+            color: #367fa9;
+            line-height: 18px;
+            font-style: italic;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #367fa9;
+            align-items: center;
+        }
+
+    </style>
+    <div style="flex: 1 1 auto;" th:attr="originPayid=${pays.origin.id}, total=${pays.origin.payTotal}">
+        <div id="filelist">
+            <div class="h4title" style="margin-top: 0px;">Article File List </div>
+            <div class="tablehead">
+                <div class="cell" style="flex: 1 1 30%; " >File Type</div>
+                <div class="cell" style="flex: 1 1 60%; " >File Name</div>
+                <div class="cell" style="flex: 1 1 10%;;" >Download</div>
+            </div>
+            <div class="body">
+                <div class="row down"  th:if="${file.originName.indexOf('Receipt') == -1 }" th:each="file : ${files}" style="display: flex;" th:attr="link=${file.version}, origin=${file.originName}">
+                    <div class="cell" style="flex: 1 1 30%; "  th:text="${file.fileType}"></div>
+                    <div class="cell  file" style="flex: 1 1 60%; " th:attr="href=${file.innerId}"  th:text="${file.originName}"></div>
+                    <div class="cell" style="flex: 1 1 10%;" ><span style="color:#0090D7"><i class="fa fa-download"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h4title" style="margin-top: 0px;">Article Processing Charge By Editor</div>
+        <div style="display: flex;" id="origin">
+            <div cell="20%"  title='Pages' data="totalpage" style="margin-right: 6px;" th:attr="totalpage=${pays.origin.orgPageNumber}">
+            </div>
+            <div cell="20%"  title='Total APC(USD)'  data="totalapc" style="margin-right: 6px;;" th:attr="totalapc=${pays.origin.orgTotalAPC}">
+            </div>
+            <div cell="30%"  title='Total(USD) by Wire Transfer ' style="margin-right: 6px;;"  data="wiretrnasfer" th:attr="wiretrnasfer=${pays.origin.orgWire}">
+            </div>
+            <div cell="30%"  title='Total(USD) by Stripe '  data="online" th:attr="online=${pays.origin.orgOnline}">
+            </div>
+        </div>
+        <div class="under" style="line-height:24px;width:auto; display:block; text-align:right;">
+			If the number of pages is wrong, you can enter the correct number of pages in the text box of Number Of Pages by yourself
+		</div>
+        <div th:if="${pays.origin.payTotal == 0 && roles.author}">
+            <div class="h4title" style="margin-top: 0px;">Pay by Stripe </div>
+            <div id="online" class="decisionbut archive" style="width: 288px; float: right; text-align: center;"> Open Stripe Payment</div>
+            <div style="clear:both; height:4px;"></div>       
+        </div>
+        <div th:if="${pays.origin.payTotal != 0 && pays.origin.payType eq 'Wire Transfer' && roles.author}">
+            <div class="h4title" style="margin-top: 0px;">Pay by Wire Transfer </div>
+            <div id="wiretransfer" class="decisionbut archive" style="width: 288px; float: right; text-align: center;"> Re-Upload Bank Receipt </div>
+        </div>
+        <div th:if="${pays.origin.payTotal == 0 && roles.author }">
+            <div class="h4title" style="margin-top: 0px;">Pay by Wire Transfer </div>
+            <div  id="wiretransfer" class="decisionbut archive" style="width: 288px; float: right; text-align: center;"> Upload Bank Receipt </div>
+        </div>
+        <div style="clear:both; height:4px;"></div>      
+        <div th:if="${pays.size() != 0 }"> 
+            <div class="h4title" style="margin-top: 0px;">Pay Records <span style="font-weight: bold; color:red" th:text="${'[total: ' + pays.total + ']'}"></span></div>
+            <div class="tablehead">
+                <div class="cell" style="flex: 1 1 20%;">Payer's Email</div>
+                <div class="cell" style="flex: 1 1 18%;" >Total Pages</div>
+                <div class="cell" style="flex: 1 1 18%;" >Amount</div>
+                <div class="cell" style="flex: 1 1 18%;" >Pay Mode</div>
+                <div class="cell" style="flex: 1 1 18%;">Time</div>
+                <div class="cell" style="flex: 1 1 8%;">Material</div>
+            </div>
+            <div class="row" th:each="pay: ${pays.pays }" style="cursor: pointer;" th:if="${ pay.payTotal != 0 }" >
+                <div class="cell" style="flex: 1 1 20%;" th:text="${pay.payEmail}"></div>
+                <div class="cell" style="flex: 1 1 18%;" th:text="${pay.payPageNumber}"></div>
+                <div class="cell" style="flex: 1 1 18%;" th:text="${pay.payTotal}"></div>
+                <div class="cell" style="flex: 1 1 18%;" th:text="${ pay.payType}"></div>
+                <div class="cell" style="flex: 1 1 18%;" th:text="${ #dates.format(pay.paytime,'yyyy-MM-dd HH:mm:ss') }">Research field</div>
+                <div class="cell" style="flex: 1 1 8%;">
+                    <span th:if="${pay.payType eq 'Wire Transfer'}" class="down" style="color: #0090D7;" th:attr="type=${ pay.payType}, fileId=${pay.wireFileId}"><i class="fa fa-download"></i></span>
+                    <span th:if="${pay.payType eq 'Online'}" class="down" style="color: #0090D7; " th:attr="type=${ pay.payType}, fileId=${pay.wireFileId}"><i class="fa fa-external-link" ></i></span>
+                </div>
+            </div>
+        </div>
+
+        <div style=" font-family: Georgia, serif; font-color:#999; ">
+            <div class="h4title" style="margin-top: 0px;">Note </div>
+            <div style="font-size: 13px; padding:4px 16px;">
+                <div style="line-height: 18px; margin:6px 0px;"> <span>A.</span><span style="margin-left:8px; text-align: justify;">If you choose pay by Card, please get your Card Number, Expiration Date, Card Verification Number ready, and click the button "Pay by Stripe".</span></div>
+                <div style="line-height: 18px; margin:6px 0px;"> <span>B.</span><span  style="margin-left:8px ;">Visa, Mastercard, American Express, and Discover cards are accepted. </span></div>
+                <div style="line-height: 18px; margin:6px 0px;"> <span>C.</span><span  style="margin-left:8px ;">If you choose the payment by wire transfer, please find the publisher bank account information below. And upload the bank receipt slip by click the button "Pay by wire transfer" </span></div>
+                <div th:utext="${bankinfo}" style="background-color: #f2f2f2; padding: 8px;border-radius: 3px;text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);">
+                    
+                </div>
+                <div style="line-height: 18px; margin:6px 0px;"> <span>D.</span><span  style="margin-left:8px ;">A Confirmation Email will be sent to you within five working days when the payment is fully confirmed. If you haven't received the Confirmation Email two weeks after payment, please contact us. We will not reply any inquiries regarding Confirmation Letter during these two weeks.</span></div>
+                <div style="clear:both; height:4px;"></div>
+            <br/><br/></div>
+            
+            </div>  
+    </div>
+    <div style="flex-basis: 288px; flex-shrink: 0; padding:8px;padding-right: 0px; padding-top: 0px;" th:if="${!roles.author && !pays.audit}">
+        <div>
+            <div class="decisionbut accept" id="auditPass" > Audit passed </div>
+        </div>
+        <div class="h4title" style="line-height: 56px; margin-top: 0px;;">Editor Board </div>
+        <div class="editor" th:each="editor: ${board}" th:if="${ editor.role eq 'financial' }">
+            <div style="flex: 1 1 auto;" th:attr="board=${board}">
+                <div>
+                    <span class="editorname" th:text="${editor.name}"></span>
+                </div>
+                <div th:text="${editor.email}"></div>
+            </div>
+        </div>
+        
+    </div> 
+</div>
+

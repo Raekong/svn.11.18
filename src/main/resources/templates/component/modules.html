@@ -1,0 +1,10 @@
+
+<div style="flex: 1 1 auto; border: 1px solid #aaa; border-radius: 2px; height: 100%; padding:8px;">
+    <div class="list" th:each="module:${modules}">
+        <span class="mtitle">
+            <span class="nocheck server"  th:attr="server=${module.server}"></span>
+            <span th:text="${module.title}"> 论文审稿处理</span>
+        </span>
+        <span class="desc" th:text="${module.desc}">- 包括投稿、审稿、修订等论文稿件的基本处理流程</span>
+    </div>
+</div>

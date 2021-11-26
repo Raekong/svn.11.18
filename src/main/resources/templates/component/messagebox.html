@@ -1,0 +1,194 @@
+<div th:attr="i18n=${i18n}">
+    <style>
+        label,div.label {
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-family: sans-serif;
+            color: #444;
+            line-height: 28px;
+            float: left;
+        }
+
+        input {
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            box-shadow: none;
+            width: 100%;
+            min-height: 38px;
+            line-height: 1;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-bottom: 4px;
+            outline: none;
+        }
+
+         #uploadDiv{
+            height: 48px;
+            font-size: 13px;
+            color:#444;
+        }
+
+        .process{
+            flex: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .processbar{
+            height: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            position: relative;
+        }
+
+        .pre{
+            position: absolute;
+            background-color: #66DDFF;
+            width: 0%;
+            top: -1px;
+            left: 0px;
+            height: 3px;
+        }
+
+        .but{
+            display: inline-block;
+            padding: 7px;
+            vertical-align: middle;
+            background-color: #eee;
+            background-image: linear-gradient(#eee, #ddd);
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 60%);
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 17px;
+            color: rgba(0,0,0,0.84);
+            text-shadow: 0 2px 0 rgb(255 255 255 / 60%);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #555;
+        }
+
+        #namelist span{
+            font-size: 13px;
+            font-family: sans-serif;
+        }
+        
+        .sender>div, .recevier>div{
+            display: inline-block;
+            margin: 0px 4px;
+            line-height: 28px;
+        }
+
+        .fileList{
+            min-height: 36px;
+            line-height: 24px;
+            margin: 8px 0px;;
+            border: 1px solid #aaa;
+            border-radius: 2px;;
+            background-color: #fff;
+        }
+
+        .fileList .file{
+            background-color: #eee;
+            font-size: 13px;
+            display: inline-block;
+            margin: 4px;
+            padding: 0px 6px;
+        }
+
+        .fileList .file i{
+            cursor: pointer;
+        }
+
+        #uploadConfirm{
+            width: 88px;
+            position: absolute;
+            right: 6px;
+            top: 6px;
+        }
+
+        .note{
+            font-size: 12px;
+            font-family: sans-serif;
+            flex-basis: 20px;
+            line-height: 20px;;
+        }
+
+        .sender::before, .recevier::before, label::before{
+            content : '\f0c9';
+            font-family:FontAwesome;
+            color: #0D6DA2;
+            margin: 0px 4px;
+            line-height: 28px;;
+        }
+
+        #send{
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 14px;
+            line-height: 22px;
+            cursor: pointer;
+            line-height: 36px;
+            padding: 0px 16px;
+        }
+        span.nocheck {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(/img/s.png) no-repeat center center;
+            background-size: cover;
+            position: relative;
+            top: 3px;
+            cursor: pointer;
+        }
+        span.checked {
+            background: url(/img/check-s.png) no-repeat center center;
+            background-size: cover;
+        }
+    </style>
+
+    <div class="messagebox">
+        
+        <div id="namelist">
+            <div class="sender"><span>Sender: </span></div>
+            <div class="recevier"><span>Recevier: </span></div>
+        </div>
+        <div style="display: flex; ">
+            <div class="cell" cell="100%" title="Message Title" data="title"></div>
+        </div>
+        <div style="position: relative;">
+            <div  id="uploadDiv" style="background:#eee; padding:4px; padding-right: 96px; ">
+                             
+            </div>
+            <div id="uploadConfirm" class="but"  >确定</div><!--确定上传按键-->
+        </div>
+        
+        <div class="fileList">
+            
+        </div>
+        <label style="display: block;">Message Content</label>
+        <div style="clear: both;"></div>
+        <div id="editor-container" style="height:208px;"></div>
+        <div style="clear: both;margin-top:38px; "></div>
+        <div  style="margin-top:15px; float:right;"  id="send">
+            <i class="fa fa-paper-plane"></i>  Send Message 
+        </div>
+        <div><span class="nocheck"></span> with Email?</div>
+    </div>
+    <div style="display:none" i18n></div>
+</div>

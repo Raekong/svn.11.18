@@ -1,0 +1,200 @@
+<div th:fragment="showconf" style="position: relative;">
+    <div  id="showconfig" >
+        <style>
+        div#showconfig div{
+            padding: 8px;
+            border-right: 1px solid #dddddd;
+        }
+
+        #configboards  div#showconfig div:last-child{
+            border: 0px;;
+        }
+
+        #configboards div#showconfig  div.item{
+            display: flex;
+            align-items: center;
+            padding: 0px;
+            border: 0px;;
+            font-size: 12px;
+        }
+        #configboards div#showconfig  div.item span{
+            position: relative;
+            top:0px;
+        }
+        #configboards div#showconfig  div.item div{
+            display: inline-block;
+            padding: 4px;
+            margin-left: 4px;
+        }
+
+        #configboards  div#showconfig  div.item:first-child{
+            border-bottom: 1px solid #dddddd;
+        }
+
+        #configboards  div#showconfig  div.item:first-child div{
+            font-size: 13px;
+            font-weight: bold;
+        }
+        </style>
+        <div style="display: flex; width: 100%;  border: 0px;">
+            <div style="flex:auto;" point="article">
+                <div class="item"><div>Article</div></div>
+            </div>
+            <!--表达式中隐藏掉没有权限显示的数据项，实现统一的配置数据，但是这样就要求在后台要过滤掉，以保安全-->
+            <div style="flex:auto;" point="review" th:attr='style=${"display:" + (listroles.manager || listroles.editor ? "" : "none") }' >
+                <div class="item"><div>Review</div></div>
+            </div>
+            <div style="flex:auto;" point="similar"  th:attr='style=${"display:" + (listroles.manager || listroles.similarcheck ? "" : "none") }' > 
+                <div class="item"><div>Similarityr Check</div></div>
+            </div>
+            <div style="flex:auto;" point="payment" th:attr='style=${"display:" + (listroles.manager || listroles.financial ? "" : "none") }' >
+                <div class="item"><div>Payment</div></div>
+            </div>
+          
+            <div style="flex:auto;" point="copyedit" th:attr='style=${"display:" + (listroles.manager || listroles.copyeditor ? "" : "none") }'>
+                <div class="item"><div>Copyedit</div></div>
+            </div>
+        </div>
+        <div style='text-align: center;'>
+            <input id="saveshowconfig" type="submit" name="commit" value="Save Configuration" class="form-submit" style="margin-bottom: 0px;margin-top: 8px; ">
+            </input>
+        </div>
+
+        
+    </div>
+</div>
+
+<div th:fragment="search" style="position: relative;">
+    <style>
+        #qboard{
+            box-sizing: border-box;
+        }
+
+        #qboard #idbut{
+           background: url('/img/addQuery.png') no-repeat right center;
+           background-size: contain;
+           display: inline-block;
+           width: 28px;
+           height: 28px;
+           position: relative;
+           top: -1px;
+        }
+
+        .query, .params{
+            border:  1px solid #c9d8db;
+            height: 28px;
+            border-radius: 2px;
+            cursor: pointer;
+            line-height: 28px;
+            padding-left: 6px;;
+        }
+
+        #qboard span{
+            position: relative;
+        }
+
+        input.queryparam{
+            border: 0px;
+            height: 26px;;
+            margin-bottom: 4px;
+            min-height: 0px;
+        }
+
+        .query.error, .params.error{
+            border-color: red;
+        }
+        
+    </style>
+    <div style="width:668px; " id="qboard">
+        <div style="display: flex; height: 32px;" id="firstquery" class="querycondition">
+            <div style="flex-basis: 88px; text-align: right; padding-right: 8px; " >
+                <span id="idbut"></span>
+            </div>
+            <div style="flex: 1 1 25%; position: relative; margin-right: 3px;" class="table droplist">
+                <div class="query" param="table" ></div>
+                <div class="autolist" style="z-index: 99; background: #fff;border:  1px solid #c9d8db; text-align: center; height: auto; top:32px; display: none;">
+                    <ul>
+                        <li class="autoitem" data="article" callback="table">Article</li>
+                        <li class="autoitem" data="review" callback="table" th:if="${listroles.manager || listroles.editor }">Review</li>
+                        <li class="autoitem" data="payment" callback="table" th:if="${listroles.manager || listroles.financial }">Payment</li>
+                        <li class="autoitem" data="similar" callback="table" th:if="${listroles.manager || listroles.similarcheck }">Similarity Check</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="flex: 1 1 25%;position: relative; margin-right: 3px;" class="detail droplist">
+                <div class="query" param="detail"></div>
+                <div class="autolist" style="z-index: 99; background: #fff;border:  1px solid #c9d8db; text-align: center; height: auto; top:32px; display: none;">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            <div style="flex: 1 1 50%; display:flex;" class="values droplist">
+                <div class="queryOper" style=" flex-basis: 58px; margin-right: 4px;position: relative;;">
+                    <div class="query" param="queryOper" ></div>
+                    <div class="autolist" style="z-index: 99; background: #fff;border:  1px solid #c9d8db; text-align: center; height: auto; top:32px; display: none;">
+                        <ul>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div  style="flex: 1 1 auto;">
+                    <div class="params" param="value" style="position: relative;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; height: 32px; display:none;" id="queryTemplate" class="querycondition">
+            <div style="display:flex; flex-basis: 88px; padding-right: 6px;  position: relative; " >
+                <div style="flex-basis:24px; display: flex; align-items: center; justify-items: center;">
+                    <span style="color:#0590DF;top:0px" class="del"><i class="fa fa-close"></i></span>
+                </div>
+                <div style="flex: 1 1 auto; width: 48px; position: relative;" class="droplist">
+                    <div param="logic" class="query" style="margin:0px; height: 28px; line-height: 28px; ">And</div>
+                    <div class="autolist" style="z-index: 99; background: #fff;border:  1px solid #c9d8db; text-align: center; height: auto; top:32px; display: none;">
+                        <ul>
+                            <li class="autoitem" data="and">And</li>
+                            <li class="autoitem" data="or">Or</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 1 1 25%; position: relative; margin-right: 3px;" class="table droplist">
+                <div class="query" param="table" ></div>
+                <div class="autolist" style="z-index: 99; background: #fff;border:  1px solid #c9d8db; text-align: center; height: auto; top:32px; display: none;">
+                    <ul>
+                        <li class="autoitem" data="article" callback="table">Article</li>
+                        <li class="autoitem" data="review" callback="table" th:if="${listroles.manager || listroles.editor }">Review</li>
+                        <li class="autoitem" data="payment" callback="table" th:if="${listroles.manager || listroles.financial }">Payment</li>
+                        <li class="autoitem" data="similar" callback="table" th:if="${listroles.manager || listroles.similarcheck }">Similarity Check</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="flex: 1 1 25%;position: relative; margin-right: 3px;" class="detail droplist">
+                <div class="query" param="detail"></div>
+                <div class="autolist" style="z-index: 99; background: #fff;border:  1px solid #c9d8db; text-align: center; height: auto; top:32px; display: none;">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            <div style="flex: 1 1 50%; display:flex;" class="values droplist">
+                <div class="queryOper" style=" flex-basis: 58px; margin-right: 4px;position: relative;;">
+                    <div class="query" param="queryOper"></div>
+                    <div class="autolist" style="z-index: 99; background: #fff;border:  1px solid #c9d8db; text-align: center; height: auto; top:32px; display: none;">
+                        <ul></ul>
+                    </div>
+                </div>
+                <div  style="flex: 1 1 auto;">
+                    <div class="params" param="value" style="position: relative; "></div>
+                </div>
+            </div>
+            
+        </div>
+        <div style='text-align: center; height: 48px;'>
+            <input id="queryStart" type="submit" name="commit" value="Query" class="form-submit" style="margin-bottom: 0px;margin-top: 8px;  width: 120px; ">
+            </input>
+            <input id="download" type="submit" name="commit" value="Download" class="form-submit" style="margin-bottom: 0px;margin-top: 8px;  width: 120px; margin-right: 8px; ">
+            </input>
+        </div>
+    </div>
+
+</div>

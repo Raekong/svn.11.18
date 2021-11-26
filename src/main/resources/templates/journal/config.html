@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TSP Academic Journal System</title>
+<link rel="shortcut icon" href="/img/favio.png"/>
+<script src="/js/third-party/jquery.js"></script>
+<link rel="stylesheet" href="/css/layui.css" media="all">
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+
+	<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-weight: 200;
+        }
+
+        html, body{
+            width:100%;
+            height: 100%;
+            font-size: 1em;
+        }
+		
+        #frame{
+            width: 100%;
+            min-height: 100%;
+        }
+
+        #menus{
+            flex-basis: 228px;  
+            background-color: #353E4F;; 
+            flex-shrink: 0;
+        }
+
+        .headTitle .mainTitle{
+            font-family: Impact, Charcoal, sans-serif;
+            color: #444;
+            line-height: 32px;;
+        }
+
+        .headTitle .Sole{
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            font-size: 1em;
+        }
+        
+        .headTitle .after {
+            display: block;
+            position: absolute;
+            border-bottom: 1px dotted #555;
+            width: 100%;
+            top: 56px;
+            height: 1px;
+        }
+
+        #container{
+            flex:auto; 
+            background-color: #eee; 
+            padding: 11px 15px 6px 15px ; 
+            display: flex; 
+            flex-direction: column;
+        }
+
+        #body{
+            flex:auto; 
+            background-color: #fff; 
+            border-radius:6px; 
+            padding: 0px 15px; 
+            padding-top: 8px; 
+            padding-bottom: 16px;
+        }
+      
+        
+        label {
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-family: sans-serif;
+            color: #444;
+            line-height: 28px;
+        }
+
+        input {
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            box-shadow: none;
+            width: 100%;
+            min-height: 38px;
+            line-height: 1;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-bottom: 4px;
+            outline: none;
+            font-size: 13px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        span.nocheck {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(/img/s.png) no-repeat center center;
+            background-size: cover;
+            position: relative;
+            top: 3px;
+            cursor: pointer;
+        }
+        span.checked {
+            background: url(/img/check-s.png) no-repeat center center;
+            background-size: cover;
+        }
+        
+        .form-submit {
+            margin-top: 25px;
+            margin-bottom: 28px;
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 15px;
+            display: block;
+            line-height: 1;
+            cursor: pointer;
+            width: 180px;
+            float: right;
+            text-align: center;
+        }
+
+        .error{
+			border: 1px solid #C8252C;
+		}
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+        }
+
+        body .layui-layer-title{
+            background-color: #3c8dbc;
+            color:#fff;
+            padding-left: 24px;
+            font-size: 14px;
+        }
+
+        body .layui-layer-title::before{
+            content: '\f06a';
+            display: inline-block;
+            margin-right: 6px;
+		    font-family:FontAwesome;
+        }
+
+
+        body .layui-layer-btn .layui-layer-btn0 {
+            background-color: #3c8dbc;
+            padding: 0px 16px;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            margin: 4px;
+            border-radius: 2px;
+            font-size: 12px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 10%);
+
+        }
+
+        body .layui-layer-page .layui-layer-content{
+            text-align: center;
+        }
+
+        body .layui-layer-dialog{
+            width: 480px;
+        }
+
+
+        .footer{
+            color:#444; 
+            text-align: center; 
+            line-height: 32px; 
+            font-size:13px; 
+            flex-basis: 32px; 
+            margin: 8px 0px; 
+            background-color: #fff;
+            border-radius:6px;
+        }
+
+        div.smallbut {
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #e2e2e2;
+            border-radius: 2px;
+            padding-left: 4px;
+            min-height: 36px;
+            margin-bottom: 8px;
+            line-height: 1;  
+            color: #323232;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-size: 13px;
+        }
+
+        .but{
+            -webkit-appearance: none;
+            background-color: #C8252C;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 22px;
+            cursor: pointer;
+        }
+
+        span.cbutton {
+            display: inline-block;
+            padding: 7px 16px;
+            vertical-align: middle;
+            background-color: #fff;
+            background-image: linear-gradient(#eee, #ddd);
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 10%), inset 0 1px 1px rgb(255 255 255 / 60%);
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 16px;
+            color: rgba(0,0,0,0.84);
+            text-shadow: 0 2px 0 rgb(255 255 255 / 60%);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+        }
+
+        .but.cancel{
+            background-color: #eee;
+            color: #444;
+        }
+
+        body .layui-layer-setwin{
+            display: none;
+        }
+
+        div.title {
+            border-top: 1px solid #d4d4d4;
+            line-height: 36px;
+            background: #eee;
+            margin: 0px;
+            padding-left: 14px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            font-weight: bold;
+            text-align: left;
+            font-size: 13px;
+            color:#007ab2;
+        }
+
+        div.popcontainer{
+            padding:16px;
+        }
+
+        .tablehead{
+            font-size: 13px;
+            display: flex;
+            margin: 4px 0px;
+            border-radius: 4px;;
+            font-family: Lato-Bold;
+            color: #555;
+            line-height: 36px;
+            text-transform: uppercase;
+            background-color: transparent;
+        }
+
+        .tablehead div.cell{
+            padding-left: 3px;
+        }
+
+        .row{
+            
+            display: flex;
+            margin: 4px 0px;
+            border-radius: 4px;;
+            background: #f7f7f7;
+        }
+
+        .row div{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 13px;
+            line-height: 32px;
+            font-family: Georgia, serif;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            width: 0;
+            padding: 0px 4px;
+        }
+
+        .row:hover{
+            background-color: #FCF9EF;;
+        }
+
+        .nav{
+            border-bottom: 1px solid #dddddd;
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            white-space: nowrap;
+            overflow: visible;;
+            padding-right: 30px;
+            vertical-align: middle;
+        }
+
+        .nav::before{
+            content: " ";
+            display: table;
+        }
+
+
+        .nav > li {
+            float: left;
+            position: relative;
+            display: block;
+            border-radius: 2px 2px 0 0;
+            cursor: pointer;
+        }
+
+
+        .nav > li > a {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            font-size: 13px;
+            display: block;
+            outline: none;
+            color: #337ab7;
+            text-decoration: none;
+            top: 2px;
+            border-radius: 2px 2px 0px 0px;
+        }
+
+        .nav > li.active {
+            background: #fff;
+            position: relative;
+            border-color: #666;
+            font-weight: bold;
+        }
+
+        .nav li > a.active {
+            color: #555555;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+            cursor: default;
+        }
+
+        .nav > li > a:hover:not(active) {
+            text-decoration: none;
+            background-color: #eeeeee;
+        }
+
+        p.other.emp {
+            background: #eee;
+            margin-left: 1em;
+            line-height: 24px;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 90%);
+            border-left: 4px solid #4d4d4d;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .h4title{
+            font-size: 14px;
+            color: #007bff;
+            margin: 8px 0px;
+            line-height: 32px;
+            padding-left: 6px;
+            background-color: #eee;
+            border-radius: 2px;
+        }
+
+        .h4title:before {
+            content: '\f0c9';
+            font-family: FontAwesome;
+            color: #0D6DA2;
+            margin: 0px 4px;
+        }
+
+        .tabDiv{
+            display: none;
+        }
+
+        .autolist{
+            border:1px solid #aaa; 
+            border-radius: 2px; 
+            position: absolute; 
+            overflow-y: auto; 
+            height: 160px; 
+            background-color: #fff; 
+            margin-right: 6px; 
+            width:100%;
+            padding: 4px;
+            
+        }
+        
+        .autolist ul li{
+            font-size: 12px;
+            text-align: left;
+            line-height: 18px;;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .autolist ul li:hover{
+            background-color: #eee;
+        }
+
+        .emphsis{
+            font-weight: bold;
+            color:#C8252C;
+            background-color: #FCF9EF;
+        }
+
+        .h4title .email{
+            margin-left: 16px;
+            font-size: 13px;
+        }
+
+        .tpl{
+            display: flex;
+            margin: 4px 0px ;
+            font-size: 13px;;
+            line-height: 28px;
+            color: #323232;
+        }
+
+        .tpl .tplName{
+            flex:1 1 40%;
+        }
+
+        .tpl .isDefault{
+            flex:1 1 30%;
+        }
+
+        .tpl .operate{
+            flex:1 1 30%;
+        }
+
+        .tpl div>span.title{
+            background-color: #eee;
+            display: inline-block;  
+            padding: 0px 16px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.9)
+        }
+
+        .tpl div>span.value{
+            display: inline-block;  
+            padding: 0px 16px;
+        }
+
+        .tpl span i{
+            display: inline-block;
+            margin: 0px 6px;
+            cursor: pointer;
+        }
+
+        .msgbox{
+			font-size: 13px;
+			border-radius: 6px;;
+		}
+
+		.msgbox .msgboxtitle{
+			line-height: 38px;
+			border-bottom: 1px solid #eee ;
+			text-align: left;
+			font-size: 14px;
+			margin: 16px;
+			margin-bottom: 0px;
+		}
+
+		.msgbox .msgboxtitle span.alert, .msgbox .msgboxtitle span.info{
+			margin-right: 6px;
+			width: 28px;
+			height: 28px;
+			float: left;
+			margin-top: 5px;
+		}
+
+		.msgbox .msgboxtitle span.alert{
+			background: url("/img/alert.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxtitle span.info{
+			background: url("/img/info.png") no-repeat center center ;
+			background-size: contain;
+		}
+
+		.msgbox .msgboxcontent{
+			padding: 24px 16px ;
+			text-align: left;
+		}
+
+		.msgbox .msgboxfoot{
+			line-height: 48px;
+			background-color: #f2f2f2;
+		}
+
+		.msgbox .msgboxfoot .confirm{
+			cursor: pointer;
+		}
+
+
+        
+	</style>
+</head>
+<body>
+	<div id="frame" th:attr="abbr=${publisherAbbr}, i18n=${i18n}, pid=${pid}" style="display: flex; flex-direction: column; align-items: stretch;">
+		<div th:include="component/head::head" style="flex-basis: 50px;"></div>
+        <div style="display: flex;  align-items: stretch; flex:auto" >
+            <div id="menus" th:include="component/head::sider" ></div>
+            <div id="container" >
+                <div id="body" >
+                    <div class="headTitle" style="position: relative;">
+                        <div class="mainTitle" th:text="${journalconfiguration}">Journal Configuration</div>
+                        <div class="Sole" style="color: #999; font-size: 13px; position: relative;">
+                            <span style="background-color: #fff; " th:text="${desc}"></span>
+                        </div>
+                        <div class="after" ></div>
+                    </div>
+                    
+                    <div id="tabs" style="margin-top: 24px;">
+                        <ul class="nav">
+                            <li class="mytab active" ><a tag="masthead" th:text="${masthead}">基本信息</a></li>
+                            <li class="mytab"><a tag="contact" th:text="${contact}">联系方式</a></li>
+                            <li class="mytab active" ><a tag="workflow" th:text="${workflow}">工作流配置</a></li>
+                            <li class="mytab"><a tag="team" th:text="${editingteam}">编辑团队</a></li>
+                            <li class="mytab"><a tag="section" th:text="${section}">期刊栏目</a></li>
+                            <li class="mytab"><a tag="emailconfig" th:text="${emailconfig}">邮件配置</a></li>
+                            <li class="mytab"><a tag="submitreview"  th:text="${submitreview}">投稿与审稿</a></li>
+                            <li class="mytab"><a tag="payment"  th:text="${payment}">收费配置</a></li>
+                        </ul>
+                        <div class="tabDiv" tag="workflow">
+                            <div id="workflow" th:include="journal/config-workflow::workflow" ></div>
+                        </div>
+                        <div class="tabDiv" tag="masthead">
+                            <div id="masthead" th:include="journal/config-masthead::masthead" ></div>
+                        </div>
+                        <div class="tabDiv" tag="contact" >
+                            <div id="contact" th:include="journal/config-contact::contact" ></div>
+                        </div>
+                        <div class="tabDiv" tag="team">
+                            <div id="team" th:include="journal/config-team::team" ></div>
+                        </div>
+                        <div class="tabDiv" tag="section" style="position: relative;">
+                            <div id="section" th:include="journal/config-section::section" ></div>
+                        </div>
+                        <div class="tabDiv" tag="emailconfig" style="position: relative;">
+                            <div id="emailconfig" th:include="journal/config-email::email" ></div>
+                        </div>
+                        <div class="tabDiv" tag="submitreview" style="position: relative;">
+                            <div id="submitreview" th:include="journal/config-submit-review::config" ></div>
+                        </div>
+                        <div class="tabDiv" tag="payment" style="position: relative;">
+                            <div id="payment" th:include="journal/config-payment::config" ></div>
+                        </div>
+                    </div>
+                    <div style="height: 16px;"></div>
+                    
+                </div>
+                <div class="footer">
+                   <span th:text="${publisher}"></span> © 2020-2025 TSP Academic Journal System - All Rights Reserved - 
+                </div>
+            </div>
+            <p style="display: none;" th:attr="i18n=${i18nInfos}"></div>
+        </div>
+	</div>
+	<script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="journal-config" target-module="journal-config" defer async="true" ></script>
+</body>
+</html>

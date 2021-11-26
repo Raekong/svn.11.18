@@ -1,0 +1,79 @@
+journalrolemenu:  
+    #这里的角色配置和JOURNALCONFIGPOINTENUM类中的配置值是一一对应的
+    jouranlroles:
+        super: Super Manager;超级管理员
+        root: Root User;管理员
+        author: Author;作者
+        reviewer: Reviewer;审稿人
+        manager: Journal Manager;期刊主管
+        office: Editorial Office;编辑官
+        chief: Editor in Chief;主编
+        achief: Associate Editor in Chief;副主编
+        section: Section Editor;责任编辑
+        guest: Guest Editor;客座编辑
+        financial: Financial Editor;财务编辑
+        production: Production Editor;出版编辑
+        copy: Copy Editor;排版编辑
+        similarity: Similarity Checker;查重编辑
+    menus: 
+      - id: 1
+        zh: "出版社创建"
+        en: "New Publisher"
+        url: "/publiser/create/"
+        icon: "<i class='fa fa-university'></i>"
+      - id: 2
+        zh: "出版社列表"
+        en: "Publisher List"
+        url: "/publiser/management/"
+        icon: "<i class='fa fa-list'></i>"
+      - id: 5
+        zh: "期刊配置"
+        en: "Journal Setting"
+        url: "/journal/list"
+        icon: "<i class='fa fa-server'></i>"
+      - id: 7
+        zh: "数据报告"
+        en: "Data Report"
+        url: "/journal/report"
+        icon: "<i class='fa fa-bar-chart-o'></i>"
+      - id: 6
+        zh: "用户管理"
+        en: "User Management"
+        url: "/journal/usermanagment"
+        icon: "<i class='fa fa-users'></i>"
+      - id: 8
+        zh: "文章存档"
+        en: "Archive"
+        url: "/journal/archive"
+        icon: "<i class='fa fa-database'></i>"
+      - id: 4
+        zh: "消息列表"
+        en: "Messages"
+        url: "/messages"
+        icon: "<i class='fa fa-clipboard'></i>"
+      - id: 3
+        zh: "文章列表"
+        en: "Papers"
+        url: "/paperlist"
+        icon: "<i class='fa fa-desktop'></i>"
+    rolemenus:
+        super: 1,2            
+        root: 3,4,5,6,7,8
+        manager: 3,4,5,6,7,8
+        section: 3,4,7,8
+        author: 3,4,8
+    modules:
+        PAPERPROCESS: 
+          title: 论文审稿处理;Paper review processing
+          desc: '- 包括投稿、审稿、修订等论文稿件的基本处理流程	; - Including the basic processing flow of paper manuscripts such as submission, review and revision'
+        SIMILARCHECK: 
+          title: 论文查重服务;Paper similar checking service
+          desc: '- 论文自动上传查重，查重结果数据自动获取与展示 ; - The paper is automatically uploaded for duplicate checking, and the duplicate checking result data is automatically obtained and displayed'
+        PAYMENT: 
+          title: 论文版面费支付;Payment
+          desc: '- 论文版面费用的收取、核对与账务信息管理;- Collect and check the paper layout fee and manage the accounting information'
+        SPECIALISSUEAPPLY: 
+          title: 特刊申请;Special issue apply
+          desc: '- 期刊特刊申请与批准的流程;- Procedures for application and approval of periodical special issues'
+
+    

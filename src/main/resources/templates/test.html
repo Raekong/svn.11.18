@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TSP Online Submission System</title>
+<link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+<script src="/js/third-party/jquery.js" ></script>
+</head>
+<body>
+	<style>
+		*{
+			box-sizing: border-box;
+			padding: 0px;
+			margin: 0px;
+			font-family: Georgia, serif;
+		}
+
+		html,body{
+			height: 100%;
+			width: 100%;
+			padding: 15px;
+		}
+
+		.uploaderTest{
+			width: 50%;
+			margin: 40px auto;
+			padding: 4px;
+		}
+
+		.testModule{
+			padding-top: 16px;
+			position: relative;
+		}
+
+		.testtip{
+			position: absolute;
+			font-size: 13px;
+			line-height: 14px;
+			top: 2px;
+			left: 2px;
+			color: #323232;
+		}
+		
+	</style>
+	
+		<div id="container" >
+			<div class="uploaderTest testModule">
+				<div class="testtip">uploader test</div>
+				<div id="uploader" class="uploader"><!--上传组件容器-->
+				</div>
+			</div>
+			<div id="uploadConfirm" class="but" th:text="${uploaded}"></div><!--确定上传按键-->
+
+			<p style="display: none;" th:attr="i18n=${i18nInfos}"></p>
+		</div>
+		<div> <input type="text" class="layui-input" id="test1"></div>
+		<div id="messagebox"> </div>
+		<div id="datapicker"></div>
+		<script src="/js/third-party/require.js" data-main="/js/require.config"  id="current-page" current-page ="test" target-module="test" defer async="true" ></script>
+		
+		
+</body>
+</html>

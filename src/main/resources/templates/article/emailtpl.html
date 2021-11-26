@@ -1,0 +1,59 @@
+<div th:fragment="emailtpl" th:attr="lang=${i18n}">
+    <style>
+        .tplname{
+            height: 32px;
+            line-height: 32px;
+            padding: 0px 8px;
+            background-color: #f7f7f7;
+            margin-right: 8px;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 13px;
+            min-width: 128px;;
+        }
+
+        div#emailcontent{
+            
+        }
+
+        div#emailcontent p{
+            font-size: 12px;
+            line-height: 18px;
+            text-align: left;
+            
+        }
+
+        div.tplbody{
+            display: none;
+        }
+
+        
+    </style>
+   
+    <div class="h4title" id="mailtitle">Email Template Setting</div>
+    
+        <div th:each="tplName: ${tplNames}" style="display: inline-block;;">
+            <div  class="tplname" th:attr="data=${'tpl-'+tplName.tplId}, t=${ tplName.isDefault }">
+                <span th:attr="class=${ tplName.isDefault ?  'nocheck checked':'nocheck' }"></span> <span  th:text="${tplName.tplName}"></span>
+            </div>
+            <div style="font-size: 13px;" th:if="${decision}" >
+                <div style="clear: both;"><label style="font-weight: bold; line-height:36px;">Receiver Setting</label></div>
+                <div style="clear: both;"></div>
+                <span class="recvs" type="1" style=" display: inline-block;margin-right:8px; padding:0px 6px; border-bottom:1px solid #aaa;"><span th:attr="class=${tplName.recvtype eq '1' ? 'nocheck checked' : 'nocheck'}"></span> Submitor </span> 
+                <span class="recvs" type="2" style=" display: inline-block;margin-right:8px; padding:0px 6px; border-bottom:1px solid #aaa;"><span th:attr="class=${tplName.recvtype eq '2' ? 'nocheck checked' : 'nocheck'}"></span> Submitor and Corresponding Author </span> 
+                <span class="recvs" type="3" style=" display: inline-block;margin-right:8px; padding:0px 6px; border-bottom:1px solid #aaa;"><span th:attr="class=${tplName.recvtype eq '3' ? 'nocheck checked' : 'nocheck'}"></span> All authors </span> 
+            </div>
+        </div>
+        
+    <div class="tplbody" th:each="tpl:${tpls}" th:attr="data=${'tpl-'+tpl.tplId}">
+        <label style="font-weight: bold; line-height:36px;">Email Title</label>
+        <input th:value="${tpl.title}" ></input>
+        <div th:utext="${tpl.body}" style="display: none;" class="tplcontent"></div>
+    </div>
+   
+    <label>Email Content</label>
+    <div style="clear: both;"></div>
+    <div id='emailcontent'><div>
+</div>

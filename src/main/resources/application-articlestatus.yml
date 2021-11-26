@@ -1,0 +1,149 @@
+article:
+    workflow:
+        'HISTORY': 流程记录;History
+        'SUBMIT': 投稿;Submission
+        'REVIEW': 审稿;Review 
+        'SIMILARCHECK': 查重;Similarity Check
+        'PAYMENT': 支付;Payment
+        'COPYEDIT': 排版;Copyedit
+    status:
+        submit: 
+            index: 0
+            statusZH: 新投稿
+            statusEN: New Submission
+            descZH: '新投稿: {0} '
+            descEN: 'New Submission: {0} '
+        #进入审稿阶段，分别在审稿与查重阶段加置一个阶段，作为预审
+        review-pre-review:
+            index: 1
+            statusZH: 论文预审
+            statusEN: Pre-review
+            descZH: '论文由{0}负责开始预审 '
+            descEN: 'Submission is being pre-reviewed by {0}. '
+        review-round:
+            index: 2
+            statusZH: 论文正在组织审稿
+            statusEN: Reviewer(s) Requirement
+            descZH: '论文由{0}负责开始组织审稿 '
+            descEN: 'Reviewer of the paper are invited by {0}. '
+        review-inreview:
+            index: 3
+            statusZH: 论文已送审，等待审稿意见
+            statusEN: Under Review
+            descZH: '论文由{0}发送到审稿人，开始审稿并等待审稿意见 '
+            descEN: 'The manuscript has been sent to external expert reviewers by {0} and presently under peer review.'
+        review-suggest:
+            index: 4
+            statusZH: 论文处理建议
+            statusEN: Article decision suggest
+            descZH: '{0}建议{1} '
+            descEN: ' {0} suggest {1}.'
+        review-decision-decline:
+            index: 5
+            statusZH: 论文审稿已结束，被拒稿
+            statusEN: Declined
+            descZH: '论文审稿意见已返回，{0}决定论文拒稿 '
+            descEN: 'Based on the returned review comments, {0} decides to reject the manuscript.'
+        review-decision-accept:
+            index: 6
+            statusZH: 论文审稿已结束，被接收
+            statusEN: Accepted
+            descZH: '论文审稿意见已返回，{0}决定接收论文 '
+            descEN: 'Based on the returned review comments, {0} decides to accept the manuscript.'
+        review-decision-revision:
+            index: 7
+            statusZH: 论文审稿已结束，需要修改后再审稿
+            statusEN: Revision
+            descZH: '论文审稿意见已返回，{0}决定接收论文需要修改后再审稿 '
+            descEN: 'Based on the returned review comments, {0} decides the manuscript need be revised and reviewed again.'
+        review-decision-changejournal:
+            index: 8
+            statusZH: 论文需要改投到其它栏目
+            statusEN: Change Journal
+            descZH: '论文需要改投到{0}期刊的{1}栏目，如果您同意，请点击 <span change="{2}" class="agree">同意 <i class="fa fa-check-square-o"></i></span>, 如果不同意, 请点击 <span change="{2}" class="disagree"> 不同意 <i class="fa fa-times-circle-o"></i></span>, 论文将被会拒稿'
+            descEN: 'The manuscript need be resubmitted to the section "{1}" of the journal  "{0}". If you agree, please click <span change="{2}" class="agree">Agree <i class="fa fa-check-square-o"></i></span>, if you disagree, please click <span change="{2}" class="disagree"> Disagree <i class="fa fa-times-circle-o"></i></span>, the paper will be rejected'
+        #进入查重阶段，分别在审稿与查重阶段加置一个阶段，作为预审
+        similarity-check-prereview:
+            index: 9
+            statusZH: 论文预审
+            statusEN: Pre-review
+            descZH: '论文由{0}负责开始预审 '
+            descEN: 'Submission is being pre-reviewed by {0} '
+        similarity-check-prereview-declined:
+            index: 10
+            statusZH: 论文预审被拒稿
+            statusEN: Pre-review Declined
+            descZH: '论文不符合期刊要求，被{0}拒稿 '
+            descEN: 'Submission is not match to the requirements fo the jounral, be declined by by {0} '
+        similarity-check-round:
+            index: 11
+            statusZH: 论文查重
+            statusEN: Similarity Check
+            descZH: '论文由{0}负责开始查重 '
+            descEN: 'Submission is being similarity checked '
+        similarity-check-round-failed:
+            index: 12
+            statusZH: 论文查重没有通过
+            statusEN: Similarity Check Failed
+            descZH: '论文不符合配置的查重条件，没有通过查重 '
+            descEN: 'Similarity check of the Article has failed '
+        similarity-check-round-revision:
+            index: 13
+            statusZH: 等待作者提交论文修改稿
+            statusEN: Waiting for Revision
+            descZH: '论文不符合配置的查重条件，等待作者提交论文修改稿 '
+            descEN: 'Waiting for uplaod revision '
+        similarity-check-round-passed:
+            index: 14
+            statusZH: 论文通过查重
+            statusEN: Similarity Check Passed
+            descZH: '论文符合配置的查重条件，通过查重'
+            descEN: 'Similarity check of the Article has passed '
+        similarity-check-round-declined:
+            index: 15
+            statusZH: 论文查重没有通过,被{0}拒稿
+            statusEN: Similarity Check Declined
+            descZH: '论文不符合配置的查重条件，没有通过查重, 被{0}拒稿 '
+            descEN: 'Similarity check of the Article has failed, and declined by {0} '
+        similarity-check-round-revisionupload:  
+            index: 16
+            statusZH: 论文修订版上传成功
+            statusEN: Revision Uploaded
+            descZH: '论文查重修改版上传成功，开启新一轮查重 '
+            descEN: 'The revision file has uploaded, and new similarity check round start.'
+        payment-waiting:
+            index: 17
+            statusZH: 等待支付
+            statusEN: Waiting for APC
+            descZH: '等待用户完成论文费用的支付 '
+            descEN: 'Waiting for user to complete APC payment.'
+        payment-paid:
+            index: 18
+            statusZH: 支付完成
+            statusEN: APC payment Completed and waiting for audit
+            descZH: '用户已经完成论文费用的支付 '
+            descEN: 'APC payment has Completed.'
+        payment-audit-pass:
+            index: 19
+            statusZH: 支付审核完成
+            statusEN: APC payment audit passed
+            descZH: '编辑审核通过论文费用的支付 '
+            descEN: 'APC payment audit has passed.'
+        copyedit-waiting-copyedit:
+            index: 20
+            statusZH: 论文等待排版
+            statusEN: Waiting for Copyedit
+            descZH: '{0}正在处理论文的排版 '
+            descEN: 'The article is being copyedited by {0}.'
+        copyedit-waiting-revision:
+            index: 21
+            statusZH: 论文等待排版确认
+            statusEN: Waiting for Copyedit confirm
+            descZH: '论文正在等待用户确认排版 '
+            descEN: 'The paper is waiting for confirm by author'
+        copyedit-published:
+            index: 22
+            statusZH: 论文完成排版
+            statusEN: Copyedit End
+            descZH: '论文已经完成排版，等待出版 '
+            descEN: 'The copyedit has completed, and waiting for publish. '

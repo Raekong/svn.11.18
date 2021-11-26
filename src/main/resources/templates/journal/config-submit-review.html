@@ -1,0 +1,94 @@
+<div th:fragment="config" style="position: relative;">
+    <style>
+        .littlebut{
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 8px;
+            font-size: 13px;
+        }
+        
+        .tabDiv{
+            padding-top: 8px ;
+        }
+    </style>
+    <div>
+        <div>
+            <div id="submittabs">
+                <ul class="nav">
+                    <li class="mytab" ><a tag="author_guidelines" >Submit Author Guidelines</a></li>
+                    <li class="mytab"><a tag="submit_requirements" >Submit Requirements </a></li>
+                    <li class="mytab" ><a tag="review_settings">Review Settings</a></li>
+                </ul>
+
+                <div class="tabDiv" tag="author_guidelines">
+                    <div id="author_guidelines" >
+                        <div id="author-guidelines" style="height: 208px; margin-bottom: 48px;" >
+                        </div>
+                        <input configPoint="Submit Guidelines"  th:value="${configsubmit}" class="form-submit" littlebut/>
+                    </div>
+                </div>
+                <div class="tabDiv" tag="submit_requirements">
+                    <div id="submit_requirements">
+                        <div >
+                            <div >
+                                <label>Require to suggest reviewers when submitting <span class="nocheck"  configPoint="Submit Requirements"  ></span></label>
+                                <input id="ReviewersNum" placeholder="推荐审稿人数" style="font-size:12px;margin-left: 8px; width: 128px; height: 28px; min-height: 0px; display: none;">
+                                <div style="clear:both;"></div>
+                                <div id="reviewer-requirement" style="height: 108px; display: none;margin-bottom: 48px; "></div>
+                            </div>
+                        </div>
+                        <div style="display: flex; "> 
+                            <div style="padding: 8px; border: 1px solid #c9d8db;flex:1 1 20%;margin-right: 6px;"><label> 投稿须要提交Cover Letter <span class="nocheck" configPoint="CoverLetter Requirement" ></span></label></div>
+                            <div style="padding: 8px; border: 1px solid #c9d8db;margin-right: 6px;;flex:1 1 20%"><label> 审核Cover Letter声明 <span class="nocheck" configPoint="CoverLetter Check" ></span></label></div>
+                            <div style="padding: 8px; border: 1px solid #c9d8db;flex:1 1 20%"><label> 审核Latex材料要求 <span class="nocheck" configPoint="Latex Check" ></span></label></div>
+                        </div>
+                        <input configPoint="Submit" th:value="${configsubmit}" class="form-submit" littlebut/>
+                    </div>
+                </div>
+                <div class="tabDiv" tag="review_settings" >
+                    <div id="review_settings" >
+                        <div style="display: flex;">
+                            <div class="cell" cell="33%" title="RESPONSE DUE (DAYS)" data="responsedue" style="margin-right: 6px;;"></div>
+                            <div class="cell" cell="33%" title="REVIEW DUE(DAYS)" data="reviewdue"  style="margin-right: 6px;;"></div>
+                            <div class="cell" cell="33%" title="REVISION DUE (DAYS)" data="revisiondue"></div>
+                        </div>
+                        <style>
+                            .reviewitems input{
+                                display: inline-block;
+                                width: 128px;
+                                min-height: 32px;
+                                margin-bottom: 0px;
+                            }
+                        </style>
+                        <div style="display: flex;" class="reviewitems">
+                            <div style="padding: 8px; border: 1px solid #c9d8db; flex:1 1 33%; margin-right: 6px;">
+                                <label>审稿人拒稿提醒邮件 <span class="nocheck" configPoint="Review Decline Notify"></span> </label>
+                            </div>
+                            <div style="padding: 8px; border: 1px solid #c9d8db; flex:1 1 67%">
+                                <label>审稿意见返回大于指定数发送提醒邮件 <span class="nocheck" configPoint="Review Finish Num Notify"></span></label>
+                                &nbsp;&nbsp;<input  placeholder="返回意见数" configPoint="Review Result Num">
+                            </div>
+                            
+                        </div>
+                        <div style="display: flex;margin-top: 8px;" class="reviewitems">
+                            <div style="padding: 8px; border: 1px solid #c9d8db; flex:1 1 33%;">
+                                <label>审稿逾期提醒 <span class="nocheck" configPoint="Review OverDue Notify"></span></label>
+                                &nbsp;&nbsp;
+                                <input placeholder="提醒次数" configPoint="Review OverDue Notify Time"> 
+                                <input  placeholder="提醒周期(天数)" configPoint="Review OverDue Notify Period"> 
+                            </div>
+                        </div>
+                        <input configPoint="Review Settings" th:value="${configsubmit}" class="form-submit" littlebut/>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="configpoints" style="display: none;" th:attr="points=${submitandreview}">
+                
+            </div>
+        </div>
+    </div>
+     
+    
+    
+</div>
