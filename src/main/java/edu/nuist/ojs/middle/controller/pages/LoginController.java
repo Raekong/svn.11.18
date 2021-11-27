@@ -54,7 +54,7 @@ public class
             return rst;
         }
 
-        if(  u != null && u.getUserId() != 0 ){
+        if( u != null && u.getUserId() != 0 ){
             if( u.isActived() ){
                 rst.put("flag", true); 
                 contextInterceptor.init(request.getSession());

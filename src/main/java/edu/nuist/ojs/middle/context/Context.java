@@ -29,7 +29,7 @@ public class Context {
     private HashMap<String, Object> something;
    
     public Context( 
-        User u, 
+        User u,
         Publisher p, 
         HashMap<Long,  JournalRole[]> roles  //用户对应所有期刊的角色, 以期刊ID号KEY，所在期刊用户担任的所有角色
     ){
