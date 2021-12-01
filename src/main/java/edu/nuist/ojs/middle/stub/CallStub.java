@@ -229,4 +229,24 @@ public class CallStub {
             seviceMap.getList().get("email").getRouter(), 
             "/message/getMessageByRevIdAndConfigPoint", param , Message.class);
     }
+
+    public User getUserById(long uid){
+        Map<String, Object> param = new HashMap<>();
+        param.put("id", uid);
+        User u = callUtil.callService(
+                seviceMap.getList().get("publisher").getIp(),
+                "/serverRouter", "/user/findById", param, User.class);
+        return u;
+    }
+
+    public  User loginAs(String email, String password, long publishId){
+        Map<String, Object> param = new HashMap<>();
+        param.put("email", email);
+        param.put("password", password);
+        param.put("publishId", publishId);
+        User u = callUtil.callService(
+                seviceMap.getList().get("publisher").getIp(),
+                "/serverRouter", "/user/loginAs", param, User.class);
+        return u;
+    }
 }

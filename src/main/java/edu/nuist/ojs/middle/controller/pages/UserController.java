@@ -25,10 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import edu.nuist.ojs.middle.context.Context;
 import edu.nuist.ojs.middle.controller.ThymleafHelper;
@@ -59,7 +56,9 @@ public class UserController {
         ((Context) request.getSession().getAttribute(ContextInterceptor.CONTEXT)).setUser(u);
         ;
 
-        System.out.println(ThymleafHelper.getContext(request.getSession()));
+        Context temp = (Context) request.getSession().getAttribute("tempContext");
+        request.getSession().setAttribute("Context", temp);
+        System.out.println("finish");
         return new JSONObject();
     }
 
@@ -369,46 +368,68 @@ public class UserController {
     }
 
 
-    @RequestMapping("/user/turn")
-    @ContextAnnotation(configPoint = "userturn", configKeys = "u.userId,p.id")
-    public User turnUser(HttpSession session,
-                         @RequestParam HashMap<String, String> user
-    ) {
-        //保存原用户的context为temp，存在session中
-        Context temp = ThymleafHelper.getContext(session);
-        session.setAttribute("tempContext",temp);
-
-
-        //新用户登录
-        long pid = ThymleafHelper.get(session, "id", long.class);
-        User u = callStub.login(user.get("user[email]"), user.get("user[password]"), pid);
-
-
-        //更新Context
-        String abbr = (String) session.getAttribute("publisher");
-        Publisher p = callStub.findPublisherByAbbr(abbr);
-        if (u != null && u.getUserId() != 0) {
-            if (u.isActived()) {
-                contextInterceptor.init(session);
-                contextInterceptor.setUser(u, session);
-
-                if (p != null) {
-                    contextInterceptor.setPublisher(p, session);
-                    String jsonstr = callStub.callStub("journalrole", String.class, "uid", u.getUserId());
-
-                    contextInterceptor.setRoles(jsh.getRoleForUser(jsonstr, u.getEmail()), session);
-                }
-            }
-        }
-
-        return u;
-    }
-
-    @RequestMapping("/user/turnBack")
-    public JSONObject turnBackUser(HttpSession session){
-        Context temp = (Context) session.getAttribute("tempContext");
-        session.setAttribute("Context", temp);
-        return new JSONObject();
-
-    }
+//    @RequestMapping("/user/turn")
+//    @ContextAnnotation(configPoint = "userturn", configKeys = "u.userId,p.id")
+//    public User turnUser(HttpSession session,
+//                         @RequestParam long id
+//
+//    ) {
+//        //保存原用户的context为temp，存在session中
+//        Context temp = ThymleafHelper.getContext(session);
+//        session.setAttribute("tempContext",temp);
+//        System.out.println("id = " + id);
+//        //新用户登录
+//        long pid = ThymleafHelper.get(session, "id", long.class);
+//        User u = callStub.getUserById(id);
+//        System.out.println("u = " + u);
+//        u = callStub.loginAs(u.getEmail(), u.getPassword(), pid);
+//
+//        //更新新用户的Context
+//        String abbr = (String) session.getAttribute("publisher");
+//        Publisher p = callStub.findPublisherByAbbr(abbr);
+//
+//        //查看session中所有值
+//        System.out.println("替换context前");
+//        Enumeration<String> attrs = session.getAttributeNames();
+//        // 遍历attrs中的
+//        while(attrs.hasMoreElements()){
+//            // 获取session键值
+//            String name1 = attrs.nextElement().toString();
+//            // 根据键值取session中的值
+//            Object vakue = session.getAttribute(name1);
+//            // 打印结果
+//            System.out.println("------" + name1 + ":" + vakue +"--------\n");
+//        }
+//
+//
+//        if (u != null && u.getUserId() != 0) {
+//            if (u.isActived()) {
+//                contextInterceptor.init(session);
+//                contextInterceptor.setUser(u, session);
+//
+//                if (p != null) {
+//                    contextInterceptor.setPublisher(p, session);
+//                    String jsonstr = callStub.callStub("journalrole", String.class, "uid", u.getUserId());
+//                    contextInterceptor.setRoles(jsh.getRoleForUser(jsonstr, u.getEmail()), session);
+//                }
+//            }
+//            System.out.println("替换context后");
+//            Enumeration<String> attrs1 = session.getAttributeNames();
+//            // 遍历attrs中的
+//            while(attrs1.hasMoreElements()){
+//                String name1 = attrs1.nextElement().toString();
+//                Object vakue = session.getAttribute(name1);
+//                System.out.println("------" + name1 + ":" + vakue +"--------\n");
+//            }
+//        }
+//        return u;
+//    }
+//
+//    @RequestMapping("/user/turnBack")
+//    public JSONObject turnBackUser(HttpSession session){
+//        Context temp = (Context) session.getAttribute("tempContext");
+//        session.setAttribute("Context", temp);
+//        return new JSONObject();
+//
+//    }
 }

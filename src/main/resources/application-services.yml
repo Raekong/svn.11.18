@@ -22,7 +22,7 @@ nacos:
                 activeUser: '/user/active'
                 disableUser: '/user/disable'
                 userResetPassword: '/user/resetPassword'
-                turnUser: '/user/turn'
+                rootUser: '/user/root'
 
                 getPublisherList: '/publish/getAllPagePublishers'
                 updatePublisher:  '/publish/update'

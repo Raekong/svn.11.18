@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-public class
- LoginController {
+public class LoginController {
     @Autowired
     private CallStub callStub;
 
@@ -36,11 +35,13 @@ public class
         @RequestParam String abbr,
         Model model
     ){
+//      callStub.callStub("rootUser", User.class, "id", 65);
         JSONObject rst = new JSONObject();
         rst.put("flag", false);
 
         User u = null;
         Publisher p = null;
+        request.getSession().setAttribute("publisher", abbr);
         if( abbr.equals("admin") ){
             u = callStub.login(email, password, -1); //是超级管理员登录
         }else{

@@ -158,13 +158,13 @@ define(
                                 )
                             }
                         )
-                        rst.find('.turn').click(
+                        rst.find('.loginas').click(
                             function(){
-                                console.log('turn')
+                                console.log('loginas')
                                 var id = $(this).parent().parent().attr('userid');
                                 $.post(
                                     '/user/turn',
-                                    { id:id},
+                                    {id:id},
                                     function(rst){
                                         _that.queryUser();
                                     }
