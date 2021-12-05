@@ -42,6 +42,8 @@ public class LoginController {
         User u = null;
         Publisher p = null;
         request.getSession().setAttribute("publisher", abbr);
+        //是否以他人身份登录
+        request.getSession().setAttribute("loginAs", false);
         if( abbr.equals("admin") ){
             u = callStub.login(email, password, -1); //是超级管理员登录
         }else{

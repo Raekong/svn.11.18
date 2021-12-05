@@ -73,6 +73,9 @@ i18n:
       logout:
         zh: 退出
         en: Logout
+      logoutas:
+        zh: 退出当前账号
+        en: Logoutas
     test: 
       uploaded-suc:
         zh: '文件上传成功'

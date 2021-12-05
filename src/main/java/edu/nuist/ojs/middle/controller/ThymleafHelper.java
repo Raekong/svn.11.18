@@ -15,14 +15,16 @@ public class ThymleafHelper {
             "email",
             "superUser",
             "name",
-            "abbr"
+            "abbr",
+                "loginAs"
         };
         String[] modelkeys = {
             "lang",
             "email",
             "isSuper",
             "publisher",
-            "publisherAbbr"
+            "publisherAbbr",
+                "loginAs"
         };
         
         set(m, session, sessionkeys, modelkeys);
@@ -34,7 +36,7 @@ public class ThymleafHelper {
             Object o = get(session, key, Object.class);
             if( o == null ) throw new Exception("set for thmyleaf parameter error, "+ key + " is null");
             //System.out.println( modelkeys[index] +"*****************************"+ o );
-            m.addAttribute( modelkeys[index], o);
+            m.addAttribute(modelkeys[index], o);
             index++;
         }
     }

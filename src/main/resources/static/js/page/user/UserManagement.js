@@ -165,8 +165,11 @@ define(
                                 $.post(
                                     '/user/turn',
                                     {id:id},
-                                    function(rst){
-                                        _that.queryUser();
+                                    // function(rst){
+                                    //     _that.queryUser();
+                                    // }
+                                    function (rst) {
+                                        window.location.href = '/home/' + rst.abbr;
                                     }
                                 )
                             }
@@ -177,7 +180,7 @@ define(
                                 var id = $(this).parent().parent().attr('userid');
                                 $.post(
                                     '/user/active',
-                                    { id:id},
+                                    {id:id},
                                     function(rst){
                                         _that.queryUser();
                                     }

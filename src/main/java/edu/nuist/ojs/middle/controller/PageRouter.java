@@ -83,6 +83,10 @@ public class PageRouter {
             model.addAttribute(
                 I18NInterceptor.I18N,
                 I18N.CN.equals(request.getSession().getAttribute(I18NInterceptor.I18N)));
+            //判断是否是以其他人身份登录
+//            if(request.getSession().getAttribute("loginAs") != null){
+//                model.addAttribute("loginAs", true);
+//            }
             return "home/home";
         } catch (Exception e) {
             e.printStackTrace();

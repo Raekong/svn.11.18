@@ -38,6 +38,7 @@ public class CallServiceUtil {
         return send(Data,resultType,serverRouter);
     }
 
+
     public Map<String, Object> basicAssembly( String api, Object bean){
         Map<String, Object> data = new HashMap<>();
         data.put("api",api);

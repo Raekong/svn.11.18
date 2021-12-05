@@ -56,18 +56,7 @@ define(
                         )
                     }
                 );
-                
-                this.container.find('#logout').click(
-                    function(){
-                        $.post(
-                                '/user/logout',
-                                function(){
-                                    var abbr = $('#frame').attr('abbr');
-                                    window.location.href = '/login/' + abbr;
-                                }
-                        )                        
-                    }
-                );
+
 
                 this.container.find('#profile').click(
                     function(){
@@ -75,7 +64,30 @@ define(
                          window.location.href = '/user/profile/' + abbr;
                     }
                 );
-                
+                this.container.find('#logout').click(
+                    function(){
+                        $.post(
+                            '/user/logout',
+                            function(){
+                                var abbr = $('#frame').attr('abbr');
+                                window.location.href = '/login/' + abbr;
+                            }
+                        )
+                    }
+                );
+
+                this.container.find('#logoutas').click(
+                    function(){
+                        $.post(
+                            '/user/turnBack',
+                            function(){
+                                var abbr = $('#frame').attr('abbr');
+                                window.location.href = '/home/' + abbr;
+                            }
+                        )
+                    }
+                );
+
                 var liTpl = '{{each list as data}}<li class="pageLink" id="{{data.id}}"><a href="{{data.url}}">{{#data.icon}}<span>{{data.text}}</span></a></li>{{/each}}';
                 $.post(
                     '/home/menu',
